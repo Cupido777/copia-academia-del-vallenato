@@ -1,39 +1,357 @@
-=== ARCHIVO: pages/clases.html ===
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" itemscope itemtype="https://schema.org/Course">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clases de Vallenato - Academia del Vallenato Cartagena</title>
-<meta name="description" content="Clases profesionales de acordeón, caja vallenata y guacharaca. Aprende vallenato con los mejores maestros en Cartagena.">
-<meta name="keywords" content="clases vallenato, acordeón cartagena, caja vallenata, guacharaca, música colombiana">
+<meta name="description" content="Clases profesionales de acordeón, caja vallenata y guacharaca en Cartagena. Aprende vallenato con los mejores maestros. Inscríbete hoy.">
+<meta name="keywords" content="clases vallenato cartagena, acordeón, caja vallenata, guacharaca, música colombiana, aprender vallenato">
 
-<!-- OPTIMIZACIÓN: Preconnect para fuentes externas -->
+<!-- Schema.org para Cursos -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Clases de Vallenato - Academia del Vallenato Cartagena",
+  "description": "Clases profesionales de acordeón, caja vallenata y guacharaca para todos los niveles",
+  "provider": {
+    "@type": "MusicSchool",
+    "name": "Academia del Vallenato Cartagena",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cartagena",
+      "addressRegion": "Bolívar",
+      "addressCountry": "CO"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "150000",
+    "priceCurrency": "COP"
+  }
+}
+</script>
+
+<!-- Preload crítico -->
+<link rel="preload" href="../assets/css/styles.css" as="style">
+<link rel="preload" href="../assets/js/script.js" as="script">
+
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- OPTIMIZACIÓN: Font Awesome con carga diferida -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- CSS principal optimizado -->
-<link rel="stylesheet" href="../assets/css/styles.css" media="all">
-<link rel="stylesheet" href="../assets/css/stats-styles.css" media="print" onload="this.media='all'">
+<!-- CSS -->
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/stats-styles.css">
+
+<!-- Estilos específicos para clases -->
+<style>
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.course-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.course-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.course-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.course-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--dark-color);
+}
+
+.course-description {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.course-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.course-duration, .course-level {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.course-duration i, .course-level i {
+  color: var(--primary-color);
+}
+
+.course-price {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.course-price .price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.course-features {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.course-features li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.course-features li:last-child {
+  border-bottom: none;
+}
+
+.course-features i {
+  color: var(--primary-color);
+  width: 20px;
+}
+
+.course-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--secondary-color);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Metodología */
+.methodology-steps {
+  display: grid;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-color);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content h3 {
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+}
+
+.step-content p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Horarios */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.schedule-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  text-align: center;
+  border-left: 4px solid var(--primary-color);
+}
+
+.schedule-card h3 {
+  margin-bottom: 1.5rem;
+  color: var(--dark-color);
+  font-size: 1.25rem;
+}
+
+.schedule-times {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-times span {
+  padding: 0.75rem;
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+}
+
+/* Niveles */
+.levels-section {
+  background: var(--light-color);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  margin-top: 3rem;
+}
+
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.level-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+}
+
+.level-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-color);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+}
+
+.level-card h4 {
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.level-card p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .step-number {
+    margin: 0 auto;
+  }
+  
+  .schedule-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .levels-section {
+    padding: 2rem 1rem;
+  }
+  
+  .course-details {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-card {
+    padding: 1.5rem;
+  }
+  
+  .levels-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
-<!-- Botón de WhatsApp -->
-<a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
-  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+<!-- Botón WhatsApp -->
+<a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chatear por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- Panel de estadísticas -->
+<!-- Panel Estadísticas -->
 <div id="stats-panel" class="stats-panel" aria-hidden="true" hidden>
   <div class="stats-header">
     <h3>Estadísticas del Sitio</h3>
-    <button id="close-stats" class="close-stats" aria-label="Cerrar panel de estadísticas">&times;</button>
+    <button id="close-stats" class="close-stats" aria-label="Cerrar panel">&times;</button>
   </div>
   <div class="stats-content">
     <div class="stat-item">
@@ -53,33 +371,36 @@
     <div class="header-content">
       <div class="logo">
         <a href="../index.html">
-          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="logo-img" loading="eager" width="50" height="50">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato Cartagena" width="50" height="50" loading="eager">
           <span class="logo-text">Academia del Vallenato</span>
         </a>
       </div>
+      
       <nav class="nav" aria-label="Navegación principal">
         <ul class="nav-list">
-          <li><a href="../index.html" class="nav-link" data-section="home">Inicio</a></li>
-          <li><a href="servicios.html" class="nav-link" data-section="services">Servicios</a></li>
-          <li><a href="clases.html" class="nav-link active" data-section="classes">Clases</a></li>
-          <li><a href="musica-en-vivo.html" class="nav-link" data-section="live-music">Música en Vivo</a></li>
-          <li><a href="instrumentos.html" class="nav-link" data-section="instruments">Instrumentos</a></li>
-          <li><a href="contacto.html" class="nav-link" data-section="contact">Contacto</a></li>
+          <li><a href="../index.html" class="nav-link">Inicio</a></li>
+          <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+          <li><a href="clases.html" class="nav-link active">Clases</a></li>
+          <li><a href="musica-en-vivo.html" class="nav-link">Música en Vivo</a></li>
+          <li><a href="instrumentos.html" class="nav-link">Instrumentos</a></li>
+          <li><a href="contacto.html" class="nav-link">Contacto</a></li>
         </ul>
       </nav>
+
       <div class="header-actions">
         <div class="language-selector">
           <button id="language-toggle" class="language-btn" aria-haspopup="true" aria-expanded="false">
             <span class="language-flag">🇪🇸</span>
             <span class="language-text">ES</span>
-            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            <i class="fas fa-chevron-down"></i>
           </button>
-          <div class="language-dropdown" role="menu" aria-hidden="true">
-            <button class="language-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
-            <button class="language-option" data-lang="en" role="menuitem">🇺🇸 English</button>
+          <div class="language-dropdown">
+            <button class="language-option" data-lang="es">🇪🇸 Español</button>
+            <button class="language-option" data-lang="en">🇺🇸 English</button>
           </div>
         </div>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+        
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menú móvil">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -89,14 +410,20 @@
 
 <!-- Hero Section Clases -->
 <section class="hero" id="clases-hero">
-  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
       <h1 class="hero-title" data-i18n="clases.hero.title">Clases de Vallenato</h1>
       <p class="hero-subtitle" data-i18n="clases.hero.subtitle">Aprende con los mejores maestros de música tradicional colombiana en Cartagena</p>
       <div class="hero-actions">
-        <a href="#cursos" class="btn btn-primary" data-i18n="clases.hero.cta1">Ver Cursos</a>
-        <a href="contacto.html" class="btn btn-secondary" data-i18n="clases.hero.cta2">Inscribirse</a>
+        <a href="#cursos" class="btn btn-primary" data-i18n="clases.hero.cta1">
+          <i class="fas fa-music"></i>
+          Ver Cursos
+        </a>
+        <a href="contacto.html" class="btn btn-secondary" data-i18n="clases.hero.cta2">
+          <i class="fas fa-user-plus"></i>
+          Inscribirse
+        </a>
       </div>
     </div>
   </div>
@@ -113,71 +440,148 @@
     <div class="courses-grid">
       <!-- Curso Acordeón -->
       <div class="course-card">
+        <div class="course-badge" data-i18n="clases.badge.mostPopular">Más Popular</div>
         <div class="course-icon">
-          <i class="fas fa-accordion" aria-hidden="true"></i>
+          <i class="fas fa-accordion"></i>
         </div>
         <h3 class="course-title" data-i18n="clases.courses.accordion.title">Acordeón Vallenato</h3>
-        <p class="course-description" data-i18n="clases.courses.accordion.description">Domina el instrumento principal del vallenato. Desde básico hasta nivel profesional.</p>
+        <p class="course-description" data-i18n="clases.courses.accordion.description">Domina el instrumento principal del vallenato. Desde básico hasta nivel profesional con técnicas tradicionales y modernas.</p>
+        
         <div class="course-details">
           <div class="course-duration">
-            <i class="fas fa-clock" aria-hidden="true"></i>
+            <i class="fas fa-clock"></i>
             <span data-i18n="clases.courses.accordion.duration">6 meses</span>
           </div>
           <div class="course-level">
-            <i class="fas fa-signal" aria-hidden="true"></i>
+            <i class="fas fa-signal"></i>
             <span data-i18n="clases.courses.accordion.level">Todos los niveles</span>
           </div>
         </div>
+        
         <div class="course-price">
           <span class="price" data-i18n="clases.courses.accordion.price">$300.000/mes</span>
         </div>
-        <a href="contacto.html" class="btn btn-primary" data-i18n="clases.courses.enroll">Inscribirse</a>
+        
+        <ul class="course-features">
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.technique">Técnica de fuelle y digitación</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.repertoire">Repertorio tradicional vallenato</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.improvisation">Improvisación y variaciones</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.performance">Técnicas de escenario</span>
+          </li>
+        </ul>
+        
+        <a href="contacto.html?curso=acordeon" class="btn btn-primary btn-block" data-i18n="clases.courses.enroll">
+          <i class="fas fa-arrow-right"></i>
+          Inscribirse Ahora
+        </a>
       </div>
 
       <!-- Curso Caja Vallenata -->
       <div class="course-card">
         <div class="course-icon">
-          <i class="fas fa-drum" aria-hidden="true"></i>
+          <i class="fas fa-drum"></i>
         </div>
         <h3 class="course-title" data-i18n="clases.courses.caja.title">Caja Vallenata</h3>
-        <p class="course-description" data-i18n="clases.courses.caja.description">Aprende los ritmos y golpes tradicionales de la caja vallenata.</p>
+        <p class="course-description" data-i18n="clases.courses.caja.description">Aprende los ritmos y golpes tradicionales de la caja vallenata. Domina los cuatro aires del vallenato.</p>
+        
         <div class="course-details">
           <div class="course-duration">
-            <i class="fas fa-clock" aria-hidden="true"></i>
+            <i class="fas fa-clock"></i>
             <span data-i18n="clases.courses.caja.duration">4 meses</span>
           </div>
           <div class="course-level">
-            <i class="fas fa-signal" aria-hidden="true"></i>
+            <i class="fas fa-signal"></i>
             <span data-i18n="clases.courses.caja.level">Principiante - Intermedio</span>
           </div>
         </div>
+        
         <div class="course-price">
           <span class="price" data-i18n="clases.courses.caja.price">$200.000/mes</span>
         </div>
-        <a href="contacto.html" class="btn btn-primary" data-i18n="clases.courses.enroll">Inscribirse</a>
+        
+        <ul class="course-features">
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.rhythms">Ritmos: paseo, merengue, son, puya</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.technique">Técnica de manos y muñecas</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.coordination">Coordinación y timing</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.ensamble">Trabajo en ensamble</span>
+          </li>
+        </ul>
+        
+        <a href="contacto.html?curso=caja" class="btn btn-primary btn-block" data-i18n="clases.courses.enroll">
+          <i class="fas fa-arrow-right"></i>
+          Inscribirse Ahora
+        </a>
       </div>
 
       <!-- Curso Guacharaca -->
       <div class="course-card">
+        <div class="course-badge" data-i18n="clases.badge.beginner">Ideal Principiantes</div>
         <div class="course-icon">
-          <i class="fas fa-music" aria-hidden="true"></i>
+          <i class="fas fa-music"></i>
         </div>
         <h3 class="course-title" data-i18n="clases.courses.guacharaca.title">Guacharaca</h3>
-        <p class="course-description" data-i18n="clases.courses.guacharaca.description">Domina el instrumento de percusión que da el groove al vallenato.</p>
+        <p class="course-description" data-i18n="clases.courses.guacharaca.description">Domina el instrumento de percusión que da el groove al vallenato. Aprende los patrones rítmicos esenciales.</p>
+        
         <div class="course-details">
           <div class="course-duration">
-            <i class="fas fa-clock" aria-hidden="true"></i>
+            <i class="fas fa-clock"></i>
             <span data-i18n="clases.courses.guacharaca.duration">3 meses</span>
           </div>
           <div class="course-level">
-            <i class="fas fa-signal" aria-hidden="true"></i>
+            <i class="fas fa-signal"></i>
             <span data-i18n="clases.courses.guacharaca.level">Principiante</span>
           </div>
         </div>
+        
         <div class="course-price">
           <span class="price" data-i18n="clases.courses.guacharaca.price">$150.000/mes</span>
         </div>
-        <a href="contacto.html" class="btn btn-primary" data-i18n="clases.courses.enroll">Inscribirse</a>
+        
+        <ul class="course-features">
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.technique">Técnica de raspado y ritmo</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.patterns">Patrones rítmicos básicos</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.coordination">Coordinación con caja y acordeón</span>
+          </li>
+          <li>
+            <i class="fas fa-check"></i>
+            <span data-i18n="clases.features.maintenance">Mantenimiento del instrumento</span>
+          </li>
+        </ul>
+        
+        <a href="contacto.html?curso=guacharaca" class="btn btn-primary btn-block" data-i18n="clases.courses.enroll">
+          <i class="fas fa-arrow-right"></i>
+          Inscribirse Ahora
+        </a>
       </div>
     </div>
   </div>
@@ -197,28 +601,31 @@
           <div class="step-number">1</div>
           <div class="step-content">
             <h3 data-i18n="clases.methodology.step1.title">Evaluación Inicial</h3>
-            <p data-i18n="clases.methodology.step1.description">Determinamos tu nivel actual y establecemos objetivos personalizados.</p>
+            <p data-i18n="clases.methodology.step1.description">Determinamos tu nivel actual y establecemos objetivos personalizados según tus metas musicales.</p>
           </div>
         </div>
+        
         <div class="step">
           <div class="step-number">2</div>
           <div class="step-content">
             <h3 data-i18n="clases.methodology.step2.title">Clases Prácticas</h3>
-            <p data-i18n="clases.methodology.step2.description">80% práctica y 20% teoría. Aprende tocando desde el primer día.</p>
+            <p data-i18n="clases.methodology.step2.description">80% práctica y 20% teoría. Aprende tocando desde el primer día con ejercicios progresivos.</p>
           </div>
         </div>
+        
         <div class="step">
           <div class="step-number">3</div>
           <div class="step-content">
             <h3 data-i18n="clases.methodology.step3.title">Repertorio Progresivo</h3>
-            <p data-i18n="clases.methodology.step3.description">Comienza con canciones sencillas y avanza hasta piezas complejas.</p>
+            <p data-i18n="clases.methodology.step3.description">Comienza con canciones sencillas y avanza hasta piezas complejas del repertorio vallenato tradicional.</p>
           </div>
         </div>
+        
         <div class="step">
           <div class="step-number">4</div>
           <div class="step-content">
-            <h3 data-i18n="clases.methodology.step4.title">Presentaciones</h3>
-            <p data-i18n="clases.methodology.step4.description">Oportunidades para tocar en eventos y muestras musicales.</p>
+            <h3 data-i18n="clases.methodology.step4.title">Presentaciones y Ensambles</h3>
+            <p data-i18n="clases.methodology.step4.description">Oportunidades para tocar en eventos y muestras musicales con otros estudiantes.</p>
           </div>
         </div>
       </div>
@@ -226,8 +633,54 @@
   </div>
 </section>
 
+<!-- Sección Niveles -->
+<section class="levels section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="clases.levels.title">Niveles de Aprendizaje</h2>
+      <p class="section-subtitle" data-i18n="clases.levels.subtitle">Progresión estructurada para garantizar tu éxito musical</p>
+    </div>
+    
+    <div class="levels-section">
+      <div class="levels-grid">
+        <div class="level-card">
+          <div class="level-icon">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <h4 data-i18n="clases.levels.beginner.title">Principiante</h4>
+          <p data-i18n="clases.levels.beginner.description">Conoce tu instrumento y aprende las bases del vallenato tradicional.</p>
+        </div>
+        
+        <div class="level-card">
+          <div class="level-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h4 data-i18n="clases.levels.intermediate.title">Intermedio</h4>
+          <p data-i18n="clases.levels.intermediate.description">Domina técnicas avanzadas y amplía tu repertorio musical.</p>
+        </div>
+        
+        <div class="level-card">
+          <div class="level-icon">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <h4 data-i18n="clases.levels.advanced.title">Avanzado</h4>
+          <p data-i18n="clases.levels.advanced.description">Perfecciona tu estilo y desarrolla tu voz musical única.</p>
+        </div>
+        
+        <div class="level-card">
+          <div class="level-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h4 data-i18n="clases.levels.professional.title">Profesional</h4>
+          <p data-i18n="clases.levels.professional.description">Prepárate para presentaciones profesionales y grabaciones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Sección Horarios -->
-<section class="schedule section-padding">
+<section class="schedule section-padding bg-light">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" data-i18n="clases.schedule.title">Horarios Disponibles</h2>
@@ -259,6 +712,13 @@
         </div>
       </div>
     </div>
+    
+    <div class="section-actions">
+      <a href="contacto.html" class="btn btn-primary" data-i18n="clases.schedule.cta">
+        <i class="fas fa-calendar-check"></i>
+        Reservar Clase de Prueba
+      </a>
+    </div>
   </div>
 </section>
 
@@ -267,10 +727,16 @@
   <div class="container">
     <div class="cta-content">
       <h2 class="cta-title" data-i18n="clases.cta.title">¿Listo para comenzar?</h2>
-      <p class="cta-text" data-i18n="clases.cta.text">Únete a nuestra academia y descubre el músico que llevas dentro.</p>
+      <p class="cta-text" data-i18n="clases.cta.text">Únete a nuestra academia y descubre el músico que llevas dentro. Clase de prueba gratuita incluida.</p>
       <div class="cta-actions">
-        <a href="contacto.html" class="btn btn-light" data-i18n="clases.cta.contact">Inscribirse ahora</a>
-        <a href="servicios.html" class="btn btn-outline-light" data-i18n="clases.cta.services">Conocer servicios</a>
+        <a href="contacto.html" class="btn btn-light" data-i18n="clases.cta.contact">
+          <i class="fas fa-phone"></i>
+          Inscribirse ahora
+        </a>
+        <a href="servicios.html" class="btn btn-outline-light" data-i18n="clases.cta.services">
+          <i class="fas fa-info-circle"></i>
+          Conocer servicios
+        </a>
       </div>
     </div>
   </div>
@@ -282,17 +748,18 @@
     <div class="footer-content">
       <div class="footer-section">
         <div class="footer-logo">
-          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="footer-logo-img" loading="lazy" width="40" height="40">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" loading="lazy" width="40" height="40">
           <span class="footer-logo-text">Academia del Vallenato</span>
         </div>
         <p class="footer-description" data-i18n="footer.description">Formando a los músicos vallenatos del futuro desde 2010.</p>
         <div class="social-links">
-          <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-          <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-          <a href="#" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-          <a href="#" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
+      
       <div class="footer-section">
         <h3 class="footer-title" data-i18n="footer.links.title">Enlaces rápidos</h3>
         <ul class="footer-links">
@@ -303,35 +770,38 @@
           <li><a href="contacto.html" data-i18n="footer.links.contact">Contacto</a></li>
         </ul>
       </div>
+      
       <div class="footer-section">
         <h3 class="footer-title" data-i18n="footer.contact.title">Contacto</h3>
         <div class="contact-info">
           <div class="contact-item">
-            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-            <span data-i18n="footer.contact.address">Calle 45 # 12-34, Valledupar, Colombia</span>
+            <i class="fas fa-map-marker-alt"></i>
+            <span data-i18n="footer.contact.address">Centro Histórico, Cartagena, Colombia</span>
           </div>
           <div class="contact-item">
-            <i class="fas fa-phone" aria-hidden="true"></i>
+            <i class="fas fa-phone"></i>
             <span>+57 300 123 4567</span>
           </div>
           <div class="contact-item">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <i class="fas fa-envelope"></i>
             <span>info@academiadelvallenato.com</span>
           </div>
         </div>
       </div>
+      
       <div class="footer-section">
         <h3 class="footer-title" data-i18n="footer.newsletter.title">Boletín informativo</h3>
         <p class="footer-description" data-i18n="footer.newsletter.description">Suscríbete para recibir noticias sobre cursos y eventos.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault();">
+        <form class="newsletter-form">
           <input type="email" placeholder="Tu correo electrónico" required data-i18n-placeholder="footer.newsletter.placeholder">
           <button type="submit" data-i18n="footer.newsletter.subscribe">Suscribirse</button>
         </form>
       </div>
     </div>
+    
     <div class="footer-bottom">
       <div class="footer-bottom-content">
-        <p class="copyright" data-i18n="footer.copyright">© 2023 Academia del Vallenato. Todos los derechos reservados.</p>
+        <p class="copyright" data-i18n="footer.copyright">© 2024 Academia del Vallenato. Todos los derechos reservados.</p>
         <div class="footer-bottom-links">
           <a href="#" data-i18n="footer.privacy">Política de privacidad</a>
           <a href="#" data-i18n="footer.terms">Términos de servicio</a>
@@ -341,128 +811,182 @@
   </div>
 </footer>
 
-<!-- Scripts optimizados -->
-<script src="../assets/js/script.js" defer></script>
-<script src="../assets/js/stats-system.js" defer></script>
+<!-- Scripts -->
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/stats-system.js"></script>
 
-<!-- Traducciones específicas para clases -->
+<!-- Script específico para clases -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const translationSystem = window.translationSystem;
-  if (translationSystem) {
-    // Agregar traducciones específicas de clases
-    const clasesTranslations = {
-      es: {
-        'clases.hero.title': 'Clases de Vallenato',
-        'clases.hero.subtitle': 'Aprende con los mejores maestros de música tradicional colombiana en Cartagena',
-        'clases.hero.cta1': 'Ver Cursos',
-        'clases.hero.cta2': 'Inscribirse',
-        'clases.courses.title': 'Nuestros Cursos',
-        'clases.courses.subtitle': 'Programas especializados para todos los niveles',
-        'clases.courses.accordion.title': 'Acordeón Vallenato',
-        'clases.courses.accordion.description': 'Domina el instrumento principal del vallenato. Desde básico hasta nivel profesional.',
-        'clases.courses.accordion.duration': '6 meses',
-        'clases.courses.accordion.level': 'Todos los niveles',
-        'clases.courses.accordion.price': '$300.000/mes',
-        'clases.courses.caja.title': 'Caja Vallenata',
-        'clases.courses.caja.description': 'Aprende los ritmos y golpes tradicionales de la caja vallenata.',
-        'clases.courses.caja.duration': '4 meses',
-        'clases.courses.caja.level': 'Principiante - Intermedio',
-        'clases.courses.caja.price': '$200.000/mes',
-        'clases.courses.guacharaca.title': 'Guacharaca',
-        'clases.courses.guacharaca.description': 'Domina el instrumento de percusión que da el groove al vallenato.',
-        'clases.courses.guacharaca.duration': '3 meses',
-        'clases.courses.guacharaca.level': 'Principiante',
-        'clases.courses.guacharaca.price': '$150.000/mes',
-        'clases.courses.enroll': 'Inscribirse',
-        'clases.methodology.title': 'Nuestra Metodología',
-        'clases.methodology.subtitle': 'Aprende de forma práctica y progresiva',
-        'clases.methodology.step1.title': 'Evaluación Inicial',
-        'clases.methodology.step1.description': 'Determinamos tu nivel actual y establecemos objetivos personalizados.',
-        'clases.methodology.step2.title': 'Clases Prácticas',
-        'clases.methodology.step2.description': '80% práctica y 20% teoría. Aprende tocando desde el primer día.',
-        'clases.methodology.step3.title': 'Repertorio Progresivo',
-        'clases.methodology.step3.description': 'Comienza con canciones sencillas y avanza hasta piezas complejas.',
-        'clases.methodology.step4.title': 'Presentaciones',
-        'clases.methodology.step4.description': 'Oportunidades para tocar en eventos y muestras musicales.',
-        'clases.schedule.title': 'Horarios Disponibles',
-        'clases.schedule.subtitle': 'Flexibilidad para adaptarnos a tu rutina',
-        'clases.schedule.morning.title': 'Turno Mañana',
-        'clases.schedule.morning.time1': 'Lunes y Miércoles - 9:00 AM a 11:00 AM',
-        'clases.schedule.morning.time2': 'Martes y Jueves - 10:00 AM a 12:00 PM',
-        'clases.schedule.afternoon.title': 'Turno Tarde',
-        'clases.schedule.afternoon.time1': 'Lunes y Miércoles - 3:00 PM a 5:00 PM',
-        'clases.schedule.afternoon.time2': 'Martes y Jueves - 4:00 PM a 6:00 PM',
-        'clases.schedule.evening.title': 'Turno Noche',
-        'clases.schedule.evening.time1': 'Lunes y Miércoles - 6:00 PM a 8:00 PM',
-        'clases.schedule.evening.time2': 'Viernes - 5:00 PM a 8:00 PM',
-        'clases.cta.title': '¿Listo para comenzar?',
-        'clases.cta.text': 'Únete a nuestra academia y descubre el músico que llevas dentro.',
-        'clases.cta.contact': 'Inscribirse ahora',
-        'clases.cta.services': 'Conocer servicios'
-      },
-      en: {
-        'clases.hero.title': 'Vallenato Classes',
-        'clases.hero.subtitle': 'Learn with the best traditional Colombian music teachers in Cartagena',
-        'clases.hero.cta1': 'View Courses',
-        'clases.hero.cta2': 'Enroll Now',
-        'clases.courses.title': 'Our Courses',
-        'clases.courses.subtitle': 'Specialized programs for all levels',
-        'clases.courses.accordion.title': 'Vallenato Accordion',
-        'clases.courses.accordion.description': 'Master the main instrument of vallenato. From basic to professional level.',
-        'clases.courses.accordion.duration': '6 months',
-        'clases.courses.accordion.level': 'All levels',
-        'clases.courses.accordion.price': '$300,000/month',
-        'clases.courses.caja.title': 'Vallenato Drum',
-        'clases.courses.caja.description': 'Learn the traditional rhythms and beats of the vallenato drum.',
-        'clases.courses.caja.duration': '4 months',
-        'clases.courses.caja.level': 'Beginner - Intermediate',
-        'clases.courses.caja.price': '$200,000/month',
-        'clases.courses.guacharaca.title': 'Guacharaca',
-        'clases.courses.guacharaca.description': 'Master the percussion instrument that gives vallenato its groove.',
-        'clases.courses.guacharaca.duration': '3 months',
-        'clases.courses.guacharaca.level': 'Beginner',
-        'clases.courses.guacharaca.price': '$150,000/month',
-        'clases.courses.enroll': 'Enroll',
-        'clases.methodology.title': 'Our Methodology',
-        'clases.methodology.subtitle': 'Learn in a practical and progressive way',
-        'clases.methodology.step1.title': 'Initial Assessment',
-        'clases.methodology.step1.description': 'We determine your current level and set personalized goals.',
-        'clases.methodology.step2.title': 'Practical Classes',
-        'clases.methodology.step2.description': '80% practice and 20% theory. Learn by playing from day one.',
-        'clases.methodology.step3.title': 'Progressive Repertoire',
-        'clases.methodology.step3.description': 'Start with simple songs and advance to complex pieces.',
-        'clases.methodology.step4.title': 'Performances',
-        'clases.methodology.step4.description': 'Opportunities to play at events and musical showcases.',
-        'clases.schedule.title': 'Available Schedules',
-        'clases.schedule.subtitle': 'Flexibility to adapt to your routine',
-        'clases.schedule.morning.title': 'Morning Shift',
-        'clases.schedule.morning.time1': 'Monday and Wednesday - 9:00 AM to 11:00 AM',
-        'clases.schedule.morning.time2': 'Tuesday and Thursday - 10:00 AM to 12:00 PM',
-        'clases.schedule.afternoon.title': 'Afternoon Shift',
-        'clases.schedule.afternoon.time1': 'Monday and Wednesday - 3:00 PM to 5:00 PM',
-        'clases.schedule.afternoon.time2': 'Tuesday and Thursday - 4:00 PM to 6:00 PM',
-        'clases.schedule.evening.title': 'Evening Shift',
-        'clases.schedule.evening.time1': 'Monday and Wednesday - 6:00 PM to 8:00 PM',
-        'clases.schedule.evening.time2': 'Friday - 5:00 PM to 8:00 PM',
-        'clases.cta.title': 'Ready to Start?',
-        'clases.cta.text': 'Join our academy and discover the musician within you.',
-        'clases.cta.contact': 'Enroll Now',
-        'clases.cta.services': 'Learn about services'
-      }
-    };
-
-    // Combinar traducciones
-    Object.keys(clasesTranslations.es).forEach(key => {
-      translationSystem.translations.es[key] = clasesTranslations.es[key];
-      translationSystem.translations.en[key] = clasesTranslations.en[key];
+    // Trackear clics en botones de inscripción
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (window.statsSystem) {
+                window.statsSystem.trackConversion('class_signup', {
+                    course: this.closest('.course-card')?.querySelector('.course-title')?.textContent || 'unknown'
+                });
+            }
+        });
     });
 
-    // Aplicar traducciones
-    translationSystem.applyTranslations();
-  }
+    // Sistema de traducciones específico para clases
+    const translationSystem = window.academiaApp?.translationSystem || window.translationSystem;
+    if (translationSystem) {
+        const clasesTranslations = {
+            es: {
+                'clases.hero.title': 'Clases de Vallenato',
+                'clases.hero.subtitle': 'Aprende con los mejores maestros de música tradicional colombiana en Cartagena',
+                'clases.hero.cta1': 'Ver Cursos',
+                'clases.hero.cta2': 'Inscribirse',
+                'clases.courses.title': 'Nuestros Cursos',
+                'clases.courses.subtitle': 'Programas especializados para todos los niveles',
+                'clases.badge.mostPopular': 'Más Popular',
+                'clases.badge.beginner': 'Ideal Principiantes',
+                'clases.courses.accordion.title': 'Acordeón Vallenato',
+                'clases.courses.accordion.description': 'Domina el instrumento principal del vallenato. Desde básico hasta nivel profesional con técnicas tradicionales y modernas.',
+                'clases.courses.accordion.duration': '6 meses',
+                'clases.courses.accordion.level': 'Todos los niveles',
+                'clases.courses.accordion.price': '$300.000/mes',
+                'clases.courses.caja.title': 'Caja Vallenata',
+                'clases.courses.caja.description': 'Aprende los ritmos y golpes tradicionales de la caja vallenata. Domina los cuatro aires del vallenato.',
+                'clases.courses.caja.duration': '4 meses',
+                'clases.courses.caja.level': 'Principiante - Intermedio',
+                'clases.courses.caja.price': '$200.000/mes',
+                'clases.courses.guacharaca.title': 'Guacharaca',
+                'clases.courses.guacharaca.description': 'Domina el instrumento de percusión que da el groove al vallenato. Aprende los patrones rítmicos esenciales.',
+                'clases.courses.guacharaca.duration': '3 meses',
+                'clases.courses.guacharaca.level': 'Principiante',
+                'clases.courses.guacharaca.price': '$150.000/mes',
+                'clases.courses.enroll': 'Inscribirse Ahora',
+                'clases.features.technique': 'Técnica de fuelle y digitación',
+                'clases.features.repertoire': 'Repertorio tradicional vallenato',
+                'clases.features.improvisation': 'Improvisación y variaciones',
+                'clases.features.performance': 'Técnicas de escenario',
+                'clases.features.rhythms': 'Ritmos: paseo, merengue, son, puya',
+                'clases.features.coordination': 'Coordinación y timing',
+                'clases.features.ensamble': 'Trabajo en ensamble',
+                'clases.features.patterns': 'Patrones rítmicos básicos',
+                'clases.features.maintenance': 'Mantenimiento del instrumento',
+                'clases.methodology.title': 'Nuestra Metodología',
+                'clases.methodology.subtitle': 'Aprende de forma práctica y progresiva',
+                'clases.methodology.step1.title': 'Evaluación Inicial',
+                'clases.methodology.step1.description': 'Determinamos tu nivel actual y establecemos objetivos personalizados según tus metas musicales.',
+                'clases.methodology.step2.title': 'Clases Prácticas',
+                'clases.methodology.step2.description': '80% práctica y 20% teoría. Aprende tocando desde el primer día con ejercicios progresivos.',
+                'clases.methodology.step3.title': 'Repertorio Progresivo',
+                'clases.methodology.step3.description': 'Comienza con canciones sencillas y avanza hasta piezas complejas del repertorio vallenato tradicional.',
+                'clases.methodology.step4.title': 'Presentaciones y Ensambles',
+                'clases.methodology.step4.description': 'Oportunidades para tocar en eventos y muestras musicales con otros estudiantes.',
+                'clases.levels.title': 'Niveles de Aprendizaje',
+                'clases.levels.subtitle': 'Progresión estructurada para garantizar tu éxito musical',
+                'clases.levels.beginner.title': 'Principiante',
+                'clases.levels.beginner.description': 'Conoce tu instrumento y aprende las bases del vallenato tradicional.',
+                'clases.levels.intermediate.title': 'Intermedio',
+                'clases.levels.intermediate.description': 'Domina técnicas avanzadas y amplía tu repertorio musical.',
+                'clases.levels.advanced.title': 'Avanzado',
+                'clases.levels.advanced.description': 'Perfecciona tu estilo y desarrolla tu voz musical única.',
+                'clases.levels.professional.title': 'Profesional',
+                'clases.levels.professional.description': 'Prepárate para presentaciones profesionales y grabaciones.',
+                'clases.schedule.title': 'Horarios Disponibles',
+                'clases.schedule.subtitle': 'Flexibilidad para adaptarnos a tu rutina',
+                'clases.schedule.morning.title': 'Turno Mañana',
+                'clases.schedule.morning.time1': 'Lunes y Miércoles - 9:00 AM a 11:00 AM',
+                'clases.schedule.morning.time2': 'Martes y Jueves - 10:00 AM a 12:00 PM',
+                'clases.schedule.afternoon.title': 'Turno Tarde',
+                'clases.schedule.afternoon.time1': 'Lunes y Miércoles - 3:00 PM a 5:00 PM',
+                'clases.schedule.afternoon.time2': 'Martes y Jueves - 4:00 PM a 6:00 PM',
+                'clases.schedule.evening.title': 'Turno Noche',
+                'clases.schedule.evening.time1': 'Lunes y Miércoles - 6:00 PM a 8:00 PM',
+                'clases.schedule.evening.time2': 'Viernes - 5:00 PM a 8:00 PM',
+                'clases.schedule.cta': 'Reservar Clase de Prueba',
+                'clases.cta.title': '¿Listo para comenzar?',
+                'clases.cta.text': 'Únete a nuestra academia y descubre el músico que llevas dentro. Clase de prueba gratuita incluida.',
+                'clases.cta.contact': 'Inscribirse ahora',
+                'clases.cta.services': 'Conocer servicios'
+            },
+            en: {
+                'clases.hero.title': 'Vallenato Classes',
+                'clases.hero.subtitle': 'Learn with the best traditional Colombian music teachers in Cartagena',
+                'clases.hero.cta1': 'View Courses',
+                'clases.hero.cta2': 'Enroll Now',
+                'clases.courses.title': 'Our Courses',
+                'clases.courses.subtitle': 'Specialized programs for all levels',
+                'clases.badge.mostPopular': 'Most Popular',
+                'clases.badge.beginner': 'Beginner Friendly',
+                'clases.courses.accordion.title': 'Vallenato Accordion',
+                'clases.courses.accordion.description': 'Master the main instrument of vallenato. From basic to professional level with traditional and modern techniques.',
+                'clases.courses.accordion.duration': '6 months',
+                'clases.courses.accordion.level': 'All levels',
+                'clases.courses.accordion.price': '$300,000/month',
+                'clases.courses.caja.title': 'Vallenato Drum',
+                'clases.courses.caja.description': 'Learn the traditional rhythms and beats of the vallenato drum. Master the four vallenato styles.',
+                'clases.courses.caja.duration': '4 months',
+                'clases.courses.caja.level': 'Beginner - Intermediate',
+                'clases.courses.caja.price': '$200,000/month',
+                'clases.courses.guacharaca.title': 'Guacharaca',
+                'clases.courses.guacharaca.description': 'Master the percussion instrument that gives vallenato its groove. Learn essential rhythmic patterns.',
+                'clases.courses.guacharaca.duration': '3 months',
+                'clases.courses.guacharaca.level': 'Beginner',
+                'clases.courses.guacharaca.price': '$150,000/month',
+                'clases.courses.enroll': 'Enroll Now',
+                'clases.features.technique': 'Bellows and fingering technique',
+                'clases.features.repertoire': 'Traditional vallenato repertoire',
+                'clases.features.improvisation': 'Improvisation and variations',
+                'clases.features.performance': 'Stage techniques',
+                'clases.features.rhythms': 'Rhythms: paseo, merengue, son, puya',
+                'clases.features.coordination': 'Coordination and timing',
+                'clases.features.ensamble': 'Ensemble work',
+                'clases.features.patterns': 'Basic rhythmic patterns',
+                'clases.features.maintenance': 'Instrument maintenance',
+                'clases.methodology.title': 'Our Methodology',
+                'clases.methodology.subtitle': 'Learn in a practical and progressive way',
+                'clases.methodology.step1.title': 'Initial Assessment',
+                'clases.methodology.step1.description': 'We determine your current level and set personalized goals according to your musical aspirations.',
+                'clases.methodology.step2.title': 'Practical Classes',
+                'clases.methodology.step2.description': '80% practice and 20% theory. Learn by playing from day one with progressive exercises.',
+                'clases.methodology.step3.title': 'Progressive Repertoire',
+                'clases.methodology.step3.description': 'Start with simple songs and advance to complex pieces from the traditional vallenato repertoire.',
+                'clases.methodology.step4.title': 'Performances and Ensembles',
+                'clases.methodology.step4.description': 'Opportunities to play at events and musical showcases with other students.',
+                'clases.levels.title': 'Learning Levels',
+                'clases.levels.subtitle': 'Structured progression to ensure your musical success',
+                'clases.levels.beginner.title': 'Beginner',
+                'clases.levels.beginner.description': 'Get to know your instrument and learn the basics of traditional vallenato.',
+                'clases.levels.intermediate.title': 'Intermediate',
+                'clases.levels.intermediate.description': 'Master advanced techniques and expand your musical repertoire.',
+                'clases.levels.advanced.title': 'Advanced',
+                'clases.levels.advanced.description': 'Perfect your style and develop your unique musical voice.',
+                'clases.levels.professional.title': 'Professional',
+                'clases.levels.professional.description': 'Prepare for professional performances and recordings.',
+                'clases.schedule.title': 'Available Schedules',
+                'clases.schedule.subtitle': 'Flexibility to adapt to your routine',
+                'clases.schedule.morning.title': 'Morning Shift',
+                'clases.schedule.morning.time1': 'Monday and Wednesday - 9:00 AM to 11:00 AM',
+                'clases.schedule.morning.time2': 'Tuesday and Thursday - 10:00 AM to 12:00 PM',
+                'clases.schedule.afternoon.title': 'Afternoon Shift',
+                'clases.schedule.afternoon.time1': 'Monday and Wednesday - 3:00 PM to 5:00 PM',
+                'clases.schedule.afternoon.time2': 'Tuesday and Thursday - 4:00 PM to 6:00 PM',
+                'clases.schedule.evening.title': 'Evening Shift',
+                'clases.schedule.evening.time1': 'Monday and Wednesday - 6:00 PM to 8:00 PM',
+                'clases.schedule.evening.time2': 'Friday - 5:00 PM to 8:00 PM',
+                'clases.schedule.cta': 'Book Trial Class',
+                'clases.cta.title': 'Ready to Start?',
+                'clases.cta.text': 'Join our academy and discover the musician within you. Free trial class included.',
+                'clases.cta.contact': 'Enroll Now',
+                'clases.cta.services': 'Learn about services'
+            }
+        };
+
+        // Combinar traducciones
+        Object.keys(clasesTranslations.es).forEach(key => {
+            translationSystem.translations.es[key] = clasesTranslations.es[key];
+            translationSystem.translations.en[key] = clasesTranslations.en[key];
+        });
+
+        // Aplicar traducciones
+        translationSystem.applyTranslations();
+    }
 });
 </script>
-
 </body>
 </html>
