@@ -1,0 +1,1102 @@
+=== ARCHIVO: pages/instrumentos.html ===
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instrumentos Vallenatos - Academia del Vallenato Cartagena</title>
+<meta name="description" content="Venta de instrumentos vallenatos profesionales: acordeones Hohner, cajas, guacharacas y accesorios. Calidad garantizada y asesoría especializada.">
+<meta name="keywords" content="instrumentos vallenatos, acordeón hohner, caja vallenata, guacharaca, venta instrumentos cartagena, accesorios vallenatos">
+
+<!-- OPTIMIZACIÓN: Preconnect para fuentes externas -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+
+<!-- OPTIMIZACIÓN: Font Awesome con carga diferida -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+<!-- CSS principal optimizado -->
+<link rel="stylesheet" href="../assets/css/styles.css" media="all">
+<link rel="stylesheet" href="../assets/css/stats-styles.css" media="print" onload="this.media='all'">
+  
+<!-- ESTILOS ADICIONALES PARA INSTRUMENTOS -->
+<style>
+.instruments-categories {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--white);
+  border: 2px solid var(--light-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.category-btn.active,
+.category-btn:hover {
+  background: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
+
+.instruments-detailed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.instrument-detailed-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.instrument-detailed-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.instrument-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.instrument-image {
+  height: 250px;
+  background: var(--light-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.instrument-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instrument-details {
+  padding: 1.5rem;
+}
+
+.instrument-name {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+}
+
+.instrument-brand {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.instrument-description {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.instrument-specs {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.instrument-specs li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+.instrument-specs li:last-child {
+  border-bottom: none;
+}
+
+.spec-label {
+  font-weight: 500;
+  color: var(--text-light);
+}
+
+.spec-value {
+  color: var(--dark-color);
+}
+
+.instrument-pricing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.instrument-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.instrument-old-price {
+  font-size: 1rem;
+  color: var(--text-light);
+  text-decoration: line-through;
+  margin-right: 0.5rem;
+}
+
+.instrument-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+}
+
+.accessories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.accessory-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.accessory-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
+}
+
+.accessory-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.accessory-price {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0.5rem 0;
+}
+
+.warranty-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.warranty-feature {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.warranty-icon {
+  width: 70px;
+  height: 70px;
+  background: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--primary-color);
+  font-size: 1.75rem;
+}
+
+.financing-options {
+  background: var(--light-color);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.financing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.financing-option {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.option-icon {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.consultation-form {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  margin-top: 2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--light-color);
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .instruments-detailed-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .instrument-pricing {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .instrument-actions {
+    width: 100%;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- Botón de WhatsApp -->
+<a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
+  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+</a>
+
+<!-- Panel de estadísticas -->
+<div id="stats-panel" class="stats-panel" aria-hidden="true" hidden>
+  <div class="stats-header">
+    <h3>Estadísticas del Sitio</h3>
+    <button id="close-stats" class="close-stats" aria-label="Cerrar panel de estadísticas">&times;</button>
+  </div>
+  <div class="stats-content">
+    <div class="stat-item">
+      <span class="stat-label">Visitas totales:</span>
+      <span id="total-visits" class="stat-value">0</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Páginas más visitadas:</span>
+      <ul id="top-pages" class="stat-list"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="logo-img" loading="eager" width="50" height="50">
+          <span class="logo-text">Academia del Vallenato</span>
+        </a>
+      </div>
+      <nav class="nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link" data-section="home">Inicio</a></li>
+          <li><a href="servicios.html" class="nav-link" data-section="services">Servicios</a></li>
+          <li><a href="clases.html" class="nav-link" data-section="classes">Clases</a></li>
+          <li><a href="musica-en-vivo.html" class="nav-link" data-section="live-music">Música en Vivo</a></li>
+          <li><a href="instrumentos.html" class="nav-link active" data-section="instruments">Instrumentos</a></li>
+          <li><a href="contacto.html" class="nav-link" data-section="contact">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="language-selector">
+          <button id="language-toggle" class="language-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="language-flag">🇪🇸</span>
+            <span class="language-text">ES</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="language-dropdown" role="menu" aria-hidden="true">
+            <button class="language-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
+            <button class="language-option" data-lang="en" role="menuitem">🇺🇸 English</button>
+          </div>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section Instrumentos -->
+<section class="hero" id="instrumentos-hero">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title" data-i18n="instrumentos.hero.title">Instrumentos Vallenatos</h1>
+      <p class="hero-subtitle" data-i18n="instrumentos.hero.subtitle">Los mejores instrumentos profesionales para tu práctica musical, con garantía y asesoría especializada</p>
+      <div class="hero-actions">
+        <a href="#instrumentos" class="btn btn-primary" data-i18n="instrumentos.hero.cta1">Ver Instrumentos</a>
+        <a href="#asesoria" class="btn btn-secondary" data-i18n="instrumentos.hero.cta2">Asesoría Gratuita</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Categorías -->
+<section class="categories section-padding" id="instrumentos">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="instrumentos.categories.title">Nuestros Instrumentos</h2>
+      <p class="section-subtitle" data-i18n="instrumentos.categories.subtitle">Calidad profesional para músicos exigentes</p>
+    </div>
+    
+    <div class="instruments-categories">
+      <button class="category-btn active" data-category="all" data-i18n="instrumentos.categories.all">Todos</button>
+      <button class="category-btn" data-category="acordeones" data-i18n="instrumentos.categories.accordions">Acordeones</button>
+      <button class="category-btn" data-category="percusion" data-i18n="instrumentos.categories.percussion">Percusión</button>
+      <button class="category-btn" data-category="accesorios" data-i18n="instrumentos.categories.accessories">Accesorios</button>
+    </div>
+    
+    <div class="instruments-detailed-grid">
+      <!-- Acordeón Hohner Corona II -->
+      <div class="instrument-detailed-card" data-category="acordeones">
+        <div class="instrument-badge" data-i18n="instrumentos.badge.popular">Popular</div>
+        <div class="instrument-image">
+          <i class="fas fa-accordion"></i>
+        </div>
+        <div class="instrument-details">
+          <h3 class="instrument-name" data-i18n="instrumentos.accordion1.name">Acordeón Hohner Corona II</h3>
+          <span class="instrument-brand" data-i18n="instrumentos.accordion1.brand">Hohner Professional</span>
+          <p class="instrument-description" data-i18n="instrumentos.accordion1.description">Acordeón profesional de 34 notas, ideal para vallenato tradicional. Sonido auténtico y respuesta sensible.</p>
+          <ul class="instrument-specs">
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.notes">Notas:</span>
+              <span class="spec-value" data-i18n="instrumentos.accordion1.specs.notes">34 (3 filas)</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.registers">Registros:</span>
+              <span class="spec-value" data-i18n="instrumentos.accordion1.specs.registers">14 (7+7)</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.weight">Peso:</span>
+              <span class="spec-value" data-i18n="instrumentos.accordion1.specs.weight">9.5 kg</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.material">Material:</span>
+              <span class="spec-value" data-i18n="instrumentos.accordion1.specs.material">Madera de ébano</span>
+            </li>
+          </ul>
+          <div class="instrument-pricing">
+            <div>
+              <span class="instrument-price" data-i18n="instrumentos.accordion1.price">$4.500.000 COP</span>
+            </div>
+            <div class="instrument-actions">
+              <a href="contacto.html" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
+              <a href="#asesoria" class="btn btn-outline" data-i18n="instrumentos.consult">Consultar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caja Vallenata Profesional -->
+      <div class="instrument-detailed-card" data-category="percusion">
+        <div class="instrument-image">
+          <i class="fas fa-drum"></i>
+        </div>
+        <div class="instrument-details">
+          <h3 class="instrument-name" data-i18n="instrumentos.caja.name">Caja Vallenata Profesional</h3>
+          <span class="instrument-brand" data-i18n="instrumentos.caja.brand">Artesanía Colombiana</span>
+          <p class="instrument-description" data-i18n="instrumentos.caja.description">Caja artesanal en madera de roble con parches de cuero natural. Sonido profundo y auténtico.</p>
+          <ul class="instrument-specs">
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.material">Material:</span>
+              <span class="spec-value" data-i18n="instrumentos.caja.specs.material">Madera de roble</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.diameter">Diámetro:</span>
+              <span class="spec-value" data-i18n="instrumentos.caja.specs.diameter">35 cm</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.height">Altura:</span>
+              <span class="spec-value" data-i18n="instrumentos.caja.specs.height">18 cm</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.skin">Piel:</span>
+              <span class="spec-value" data-i18n="instrumentos.caja.specs.skin">Cuero natural</span>
+            </li>
+          </ul>
+          <div class="instrument-pricing">
+            <div>
+              <span class="instrument-price" data-i18n="instrumentos.caja.price">$350.000 COP</span>
+            </div>
+            <div class="instrument-actions">
+              <a href="contacto.html" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
+              <a href="#asesoria" class="btn btn-outline" data-i18n="instrumentos.consult">Consultar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guacharaca Tradicional -->
+      <div class="instrument-detailed-card" data-category="percusion">
+        <div class="instrument-badge" data-i18n="instrumentos.badge.bestSeller">Más Vendido</div>
+        <div class="instrument-image">
+          <i class="fas fa-music"></i>
+        </div>
+        <div class="instrument-details">
+          <h3 class="instrument-name" data-i18n="instrumentos.guacharaca.name">Guacharaca Tradicional</h3>
+          <span class="instrument-brand" data-i18n="instrumentos.guacharaca.brand">Artesanía Santandereana</span>
+          <p class="instrument-description" data-i18n="instrumentos.guacharaca.description">Guacharaca artesanal en madera de guayacán con rascador de metal. Sonido brillante y definido.</p>
+          <ul class="instrument-specs">
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.material">Material:</span>
+              <span class="spec-value" data-i18n="instrumentos.guacharaca.specs.material">Madera de guayacán</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.length">Longitud:</span>
+              <span class="spec-value" data-i18n="instrumentos.guacharaca.specs.length">45 cm</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.scraper">Rascador:</span>
+              <span class="spec-value" data-i18n="instrumentos.guacharaca.specs.scraper">Acero inoxidable</span>
+            </li>
+            <li>
+              <span class="spec-label" data-i18n="instrumentos.specs.finish">Acabado:</span>
+              <span class="spec-value" data-i18n="instrumentos.guacharaca.specs.finish">Pulido natural</span>
+            </li>
+          </ul>
+          <div class="instrument-pricing">
+            <div>
+              <span class="instrument-price" data-i18n="instrumentos.guacharaca.price">$120.000 COP</span>
+            </div>
+            <div class="instrument-actions">
+              <a href="contacto.html" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
+              <a href="#asesoria" class="btn btn-outline" data-i18n="instrumentos.consult">Consultar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Accesorios -->
+<section class="accessories section-padding bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="instrumentos.accessories.title">Accesorios y Mantenimiento</h2>
+      <p class="section-subtitle" data-i18n="instrumentos.accessories.subtitle">Todo lo que necesitas para el cuidado de tus instrumentos</p>
+    </div>
+    
+    <div class="accessories-grid">
+      <div class="accessory-card">
+        <div class="accessory-icon">
+          <i class="fas fa-toolbox"></i>
+        </div>
+        <h3 data-i18n="instrumentos.accessories.kit.title">Kit de Mantenimiento</h3>
+        <p data-i18n="instrumentos.accessories.kit.description">Herramientas especializadas para el cuidado de acordeones</p>
+        <div class="accessory-price" data-i18n="instrumentos.accessories.kit.price">$85.000 COP</div>
+        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+      </div>
+      
+      <div class="accessory-card">
+        <div class="accessory-icon">
+          <i class="fas fa-guitar"></i>
+        </div>
+        <h3 data-i18n="instrumentos.accessories.strap.title">Correas Profesionales</h3>
+        <p data-i18n="instrumentos.accessories.strap.description">Correas ajustables y acolchadas para mayor comodidad</p>
+        <div class="accessory-price" data-i18n="instrumentos.accessories.strap.price">$45.000 COP</div>
+        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+      </div>
+      
+      <div class="accessory-card">
+        <div class="accessory-icon">
+          <i class="fas fa-box"></i>
+        </div>
+        <h3 data-i18n="instrumentos.accessories.case.title">Estuches Protectores</h3>
+        <p data-i18n="instrumentos.accessories.case.description">Estuches rígidos para transporte seguro de instrumentos</p>
+        <div class="accessory-price" data-i18n="instrumentos.accessories.case.price">$180.000 COP</div>
+        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+      </div>
+      
+      <div class="accessory-card">
+        <div class="accessory-icon">
+          <i class="fas fa-spa"></i>
+        </div>
+        <h3 data-i18n="instrumentos.accessories.cleaner.title">Líquidos de Limpieza</h3>
+        <p data-i18n="instrumentos.accessories.cleaner.description">Soluciones especializadas para limpieza profunda</p>
+        <div class="accessory-price" data-i18n="instrumentos.accessories.cleaner.price">$35.000 COP</div>
+        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Garantía y Servicios -->
+<section class="warranty section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="instrumentos.warranty.title">Garantía y Servicios Incluidos</h2>
+      <p class="section-subtitle" data-i18n="instrumentos.warranty.subtitle">Tu tranquilidad es nuestra prioridad</p>
+    </div>
+    
+    <div class="warranty-features">
+      <div class="warranty-feature">
+        <div class="warranty-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h3 data-i18n="instrumentos.warranty.coverage.title">Garantía Extendida</h3>
+        <p data-i18n="instrumentos.warranty.coverage.description">2 años de garantía en todos nuestros instrumentos profesionales</p>
+      </div>
+      
+      <div class="warranty-feature">
+        <div class="warranty-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <h3 data-i18n="instrumentos.warranty.maintenance.title">Mantenimiento Gratuito</h3>
+        <p data-i18n="instrumentos.warranty.maintenance.description">Primera afinación y ajuste incluido con tu compra</p>
+      </div>
+      
+      <div class="warranty-feature">
+        <div class="warranty-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <h3 data-i18n="instrumentos.warranty.return.title">Devolución Sencilla</h3>
+        <p data-i18n="instrumentos.warranty.return.description">30 días para cambiar o devolver tu instrumento si no estás satisfecho</p>
+      </div>
+      
+      <div class="warranty-feature">
+        <div class="warranty-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3 data-i18n="instrumentos.warranty.advice.title">Asesoría Personalizada</h3>
+        <p data-i18n="instrumentos.warranty.advice.description">Nuestros expertos te ayudan a elegir el instrumento perfecto</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Financiación -->
+<section class="financing section-padding bg-light" id="asesoria">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="instrumentos.financing.title">Opciones de Financiación</h2>
+      <p class="section-subtitle" data-i18n="instrumentos.financing.subtitle">Hacemos posible tu sueño musical</p>
+    </div>
+    
+    <div class="financing-options">
+      <p data-i18n="instrumentos.financing.description">Ofrecemos diferentes planes de pago para que adquieras tu instrumento profesional sin complicaciones.</p>
+      
+      <div class="financing-grid">
+        <div class="financing-option">
+          <div class="option-icon">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <h3 data-i18n="instrumentos.financing.cash.title">Pago Contado</h3>
+          <p data-i18n="instrumentos.financing.cash.description">10% de descuento en compras al contado</p>
+        </div>
+        
+        <div class="financing-option">
+          <div class="option-icon">
+            <i class="fas fa-credit-card"></i>
+          </div>
+          <h3 data-i18n="instrumentos.financing.installments.title">Cuotas Fijas</h3>
+          <p data-i18n="instrumentos.financing.installments.description">Hasta 12 cuotas sin intereses</p>
+        </div>
+        
+        <div class="financing-option">
+          <div class="option-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3 data-i18n="instrumentos.financing.trade.title">Permuta Aceptada</h3>
+          <p data-i18n="instrumentos.financing.trade.description">Aceptamos tu instrumento usado como parte de pago</p>
+        </div>
+        
+        <div class="financing-option">
+          <div class="option-icon">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <h3 data-i18n="instrumentos.financing.layaway.title">Apartado Flexible</h3>
+          <p data-i18n="instrumentos.financing.layaway.description">Aparta tu instrumento con el 30% de inicial</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Asesoría -->
+<section class="consultation section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="instrumentos.consultation.title">Asesoría Gratuita</h2>
+      <p class="section-subtitle" data-i18n="instrumentos.consultation.subtitle">Te ayudamos a elegir el instrumento perfecto para ti</p>
+    </div>
+    
+    <div class="consultation-form">
+      <form id="instrument-consultation-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="consult-name" data-i18n="instrumentos.consultation.form.name">Nombre Completo</label>
+            <input type="text" id="consult-name" required>
+          </div>
+          <div class="form-group">
+            <label for="consult-phone" data-i18n="instrumentos.consultation.form.phone">Teléfono</label>
+            <input type="tel" id="consult-phone" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="consult-email" data-i18n="instrumentos.consultation.form.email">Correo Electrónico</label>
+            <input type="email" id="consult-email" required>
+          </div>
+          <div class="form-group">
+            <label for="consult-instrument" data-i18n="instrumentos.consultation.form.instrument">Instrumento de Interés</label>
+            <select id="consult-instrument" required>
+              <option value="" data-i18n="instrumentos.consultation.form.selectOption">Selecciona una opción</option>
+              <option value="acordeon" data-i18n="instrumentos.consultation.form.accordion">Acordeón</option>
+              <option value="caja" data-i18n="instrumentos.consultation.form.caja">Caja Vallenata</option>
+              <option value="guacharaca" data-i18n="instrumentos.consultation.form.guacharaca">Guacharaca</option>
+              <option value="accesorios" data-i18n="instrumentos.consultation.form.accessories">Accesorios</option>
+              <option value="multiple" data-i18n="instrumentos.consultation.form.multiple">Varios Instrumentos</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="consult-level" data-i18n="instrumentos.consultation.form.level">Nivel Musical</label>
+          <select id="consult-level" required>
+            <option value="" data-i18n="instrumentos.consultation.form.selectOption">Selecciona una opción</option>
+            <option value="beginner" data-i18n="instrumentos.consultation.form.beginner">Principiante</option>
+            <option value="intermediate" data-i18n="instrumentos.consultation.form.intermediate">Intermedio</option>
+            <option value="advanced" data-i18n="instrumentos.consultation.form.advanced">Avanzado</option>
+            <option value="professional" data-i18n="instrumentos.consultation.form.professional">Profesional</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="consult-budget" data-i18n="instrumentos.consultation.form.budget">Presupuesto Aproximado</label>
+          <input type="text" id="consult-budget" placeholder="$" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="consult-message" data-i18n="instrumentos.consultation.form.message">Mensaje o Consulta Específica</label>
+          <textarea id="consult-message" rows="4" placeholder="Cuéntanos sobre tus necesidades musicales..."></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="instrumentos.consultation.form.submit">Solicitar Asesoría Gratuita</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="footer-logo-img" loading="lazy" width="40" height="40">
+          <span class="footer-logo-text">Academia del Vallenato</span>
+        </div>
+        <p class="footer-description" data-i18n="footer.description">Formando a los músicos vallenatos del futuro desde 2010.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          <a href="#" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.links.title">Enlaces rápidos</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html" data-i18n="footer.links.home">Inicio</a></li>
+          <li><a href="servicios.html" data-i18n="footer.links.services">Servicios</a></li>
+          <li><a href="clases.html" data-i18n="footer.links.classes">Clases</a></li>
+          <li><a href="instrumentos.html" data-i18n="footer.links.instruments">Instrumentos</a></li>
+          <li><a href="contacto.html" data-i18n="footer.links.contact">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.contact.title">Contacto</h3>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            <span data-i18n="footer.contact.address">Calle 45 # 12-34, Valledupar, Colombia</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+            <span>+57 300 123 4567</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span>info@academiadelvallenato.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.newsletter.title">Boletín informativo</h3>
+        <p class="footer-description" data-i18n="footer.newsletter.description">Suscríbete para recibir noticias sobre cursos y eventos.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Tu correo electrónico" required data-i18n-placeholder="footer.newsletter.placeholder">
+          <button type="submit" data-i18n="footer.newsletter.subscribe">Suscribirse</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p class="copyright" data-i18n="footer.copyright">© 2023 Academia del Vallenato. Todos los derechos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="#" data-i18n="footer.privacy">Política de privacidad</a>
+          <a href="#" data-i18n="footer.terms">Términos de servicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts optimizados -->
+<script src="../assets/js/script.js" defer></script>
+<script src="../assets/js/stats-system.js" defer></script>
+  
+<!-- Script específico para instrumentos -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Filtrado de categorías
+  const categoryBtns = document.querySelectorAll('.category-btn');
+  const instrumentCards = document.querySelectorAll('.instrument-detailed-card');
+  
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const category = this.getAttribute('data-category');
+      
+      // Actualizar botones activos
+      categoryBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Filtrar instrumentos
+      instrumentCards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Manejo del formulario de asesoría
+  const consultForm = document.getElementById('instrument-consultation-form');
+  if (consultForm) {
+    consultForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Gracias por tu solicitud de asesoría. Un experto te contactará dentro de 24 horas.');
+      consultForm.reset();
+    });
+  }
+
+  const translationSystem = window.translationSystem;
+  if (translationSystem) {
+    // Agregar traducciones específicas de instrumentos
+    const instrumentosTranslations = {
+      es: {
+        'instrumentos.hero.title': 'Instrumentos Vallenatos',
+        'instrumentos.hero.subtitle': 'Los mejores instrumentos profesionales para tu práctica musical, con garantía y asesoría especializada',
+        'instrumentos.hero.cta1': 'Ver Instrumentos',
+        'instrumentos.hero.cta2': 'Asesoría Gratuita',
+        'instrumentos.categories.title': 'Nuestros Instrumentos',
+        'instrumentos.categories.subtitle': 'Calidad profesional para músicos exigentes',
+        'instrumentos.categories.all': 'Todos',
+        'instrumentos.categories.accordions': 'Acordeones',
+        'instrumentos.categories.percussion': 'Percusión',
+        'instrumentos.categories.accessories': 'Accesorios',
+        'instrumentos.badge.popular': 'Popular',
+        'instrumentos.badge.bestSeller': 'Más Vendido',
+        'instrumentos.accordion1.name': 'Acordeón Hohner Corona II',
+        'instrumentos.accordion1.brand': 'Hohner Professional',
+        'instrumentos.accordion1.description': 'Acordeón profesional de 34 notas, ideal para vallenato tradicional. Sonido auténtico y respuesta sensible.',
+        'instrumentos.accordion1.specs.notes': '34 (3 filas)',
+        'instrumentos.accordion1.specs.registers': '14 (7+7)',
+        'instrumentos.accordion1.specs.weight': '9.5 kg',
+        'instrumentos.accordion1.specs.material': 'Madera de ébano',
+        'instrumentos.accordion1.price': '$4.500.000 COP',
+        'instrumentos.caja.name': 'Caja Vallenata Profesional',
+        'instrumentos.caja.brand': 'Artesanía Colombiana',
+        'instrumentos.caja.description': 'Caja artesanal en madera de roble con parches de cuero natural. Sonido profundo y auténtico.',
+        'instrumentos.caja.specs.material': 'Madera de roble',
+        'instrumentos.caja.specs.diameter': '35 cm',
+        'instrumentos.caja.specs.height': '18 cm',
+        'instrumentos.caja.specs.skin': 'Cuero natural',
+        'instrumentos.caja.price': '$350.000 COP',
+        'instrumentos.guacharaca.name': 'Guacharaca Tradicional',
+        'instrumentos.guacharaca.brand': 'Artesanía Santandereana',
+        'instrumentos.guacharaca.description': 'Guacharaca artesanal en madera de guayacán con rascador de metal. Sonido brillante y definido.',
+        'instrumentos.guacharaca.specs.material': 'Madera de guayacán',
+        'instrumentos.guacharaca.specs.length': '45 cm',
+        'instrumentos.guacharaca.specs.scraper': 'Acero inoxidable',
+        'instrumentos.guacharaca.specs.finish': 'Pulido natural',
+        'instrumentos.guacharaca.price': '$120.000 COP',
+        'instrumentos.specs.notes': 'Notas:',
+        'instrumentos.specs.registers': 'Registros:',
+        'instrumentos.specs.weight': 'Peso:',
+        'instrumentos.specs.material': 'Material:',
+        'instrumentos.specs.diameter': 'Diámetro:',
+        'instrumentos.specs.height': 'Altura:',
+        'instrumentos.specs.skin': 'Piel:',
+        'instrumentos.specs.length': 'Longitud:',
+        'instrumentos.specs.scraper': 'Rascador:',
+        'instrumentos.specs.finish': 'Acabado:',
+        'instrumentos.buyNow': 'Comprar',
+        'instrumentos.consult': 'Consultar',
+        'instrumentos.accessories.title': 'Accesorios y Mantenimiento',
+        'instrumentos.accessories.subtitle': 'Todo lo que necesitas para el cuidado de tus instrumentos',
+        'instrumentos.accessories.kit.title': 'Kit de Mantenimiento',
+        'instrumentos.accessories.kit.description': 'Herramientas especializadas para el cuidado de acordeones',
+        'instrumentos.accessories.kit.price': '$85.000 COP',
+        'instrumentos.accessories.strap.title': 'Correas Profesionales',
+        'instrumentos.accessories.strap.description': 'Correas ajustables y acolchadas para mayor comodidad',
+        'instrumentos.accessories.strap.price': '$45.000 COP',
+        'instrumentos.accessories.case.title': 'Estuches Protectores',
+        'instrumentos.accessories.case.description': 'Estuches rígidos para transporte seguro de instrumentos',
+        'instrumentos.accessories.case.price': '$180.000 COP',
+        'instrumentos.accessories.cleaner.title': 'Líquidos de Limpieza',
+        'instrumentos.accessories.cleaner.description': 'Soluciones especializadas para limpieza profunda',
+        'instrumentos.accessories.cleaner.price': '$35.000 COP',
+        'instrumentos.warranty.title': 'Garantía y Servicios Incluidos',
+        'instrumentos.warranty.subtitle': 'Tu tranquilidad es nuestra prioridad',
+        'instrumentos.warranty.coverage.title': 'Garantía Extendida',
+        'instrumentos.warranty.coverage.description': '2 años de garantía en todos nuestros instrumentos profesionales',
+        'instrumentos.warranty.maintenance.title': 'Mantenimiento Gratuito',
+        'instrumentos.warranty.maintenance.description': 'Primera afinación y ajuste incluido con tu compra',
+        'instrumentos.warranty.return.title': 'Devolución Sencilla',
+        'instrumentos.warranty.return.description': '30 días para cambiar o devolver tu instrumento si no estás satisfecho',
+        'instrumentos.warranty.advice.title': 'Asesoría Personalizada',
+        'instrumentos.warranty.advice.description': 'Nuestros expertos te ayudan a elegir el instrumento perfecto',
+        'instrumentos.financing.title': 'Opciones de Financiación',
+        'instrumentos.financing.subtitle': 'Hacemos posible tu sueño musical',
+        'instrumentos.financing.description': 'Ofrecemos diferentes planes de pago para que adquieras tu instrumento profesional sin complicaciones.',
+        'instrumentos.financing.cash.title': 'Pago Contado',
+        'instrumentos.financing.cash.description': '10% de descuento en compras al contado',
+        'instrumentos.financing.installments.title': 'Cuotas Fijas',
+        'instrumentos.financing.installments.description': 'Hasta 12 cuotas sin intereses',
+        'instrumentos.financing.trade.title': 'Permuta Aceptada',
+        'instrumentos.financing.trade.description': 'Aceptamos tu instrumento usado como parte de pago',
+        'instrumentos.financing.layaway.title': 'Apartado Flexible',
+        'instrumentos.financing.layaway.description': 'Aparta tu instrumento con el 30% de inicial',
+        'instrumentos.consultation.title': 'Asesoría Gratuita',
+        'instrumentos.consultation.subtitle': 'Te ayudamos a elegir el instrumento perfecto para ti',
+        'instrumentos.consultation.form.name': 'Nombre Completo',
+        'instrumentos.consultation.form.phone': 'Teléfono',
+        'instrumentos.consultation.form.email': 'Correo Electrónico',
+        'instrumentos.consultation.form.instrument': 'Instrumento de Interés',
+        'instrumentos.consultation.form.selectOption': 'Selecciona una opción',
+        'instrumentos.consultation.form.accordion': 'Acordeón',
+        'instrumentos.consultation.form.caja': 'Caja Vallenata',
+        'instrumentos.consultation.form.guacharaca': 'Guacharaca',
+        'instrumentos.consultation.form.accessories': 'Accesorios',
+        'instrumentos.consultation.form.multiple': 'Varios Instrumentos',
+        'instrumentos.consultation.form.level': 'Nivel Musical',
+        'instrumentos.consultation.form.beginner': 'Principiante',
+        'instrumentos.consultation.form.intermediate': 'Intermedio',
+        'instrumentos.consultation.form.advanced': 'Avanzado',
+        'instrumentos.consultation.form.professional': 'Profesional',
+        'instrumentos.consultation.form.budget': 'Presupuesto Aproximado',
+        'instrumentos.consultation.form.message': 'Mensaje o Consulta Específica',
+        'instrumentos.consultation.form.submit': 'Solicitar Asesoría Gratuita'
+      },
+      en: {
+        'instrumentos.hero.title': 'Vallenato Instruments',
+        'instrumentos.hero.subtitle': 'The best professional instruments for your musical practice, with warranty and specialized advice',
+        'instrumentos.hero.cta1': 'View Instruments',
+        'instrumentos.hero.cta2': 'Free Consultation',
+        'instrumentos.categories.title': 'Our Instruments',
+        'instrumentos.categories.subtitle': 'Professional quality for demanding musicians',
+        'instrumentos.categories.all': 'All',
+        'instrumentos.categories.accordions': 'Accordions',
+        'instrumentos.categories.percussion': 'Percussion',
+        'instrumentos.categories.accessories': 'Accessories',
+        'instrumentos.badge.popular': 'Popular',
+        'instrumentos.badge.bestSeller': 'Best Seller',
+        'instrumentos.accordion1.name': 'Hohner Corona II Accordion',
+        'instrumentos.accordion1.brand': 'Hohner Professional',
+        'instrumentos.accordion1.description': 'Professional 34-note accordion, ideal for traditional vallenato. Authentic sound and sensitive response.',
+        'instrumentos.accordion1.specs.notes': '34 (3 rows)',
+        'instrumentos.accordion1.specs.registers': '14 (7+7)',
+        'instrumentos.accordion1.specs.weight': '9.5 kg',
+        'instrumentos.accordion1.specs.material': 'Ebony wood',
+        'instrumentos.accordion1.price': '$4,500,000 COP',
+        'instrumentos.caja.name': 'Professional Vallenato Drum',
+        'instrumentos.caja.brand': 'Colombian Craftsmanship',
+        'instrumentos.caja.description': 'Artisanal drum made of oak wood with natural leather patches. Deep and authentic sound.',
+        'instrumentos.caja.specs.material': 'Oak wood',
+        'instrumentos.caja.specs.diameter': '35 cm',
+        'instrumentos.caja.specs.height': '18 cm',
+        'instrumentos.caja.specs.skin': 'Natural leather',
+        'instrumentos.caja.price': '$350,000 COP',
+        'instrumentos.guacharaca.name': 'Traditional Guacharaca',
+        'instrumentos.guacharaca.brand': 'Santanderean Craftsmanship',
+        'instrumentos.guacharaca.description': 'Artisanal guacharaca made of guayacán wood with metal scraper. Bright and defined sound.',
+        'instrumentos.guacharaca.specs.material': 'Guayacán wood',
+        'instrumentos.guacharaca.specs.length': '45 cm',
+        'instrumentos.guacharaca.specs.scraper': 'Stainless steel',
+        'instrumentos.guacharaca.specs.finish': 'Natural polish',
+        'instrumentos.guacharaca.price': '$120,000 COP',
+        'instrumentos.specs.notes': 'Notes:',
+        'instrumentos.specs.registers': 'Registers:',
+        'instrumentos.specs.weight': 'Weight:',
+        'instrumentos.specs.material': 'Material:',
+        'instrumentos.specs.diameter': 'Diameter:',
+        'instrumentos.specs.height': 'Height:',
+        'instrumentos.specs.skin': 'Skin:',
+        'instrumentos.specs.length': 'Length:',
+        'instrumentos.specs.scraper': 'Scraper:',
+        'instrumentos.specs.finish': 'Finish:',
+        'instrumentos.buyNow': 'Buy Now',
+        'instrumentos.consult': 'Consult',
+        'instrumentos.accessories.title': 'Accessories and Maintenance',
+        'instrumentos.accessories.subtitle': 'Everything you need for your instrument care',
+        'instrumentos.accessories.kit.title': 'Maintenance Kit',
+        'instrumentos.accessories.kit.description': 'Specialized tools for accordion care',
+        'instrumentos.accessories.kit.price': '$85,000 COP',
+        'instrumentos.accessories.strap.title': 'Professional Straps',
+        'instrumentos.accessories.strap.description': 'Adjustable and padded straps for greater comfort',
+        'instrumentos.accessories.strap.price': '$45,000 COP',
+        'instrumentos.accessories.case.title': 'Protective Cases',
+        'instrumentos.accessories.case.description': 'Rigid cases for safe instrument transport',
+        'instrumentos.accessories.case.price': '$180,000 COP',
+        'instrumentos.accessories.cleaner.title': 'Cleaning Liquids',
+        'instrumentos.accessories.cleaner.description': 'Specialized solutions for deep cleaning',
+        'instrumentos.accessories.cleaner.price': '$35,000 COP',
+        'instrumentos.warranty.title': 'Warranty and Included Services',
+        'instrumentos.warranty.subtitle': 'Your peace of mind is our priority',
+        'instrumentos.warranty.coverage.title': 'Extended Warranty',
+        'instrumentos.warranty.coverage.description': '2 years warranty on all our professional instruments',
+        'instrumentos.warranty.maintenance.title': 'Free Maintenance',
+        'instrumentos.warranty.maintenance.description': 'First tuning and adjustment included with your purchase',
+        'instrumentos.warranty.return.title': 'Easy Returns',
+        'instrumentos.warranty.return.description': '30 days to exchange or return your instrument if not satisfied',
+        'instrumentos.warranty.advice.title': 'Personalized Advice',
+        'instrumentos.warranty.advice.description': 'Our experts help you choose the perfect instrument',
+        'instrumentos.financing.title': 'Financing Options',
+        'instrumentos.financing.subtitle': 'We make your musical dream possible',
+        'instrumentos.financing.description': 'We offer different payment plans so you can acquire your professional instrument without complications.',
+        'instrumentos.financing.cash.title': 'Cash Payment',
+        'instrumentos.financing.cash.description': '10% discount on cash purchases',
+        'instrumentos.financing.installments.title': 'Fixed Installments',
+        'instrumentos.financing.installments.description': 'Up to 12 installments without interest',
+        'instrumentos.financing.trade.title': 'Trade Accepted',
+        'instrumentos.financing.trade.description': 'We accept your used instrument as part of payment',
+        'instrumentos.financing.layaway.title': 'Flexible Layaway',
+        'instrumentos.financing.layaway.description': 'Reserve your instrument with 30% down payment',
+        'instrumentos.consultation.title': 'Free Consultation',
+        'instrumentos.consultation.subtitle': 'We help you choose the perfect instrument for you',
+        'instrumentos.consultation.form.name': 'Full Name',
+        'instrumentos.consultation.form.phone': 'Phone',
+        'instrumentos.consultation.form.email': 'Email',
+        'instrumentos.consultation.form.instrument': 'Instrument of Interest',
+        'instrumentos.consultation.form.selectOption': 'Select an option',
+        'instrumentos.consultation.form.accordion': 'Accordion',
+        'instrumentos.consultation.form.caja': 'Vallenato Drum',
+        'instrumentos.consultation.form.guacharaca': 'Guacharaca',
+        'instrumentos.consultation.form.accessories': 'Accessories',
+        'instrumentos.consultation.form.multiple': 'Multiple Instruments',
+        'instrumentos.consultation.form.level': 'Musical Level',
+        'instrumentos.consultation.form.beginner': 'Beginner',
+        'instrumentos.consultation.form.intermediate': 'Intermediate',
+        'instrumentos.consultation.form.advanced': 'Advanced',
+        'instrumentos.consultation.form.professional': 'Professional',
+        'instrumentos.consultation.form.budget': 'Approximate Budget',
+        'instrumentos.consultation.form.message': 'Message or Specific Query',
+        'instrumentos.consultation.form.submit': 'Request Free Consultation'
+      }
+    };
+
+    // Combinar traducciones
+    Object.keys(instrumentosTranslations.es).forEach(key => {
+      translationSystem.translations.es[key] = instrumentosTranslations.es[key];
+      translationSystem.translations.en[key] = instrumentosTranslations.en[key];
+    });
+
+    // Aplicar traducciones
+    translationSystem.applyTranslations();
+  }
+});
+</script>
+
+</body>
+</html>
+=== FIN ARCHIVO ===
