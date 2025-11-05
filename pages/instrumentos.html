@@ -1,6 +1,5 @@
-=== ARCHIVO: pages/instrumentos.html ===
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" itemscope itemtype="https://schema.org/Product">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +7,71 @@
 <meta name="description" content="Venta de instrumentos vallenatos profesionales: acordeones Hohner, cajas, guacharacas y accesorios. Calidad garantizada y asesoría especializada.">
 <meta name="keywords" content="instrumentos vallenatos, acordeón hohner, caja vallenata, guacharaca, venta instrumentos cartagena, accesorios vallenatos">
 
-<!-- OPTIMIZACIÓN: Preconnect para fuentes externas -->
+<!-- Schema.org para Productos -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Instrumentos Vallenatos Profesionales",
+  "description": "Venta de instrumentos vallenatos de alta calidad para músicos profesionales y estudiantes",
+  "itemListElement": [
+    {
+      "@type": "Product",
+      "position": 1,
+      "name": "Acordeón Hohner Corona II",
+      "description": "Acordeón profesional de 34 notas, ideal para vallenato tradicional",
+      "brand": "Hohner",
+      "offers": {
+        "@type": "Offer",
+        "price": "4500000",
+        "priceCurrency": "COP"
+      }
+    },
+    {
+      "@type": "Product",
+      "position": 2,
+      "name": "Caja Vallenata Profesional",
+      "description": "Caja artesanal en madera de roble con parches de cuero natural",
+      "brand": "Artesanía Colombiana",
+      "offers": {
+        "@type": "Offer",
+        "price": "350000",
+        "priceCurrency": "COP"
+      }
+    },
+    {
+      "@type": "Product",
+      "position": 3,
+      "name": "Guacharaca Tradicional",
+      "description": "Guacharaca artesanal en madera de guayacán con rascador de metal",
+      "brand": "Artesanía Santandereana",
+      "offers": {
+        "@type": "Offer",
+        "price": "120000",
+        "priceCurrency": "COP"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Preload crítico -->
+<link rel="preload" href="../assets/css/styles.css" as="style">
+<link rel="preload" href="../assets/js/script.js" as="script">
+
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- OPTIMIZACIÓN: Font Awesome con carga diferida -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- CSS principal optimizado -->
-<link rel="stylesheet" href="../assets/css/styles.css" media="all">
-<link rel="stylesheet" href="../assets/css/stats-styles.css" media="print" onload="this.media='all'">
-  
-<!-- ESTILOS ADICIONALES PARA INSTRUMENTOS -->
+<!-- CSS -->
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/stats-styles.css">
+
+<!-- Estilos específicos para instrumentos -->
 <style>
 .instruments-categories {
   display: flex;
@@ -38,15 +87,19 @@
   border: 2px solid var(--light-color);
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-fast);
   font-weight: 500;
+  font-family: var(--font-primary);
 }
 
 .category-btn.active,
-.category-btn:hover {
+.category-btn:hover,
+.category-btn:focus-visible {
   background: var(--primary-color);
   color: var(--white);
   border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
 }
 
 .instruments-detailed-grid {
@@ -61,8 +114,9 @@
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-light);
-  transition: all 0.3s ease;
+  transition: all var(--transition-fast);
   position: relative;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
 .instrument-detailed-card:hover {
@@ -76,11 +130,17 @@
   right: 1rem;
   background: var(--primary-color);
   color: var(--white);
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
   z-index: 2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.instrument-badge.best-seller {
+  background: var(--secondary-color);
 }
 
 .instrument-image {
@@ -93,12 +153,18 @@
   font-size: 4rem;
   position: relative;
   overflow: hidden;
+  transition: transform var(--transition-slow);
+}
+
+.instrument-detailed-card:hover .instrument-image {
+  transform: scale(1.05);
 }
 
 .instrument-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--transition-slow);
 }
 
 .instrument-details {
@@ -109,6 +175,7 @@
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   color: var(--dark-color);
+  line-height: 1.3;
 }
 
 .instrument-brand {
@@ -116,6 +183,7 @@
   font-size: 0.9rem;
   margin-bottom: 1rem;
   display: block;
+  font-weight: 500;
 }
 
 .instrument-description {
@@ -127,6 +195,9 @@
 .instrument-specs {
   list-style: none;
   margin-bottom: 1.5rem;
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
 }
 
 .instrument-specs li {
@@ -134,6 +205,7 @@
   border-bottom: 1px solid rgba(0,0,0,0.05);
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .instrument-specs li:last-child {
@@ -143,10 +215,13 @@
 .spec-label {
   font-weight: 500;
   color: var(--text-light);
+  font-size: 0.9rem;
 }
 
 .spec-value {
   color: var(--dark-color);
+  font-weight: 600;
+  text-align: right;
 }
 
 .instrument-pricing {
@@ -154,6 +229,10 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--light-color) 0%, rgba(212, 175, 55, 0.1) 100%);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
 }
 
 .instrument-price {
@@ -192,7 +271,8 @@
   padding: 1.5rem;
   text-align: center;
   box-shadow: var(--shadow-light);
-  transition: all 0.3s ease;
+  transition: all var(--transition-fast);
+  border-top: 3px solid var(--primary-color);
 }
 
 .accessory-card:hover {
@@ -211,12 +291,20 @@
   margin: 0 auto 1rem;
   color: var(--primary-color);
   font-size: 1.5rem;
+  transition: all var(--transition-fast);
+}
+
+.accessory-card:hover .accessory-icon {
+  background: var(--primary-color);
+  color: var(--white);
+  transform: scale(1.1);
 }
 
 .accessory-price {
   font-weight: 600;
   color: var(--primary-color);
   margin: 0.5rem 0;
+  font-size: 1.25rem;
 }
 
 .warranty-features {
@@ -229,6 +317,15 @@
 .warranty-feature {
   text-align: center;
   padding: 1.5rem;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-fast);
+}
+
+.warranty-feature:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
 }
 
 .warranty-icon {
@@ -242,6 +339,12 @@
   margin: 0 auto 1rem;
   color: var(--primary-color);
   font-size: 1.75rem;
+  transition: all var(--transition-fast);
+}
+
+.warranty-feature:hover .warranty-icon {
+  background: var(--primary-color);
+  color: var(--white);
 }
 
 .financing-options {
@@ -249,6 +352,12 @@
   border-radius: var(--border-radius-lg);
   padding: 2rem;
   margin-top: 2rem;
+  border: 2px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.financing-options:hover {
+  border-color: var(--primary-color);
 }
 
 .financing-grid {
@@ -263,12 +372,26 @@
   border-radius: var(--border-radius);
   padding: 1.5rem;
   text-align: center;
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-fast);
+  border-top: 3px solid var(--primary-color);
+}
+
+.financing-option:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-medium);
 }
 
 .option-icon {
   color: var(--primary-color);
   font-size: 2rem;
   margin-bottom: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.financing-option:hover .option-icon {
+  transform: scale(1.1);
+  color: var(--secondary-color);
 }
 
 .consultation-form {
@@ -277,6 +400,7 @@
   padding: 2rem;
   box-shadow: var(--shadow-light);
   margin-top: 2rem;
+  border-left: 4px solid var(--primary-color);
 }
 
 .form-row {
@@ -305,7 +429,8 @@
   border: 2px solid var(--light-color);
   border-radius: var(--border-radius);
   font-family: inherit;
-  transition: border-color 0.3s ease;
+  transition: border-color var(--transition-fast);
+  background: var(--white);
 }
 
 .form-group input:focus,
@@ -313,6 +438,23 @@
 .form-group textarea:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.payment-notice {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  color: #856404;
+  text-align: center;
+}
+
+.payment-notice i {
+  color: #f39c12;
+  margin-right: 0.5rem;
 }
 
 @media (max-width: 768px) {
@@ -328,10 +470,93 @@
   
   .instrument-actions {
     width: 100%;
+    flex-direction: column;
   }
   
   .form-row {
     grid-template-columns: 1fr;
+  }
+  
+  .instruments-categories {
+    gap: 0.5rem;
+  }
+  
+  .category-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .instrument-details {
+    padding: 1rem;
+  }
+  
+  .instrument-name {
+    font-size: 1.25rem;
+  }
+  
+  .instrument-price {
+    font-size: 1.25rem;
+  }
+  
+  .consultation-form {
+    padding: 1.5rem;
+  }
+  
+  .warranty-features {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .financing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animaciones mejoradas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.instrument-detailed-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.instrument-detailed-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.instrument-detailed-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .instrument-detailed-card,
+  .accessory-card,
+  .warranty-feature,
+  .financing-option {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .instrument-detailed-card {
+    border: 2px solid var(--dark-color);
+  }
+  
+  .instrument-badge {
+    background: var(--dark-color);
   }
 }
 </style>
@@ -436,7 +661,7 @@
       <div class="instrument-detailed-card" data-category="acordeones">
         <div class="instrument-badge" data-i18n="instrumentos.badge.popular">Popular</div>
         <div class="instrument-image">
-          <i class="fas fa-accordion"></i>
+          <i class="fas fa-accordion" aria-hidden="true"></i>
         </div>
         <div class="instrument-details">
           <h3 class="instrument-name" data-i18n="instrumentos.accordion1.name">Acordeón Hohner Corona II</h3>
@@ -465,7 +690,7 @@
               <span class="instrument-price" data-i18n="instrumentos.accordion1.price">$4.500.000 COP</span>
             </div>
             <div class="instrument-actions">
-              <a href="contacto.html" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
+              <a href="contacto.html?product=acordeon-hohner" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
               <a href="#asesoria" class="btn btn-outline" data-i18n="instrumentos.consult">Consultar</a>
             </div>
           </div>
@@ -475,7 +700,7 @@
       <!-- Caja Vallenata Profesional -->
       <div class="instrument-detailed-card" data-category="percusion">
         <div class="instrument-image">
-          <i class="fas fa-drum"></i>
+          <i class="fas fa-drum" aria-hidden="true"></i>
         </div>
         <div class="instrument-details">
           <h3 class="instrument-name" data-i18n="instrumentos.caja.name">Caja Vallenata Profesional</h3>
@@ -504,7 +729,7 @@
               <span class="instrument-price" data-i18n="instrumentos.caja.price">$350.000 COP</span>
             </div>
             <div class="instrument-actions">
-              <a href="contacto.html" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
+              <a href="contacto.html?product=caja-vallenata" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
               <a href="#asesoria" class="btn btn-outline" data-i18n="instrumentos.consult">Consultar</a>
             </div>
           </div>
@@ -513,9 +738,9 @@
 
       <!-- Guacharaca Tradicional -->
       <div class="instrument-detailed-card" data-category="percusion">
-        <div class="instrument-badge" data-i18n="instrumentos.badge.bestSeller">Más Vendido</div>
+        <div class="instrument-badge best-seller" data-i18n="instrumentos.badge.bestSeller">Más Vendido</div>
         <div class="instrument-image">
-          <i class="fas fa-music"></i>
+          <i class="fas fa-music" aria-hidden="true"></i>
         </div>
         <div class="instrument-details">
           <h3 class="instrument-name" data-i18n="instrumentos.guacharaca.name">Guacharaca Tradicional</h3>
@@ -544,7 +769,7 @@
               <span class="instrument-price" data-i18n="instrumentos.guacharaca.price">$120.000 COP</span>
             </div>
             <div class="instrument-actions">
-              <a href="contacto.html" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
+              <a href="contacto.html?product=guacharaca" class="btn btn-primary" data-i18n="instrumentos.buyNow">Comprar</a>
               <a href="#asesoria" class="btn btn-outline" data-i18n="instrumentos.consult">Consultar</a>
             </div>
           </div>
@@ -565,42 +790,42 @@
     <div class="accessories-grid">
       <div class="accessory-card">
         <div class="accessory-icon">
-          <i class="fas fa-toolbox"></i>
+          <i class="fas fa-toolbox" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.accessories.kit.title">Kit de Mantenimiento</h3>
         <p data-i18n="instrumentos.accessories.kit.description">Herramientas especializadas para el cuidado de acordeones</p>
         <div class="accessory-price" data-i18n="instrumentos.accessories.kit.price">$85.000 COP</div>
-        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+        <a href="contacto.html?product=kit-mantenimiento" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
       </div>
       
       <div class="accessory-card">
         <div class="accessory-icon">
-          <i class="fas fa-guitar"></i>
+          <i class="fas fa-guitar" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.accessories.strap.title">Correas Profesionales</h3>
         <p data-i18n="instrumentos.accessories.strap.description">Correas ajustables y acolchadas para mayor comodidad</p>
         <div class="accessory-price" data-i18n="instrumentos.accessories.strap.price">$45.000 COP</div>
-        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+        <a href="contacto.html?product=correas" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
       </div>
       
       <div class="accessory-card">
         <div class="accessory-icon">
-          <i class="fas fa-box"></i>
+          <i class="fas fa-box" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.accessories.case.title">Estuches Protectores</h3>
         <p data-i18n="instrumentos.accessories.case.description">Estuches rígidos para transporte seguro de instrumentos</p>
         <div class="accessory-price" data-i18n="instrumentos.accessories.case.price">$180.000 COP</div>
-        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+        <a href="contacto.html?product=estuches" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
       </div>
       
       <div class="accessory-card">
         <div class="accessory-icon">
-          <i class="fas fa-spa"></i>
+          <i class="fas fa-spa" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.accessories.cleaner.title">Líquidos de Limpieza</h3>
         <p data-i18n="instrumentos.accessories.cleaner.description">Soluciones especializadas para limpieza profunda</p>
         <div class="accessory-price" data-i18n="instrumentos.accessories.cleaner.price">$35.000 COP</div>
-        <a href="contacto.html" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
+        <a href="contacto.html?product=liquidos-limpieza" class="btn btn-outline btn-block" data-i18n="instrumentos.buyNow">Comprar</a>
       </div>
     </div>
   </div>
@@ -617,7 +842,7 @@
     <div class="warranty-features">
       <div class="warranty-feature">
         <div class="warranty-icon">
-          <i class="fas fa-shield-alt"></i>
+          <i class="fas fa-shield-alt" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.warranty.coverage.title">Garantía Extendida</h3>
         <p data-i18n="instrumentos.warranty.coverage.description">2 años de garantía en todos nuestros instrumentos profesionales</p>
@@ -625,7 +850,7 @@
       
       <div class="warranty-feature">
         <div class="warranty-icon">
-          <i class="fas fa-tools"></i>
+          <i class="fas fa-tools" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.warranty.maintenance.title">Mantenimiento Gratuito</h3>
         <p data-i18n="instrumentos.warranty.maintenance.description">Primera afinación y ajuste incluido con tu compra</p>
@@ -633,7 +858,7 @@
       
       <div class="warranty-feature">
         <div class="warranty-icon">
-          <i class="fas fa-exchange-alt"></i>
+          <i class="fas fa-exchange-alt" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.warranty.return.title">Devolución Sencilla</h3>
         <p data-i18n="instrumentos.warranty.return.description">30 días para cambiar o devolver tu instrumento si no estás satisfecho</p>
@@ -641,7 +866,7 @@
       
       <div class="warranty-feature">
         <div class="warranty-icon">
-          <i class="fas fa-graduation-cap"></i>
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
         </div>
         <h3 data-i18n="instrumentos.warranty.advice.title">Asesoría Personalizada</h3>
         <p data-i18n="instrumentos.warranty.advice.description">Nuestros expertos te ayudan a elegir el instrumento perfecto</p>
@@ -661,10 +886,15 @@
     <div class="financing-options">
       <p data-i18n="instrumentos.financing.description">Ofrecemos diferentes planes de pago para que adquieras tu instrumento profesional sin complicaciones.</p>
       
+      <div class="payment-notice">
+        <i class="fas fa-exclamation-circle"></i>
+        <span data-i18n="instrumentos.financing.paymentNotice">Todos los pagos requieren confirmación con 50% de anticipo. Saldo antes de la entrega.</span>
+      </div>
+      
       <div class="financing-grid">
         <div class="financing-option">
           <div class="option-icon">
-            <i class="fas fa-money-bill-wave"></i>
+            <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
           </div>
           <h3 data-i18n="instrumentos.financing.cash.title">Pago Contado</h3>
           <p data-i18n="instrumentos.financing.cash.description">10% de descuento en compras al contado</p>
@@ -672,7 +902,7 @@
         
         <div class="financing-option">
           <div class="option-icon">
-            <i class="fas fa-credit-card"></i>
+            <i class="fas fa-credit-card" aria-hidden="true"></i>
           </div>
           <h3 data-i18n="instrumentos.financing.installments.title">Cuotas Fijas</h3>
           <p data-i18n="instrumentos.financing.installments.description">Hasta 12 cuotas sin intereses</p>
@@ -680,7 +910,7 @@
         
         <div class="financing-option">
           <div class="option-icon">
-            <i class="fas fa-handshake"></i>
+            <i class="fas fa-handshake" aria-hidden="true"></i>
           </div>
           <h3 data-i18n="instrumentos.financing.trade.title">Permuta Aceptada</h3>
           <p data-i18n="instrumentos.financing.trade.description">Aceptamos tu instrumento usado como parte de pago</p>
@@ -688,7 +918,7 @@
         
         <div class="financing-option">
           <div class="option-icon">
-            <i class="fas fa-calendar-alt"></i>
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
           </div>
           <h3 data-i18n="instrumentos.financing.layaway.title">Apartado Flexible</h3>
           <p data-i18n="instrumentos.financing.layaway.description">Aparta tu instrumento con el 30% de inicial</p>
@@ -710,23 +940,23 @@
       <form id="instrument-consultation-form">
         <div class="form-row">
           <div class="form-group">
-            <label for="consult-name" data-i18n="instrumentos.consultation.form.name">Nombre Completo</label>
-            <input type="text" id="consult-name" required>
+            <label for="consult-name" data-i18n="instrumentos.consultation.form.name">Nombre Completo *</label>
+            <input type="text" id="consult-name" required aria-required="true">
           </div>
           <div class="form-group">
-            <label for="consult-phone" data-i18n="instrumentos.consultation.form.phone">Teléfono</label>
-            <input type="tel" id="consult-phone" required>
+            <label for="consult-phone" data-i18n="instrumentos.consultation.form.phone">Teléfono *</label>
+            <input type="tel" id="consult-phone" required aria-required="true">
           </div>
         </div>
         
         <div class="form-row">
           <div class="form-group">
-            <label for="consult-email" data-i18n="instrumentos.consultation.form.email">Correo Electrónico</label>
-            <input type="email" id="consult-email" required>
+            <label for="consult-email" data-i18n="instrumentos.consultation.form.email">Correo Electrónico *</label>
+            <input type="email" id="consult-email" required aria-required="true">
           </div>
           <div class="form-group">
-            <label for="consult-instrument" data-i18n="instrumentos.consultation.form.instrument">Instrumento de Interés</label>
-            <select id="consult-instrument" required>
+            <label for="consult-instrument" data-i18n="instrumentos.consultation.form.instrument">Instrumento de Interés *</label>
+            <select id="consult-instrument" required aria-required="true">
               <option value="" data-i18n="instrumentos.consultation.form.selectOption">Selecciona una opción</option>
               <option value="acordeon" data-i18n="instrumentos.consultation.form.accordion">Acordeón</option>
               <option value="caja" data-i18n="instrumentos.consultation.form.caja">Caja Vallenata</option>
@@ -738,8 +968,8 @@
         </div>
         
         <div class="form-group">
-          <label for="consult-level" data-i18n="instrumentos.consultation.form.level">Nivel Musical</label>
-          <select id="consult-level" required>
+          <label for="consult-level" data-i18n="instrumentos.consultation.form.level">Nivel Musical *</label>
+          <select id="consult-level" required aria-required="true">
             <option value="" data-i18n="instrumentos.consultation.form.selectOption">Selecciona una opción</option>
             <option value="beginner" data-i18n="instrumentos.consultation.form.beginner">Principiante</option>
             <option value="intermediate" data-i18n="instrumentos.consultation.form.intermediate">Intermedio</option>
@@ -749,16 +979,23 @@
         </div>
         
         <div class="form-group">
-          <label for="consult-budget" data-i18n="instrumentos.consultation.form.budget">Presupuesto Aproximado</label>
-          <input type="text" id="consult-budget" placeholder="$" required>
+          <label for="consult-budget" data-i18n="instrumentos.consultation.form.budget">Presupuesto Aproximado *</label>
+          <input type="text" id="consult-budget" placeholder="$" required aria-required="true">
         </div>
         
         <div class="form-group">
           <label for="consult-message" data-i18n="instrumentos.consultation.form.message">Mensaje o Consulta Específica</label>
-          <textarea id="consult-message" rows="4" placeholder="Cuéntanos sobre tus necesidades musicales..."></textarea>
+          <textarea id="consult-message" rows="4" placeholder="Cuéntanos sobre tus necesidades musicales..." data-i18n-placeholder="instrumentos.consultation.form.messagePlaceholder"></textarea>
+        </div>
+
+        <div class="payment-notice">
+          <i class="fas fa-exclamation-circle"></i>
+          <span data-i18n="instrumentos.consultation.paymentNotice">Todas las compras requieren pago de confirmación. Te contactaremos para coordinar el proceso.</span>
         </div>
         
-        <button type="submit" class="btn btn-primary btn-block" data-i18n="instrumentos.consultation.form.submit">Solicitar Asesoría Gratuita</button>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="instrumentos.consultation.form.submit">
+          <i class="fas fa-paper-plane"></i> Solicitar Asesoría Gratuita
+        </button>
       </form>
     </div>
   </div>
@@ -787,7 +1024,7 @@
           <li><a href="../index.html" data-i18n="footer.links.home">Inicio</a></li>
           <li><a href="servicios.html" data-i18n="footer.links.services">Servicios</a></li>
           <li><a href="clases.html" data-i18n="footer.links.classes">Clases</a></li>
-          <li><a href="instrumentos.html" data-i18n="footer.links.instruments">Instrumentos</a></li>
+          <li><a href="musica-en-vivo.html" data-i18n="footer.links.instruments">Instrumentos</a></li>
           <li><a href="contacto.html" data-i18n="footer.links.contact">Contacto</a></li>
         </ul>
       </div>
@@ -796,7 +1033,7 @@
         <div class="contact-info">
           <div class="contact-item">
             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-            <span data-i18n="footer.contact.address">Calle 45 # 12-34, Valledupar, Colombia</span>
+            <span data-i18n="footer.contact.address">Centro Histórico, Cartagena, Colombia</span>
           </div>
           <div class="contact-item">
             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -819,7 +1056,7 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-bottom-content">
-        <p class="copyright" data-i18n="footer.copyright">© 2023 Academia del Vallenato. Todos los derechos reservados.</p>
+        <p class="copyright" data-i18n="footer.copyright">© 2024 Academia del Vallenato. Todos los derechos reservados.</p>
         <div class="footer-bottom-links">
           <a href="#" data-i18n="footer.privacy">Política de privacidad</a>
           <a href="#" data-i18n="footer.terms">Términos de servicio</a>
@@ -829,10 +1066,10 @@
   </div>
 </footer>
 
-<!-- Scripts optimizados -->
-<script src="../assets/js/script.js" defer></script>
-<script src="../assets/js/stats-system.js" defer></script>
-  
+<!-- Scripts -->
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/stats-system.js"></script>
+
 <!-- Script específico para instrumentos -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -856,6 +1093,13 @@ document.addEventListener('DOMContentLoaded', function() {
           card.style.display = 'none';
         }
       });
+
+      // Trackear filtro de categoría
+      if (window.statsSystem) {
+        window.statsSystem.trackConversion('instrument_category_filter', {
+          category: category
+        });
+      }
     });
   });
 
@@ -864,14 +1108,53 @@ document.addEventListener('DOMContentLoaded', function() {
   if (consultForm) {
     consultForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Validación básica
+      const nombre = document.getElementById('consult-name').value;
+      const email = document.getElementById('consult-email').value;
+      const telefono = document.getElementById('consult-phone').value;
+      const instrumento = document.getElementById('consult-instrument').value;
+      const nivel = document.getElementById('consult-level').value;
+      const presupuesto = document.getElementById('consult-budget').value;
+      
+      if (!nombre || !email || !telefono || !instrumento || !nivel || !presupuesto) {
+        alert('Por favor, completa todos los campos requeridos.');
+        return;
+      }
+      
       alert('Gracias por tu solicitud de asesoría. Un experto te contactará dentro de 24 horas.');
       consultForm.reset();
+      
+      // Trackear solicitud de asesoría
+      if (window.statsSystem) {
+        window.statsSystem.trackConversion('instrument_consultation_request', {
+          instrument: instrumento,
+          level: nivel,
+          budget: presupuesto
+        });
+      }
     });
   }
 
-  const translationSystem = window.translationSystem;
+  // Trackear clics en compras
+  document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (window.statsSystem) {
+        const instrumentCard = this.closest('.instrument-detailed-card, .accessory-card');
+        const productName = instrumentCard?.querySelector('.instrument-name, h3')?.textContent || 'unknown';
+        const action = this.classList.contains('btn-primary') ? 'purchase' : 'consultation';
+        
+        window.statsSystem.trackConversion('instrument_interaction', {
+          product: productName,
+          action: action
+        });
+      }
+    });
+  });
+
+  // Sistema de traducciones específico para instrumentos
+  const translationSystem = window.academiaApp?.translationSystem || window.translationSystem;
   if (translationSystem) {
-    // Agregar traducciones específicas de instrumentos
     const instrumentosTranslations = {
       es: {
         'instrumentos.hero.title': 'Instrumentos Vallenatos',
@@ -949,6 +1232,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'instrumentos.financing.title': 'Opciones de Financiación',
         'instrumentos.financing.subtitle': 'Hacemos posible tu sueño musical',
         'instrumentos.financing.description': 'Ofrecemos diferentes planes de pago para que adquieras tu instrumento profesional sin complicaciones.',
+        'instrumentos.financing.paymentNotice': 'Todos los pagos requieren confirmación con 50% de anticipo. Saldo antes de la entrega.',
         'instrumentos.financing.cash.title': 'Pago Contado',
         'instrumentos.financing.cash.description': '10% de descuento en compras al contado',
         'instrumentos.financing.installments.title': 'Cuotas Fijas',
@@ -959,23 +1243,25 @@ document.addEventListener('DOMContentLoaded', function() {
         'instrumentos.financing.layaway.description': 'Aparta tu instrumento con el 30% de inicial',
         'instrumentos.consultation.title': 'Asesoría Gratuita',
         'instrumentos.consultation.subtitle': 'Te ayudamos a elegir el instrumento perfecto para ti',
-        'instrumentos.consultation.form.name': 'Nombre Completo',
-        'instrumentos.consultation.form.phone': 'Teléfono',
-        'instrumentos.consultation.form.email': 'Correo Electrónico',
-        'instrumentos.consultation.form.instrument': 'Instrumento de Interés',
+        'instrumentos.consultation.paymentNotice': 'Todas las compras requieren pago de confirmación. Te contactaremos para coordinar el proceso.',
+        'instrumentos.consultation.form.name': 'Nombre Completo *',
+        'instrumentos.consultation.form.phone': 'Teléfono *',
+        'instrumentos.consultation.form.email': 'Correo Electrónico *',
+        'instrumentos.consultation.form.instrument': 'Instrumento de Interés *',
         'instrumentos.consultation.form.selectOption': 'Selecciona una opción',
         'instrumentos.consultation.form.accordion': 'Acordeón',
         'instrumentos.consultation.form.caja': 'Caja Vallenata',
         'instrumentos.consultation.form.guacharaca': 'Guacharaca',
         'instrumentos.consultation.form.accessories': 'Accesorios',
         'instrumentos.consultation.form.multiple': 'Varios Instrumentos',
-        'instrumentos.consultation.form.level': 'Nivel Musical',
+        'instrumentos.consultation.form.level': 'Nivel Musical *',
         'instrumentos.consultation.form.beginner': 'Principiante',
         'instrumentos.consultation.form.intermediate': 'Intermedio',
         'instrumentos.consultation.form.advanced': 'Avanzado',
         'instrumentos.consultation.form.professional': 'Profesional',
-        'instrumentos.consultation.form.budget': 'Presupuesto Aproximado',
+        'instrumentos.consultation.form.budget': 'Presupuesto Aproximado *',
         'instrumentos.consultation.form.message': 'Mensaje o Consulta Específica',
+        'instrumentos.consultation.form.messagePlaceholder': 'Cuéntanos sobre tus necesidades musicales...',
         'instrumentos.consultation.form.submit': 'Solicitar Asesoría Gratuita'
       },
       en: {
@@ -1054,6 +1340,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'instrumentos.financing.title': 'Financing Options',
         'instrumentos.financing.subtitle': 'We make your musical dream possible',
         'instrumentos.financing.description': 'We offer different payment plans so you can acquire your professional instrument without complications.',
+        'instrumentos.financing.paymentNotice': 'All payments require confirmation with 50% deposit. Balance before delivery.',
         'instrumentos.financing.cash.title': 'Cash Payment',
         'instrumentos.financing.cash.description': '10% discount on cash purchases',
         'instrumentos.financing.installments.title': 'Fixed Installments',
@@ -1064,23 +1351,25 @@ document.addEventListener('DOMContentLoaded', function() {
         'instrumentos.financing.layaway.description': 'Reserve your instrument with 30% down payment',
         'instrumentos.consultation.title': 'Free Consultation',
         'instrumentos.consultation.subtitle': 'We help you choose the perfect instrument for you',
-        'instrumentos.consultation.form.name': 'Full Name',
-        'instrumentos.consultation.form.phone': 'Phone',
-        'instrumentos.consultation.form.email': 'Email',
-        'instrumentos.consultation.form.instrument': 'Instrument of Interest',
+        'instrumentos.consultation.paymentNotice': 'All purchases require confirmation payment. We will contact you to coordinate the process.',
+        'instrumentos.consultation.form.name': 'Full Name *',
+        'instrumentos.consultation.form.phone': 'Phone *',
+        'instrumentos.consultation.form.email': 'Email *',
+        'instrumentos.consultation.form.instrument': 'Instrument of Interest *',
         'instrumentos.consultation.form.selectOption': 'Select an option',
         'instrumentos.consultation.form.accordion': 'Accordion',
         'instrumentos.consultation.form.caja': 'Vallenato Drum',
         'instrumentos.consultation.form.guacharaca': 'Guacharaca',
         'instrumentos.consultation.form.accessories': 'Accessories',
         'instrumentos.consultation.form.multiple': 'Multiple Instruments',
-        'instrumentos.consultation.form.level': 'Musical Level',
+        'instrumentos.consultation.form.level': 'Musical Level *',
         'instrumentos.consultation.form.beginner': 'Beginner',
         'instrumentos.consultation.form.intermediate': 'Intermediate',
         'instrumentos.consultation.form.advanced': 'Advanced',
         'instrumentos.consultation.form.professional': 'Professional',
-        'instrumentos.consultation.form.budget': 'Approximate Budget',
+        'instrumentos.consultation.form.budget': 'Approximate Budget *',
         'instrumentos.consultation.form.message': 'Message or Specific Query',
+        'instrumentos.consultation.form.messagePlaceholder': 'Tell us about your musical needs...',
         'instrumentos.consultation.form.submit': 'Request Free Consultation'
       }
     };
@@ -1096,7 +1385,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
-
 </body>
 </html>
-=== FIN ARCHIVO ===
