@@ -1,0 +1,508 @@
+=== ARCHIVO: pages/servicios.html ===
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servicios - Academia del Vallenato Cartagena</title>
+<meta name="description" content="Servicios profesionales de enseñanza vallenata, música en vivo y venta de instrumentos. La mejor academia de vallenato en Cartagena.">
+<meta name="keywords" content="servicios vallenato, clases música cartagena, acordeón, caja vallenata, guacharaca, música en vivo">
+
+<!-- OPTIMIZACIÓN: Preconnect para fuentes externas -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+
+<!-- OPTIMIZACIÓN: Font Awesome con carga diferida -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+<!-- CSS principal optimizado -->
+<link rel="stylesheet" href="../assets/css/styles.css" media="all">
+<link rel="stylesheet" href="../assets/css/stats-styles.css" media="print" onload="this.media='all'">
+</head>
+
+<body>
+<!-- Botón de WhatsApp -->
+<a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
+  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+</a>
+
+<!-- Panel de estadísticas -->
+<div id="stats-panel" class="stats-panel" aria-hidden="true" hidden>
+  <div class="stats-header">
+    <h3>Estadísticas del Sitio</h3>
+    <button id="close-stats" class="close-stats" aria-label="Cerrar panel de estadísticas">&times;</button>
+  </div>
+  <div class="stats-content">
+    <div class="stat-item">
+      <span class="stat-label">Visitas totales:</span>
+      <span id="total-visits" class="stat-value">0</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Páginas más visitadas:</span>
+      <ul id="top-pages" class="stat-list"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="logo-img" loading="eager" width="50" height="50">
+          <span class="logo-text">Academia del Vallenato</span>
+        </a>
+      </div>
+      <nav class="nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link" data-section="home">Inicio</a></li>
+          <li><a href="servicios.html" class="nav-link active" data-section="services">Servicios</a></li>
+          <li><a href="clases.html" class="nav-link" data-section="classes">Clases</a></li>
+          <li><a href="musica-en-vivo.html" class="nav-link" data-section="live-music">Música en Vivo</a></li>
+          <li><a href="instrumentos.html" class="nav-link" data-section="instruments">Instrumentos</a></li>
+          <li><a href="contacto.html" class="nav-link" data-section="contact">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="language-selector">
+          <button id="language-toggle" class="language-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="language-flag">🇪🇸</span>
+            <span class="language-text">ES</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="language-dropdown" role="menu" aria-hidden="true">
+            <button class="language-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
+            <button class="language-option" data-lang="en" role="menuitem">🇺🇸 English</button>
+          </div>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section Servicios -->
+<section class="hero" id="servicios-hero">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title" data-i18n="servicios.hero.title">Nuestros Servicios</h1>
+      <p class="hero-subtitle" data-i18n="servicios.hero.subtitle">Soluciones integrales para tu formación y disfrute de la música vallenata</p>
+      <div class="hero-actions">
+        <a href="#servicios" class="btn btn-primary" data-i18n="servicios.hero.cta1">Ver Servicios</a>
+        <a href="contacto.html" class="btn btn-secondary" data-i18n="servicios.hero.cta2">Solicitar Información</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Servicios Principales -->
+<section class="services-detailed section-padding" id="servicios">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="servicios.main.title">Servicios Integrales</h2>
+      <p class="section-subtitle" data-i18n="servicios.main.subtitle">Todo lo que necesitas para tu journey musical vallenato</p>
+    </div>
+    
+    <div class="services-detailed-grid">
+      <!-- Servicio 1: Pedagogía Musical -->
+      <div class="service-detailed-card" id="pedagogia">
+        <div class="service-detailed-icon">
+          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+        </div>
+        <div class="service-detailed-content">
+          <h3 class="service-detailed-title" data-i18n="servicios.pedagogia.title">Pedagogía Musical Especializada</h3>
+          <p class="service-detailed-description" data-i18n="servicios.pedagogia.description">Metodología adaptada a todas las edades y niveles. Desde niños hasta adultos mayores, nuestro sistema garantiza un aprendizaje efectivo y disfrutable.</p>
+          <ul class="service-features">
+            <li data-i18n="servicios.pedagogia.feature1">Programas para niños (6-12 años)</li>
+            <li data-i18n="servicios.pedagogia.feature2">Cursos para jóvenes y adultos</li>
+            <li data-i18n="servicios.pedagogia.feature3">Clases personalizadas one-on-one</li>
+            <li data-i18n="servicios.pedagogia.feature4">Grupos reducidos (máx. 5 personas)</li>
+          </ul>
+          <div class="service-pricing">
+            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price" data-i18n="servicios.pedagogia.price">$150.000/mes</span>
+          </div>
+          <a href="clases.html" class="btn btn-outline" data-i18n="servicios.learnMore">Ver Clases</a>
+        </div>
+      </div>
+
+      <!-- Servicio 2: Música en Vivo -->
+      <div class="service-detailed-card" id="musica-vivo">
+        <div class="service-detailed-icon">
+          <i class="fas fa-microphone-alt" aria-hidden="true"></i>
+        </div>
+        <div class="service-detailed-content">
+          <h3 class="service-detailed-title" data-i18n="servicios.musicaVivo.title">Música en Vivo para Eventos</h3>
+          <p class="service-detailed-description" data-i18n="servicios.musicaVivo.description">Lleva la auténtica música vallenata a tus eventos. Contamos con agrupaciones profesionales para todo tipo de celebraciones.</p>
+          <ul class="service-features">
+            <li data-i18n="servicios.musicaVivo.feature1">Bodas y eventos sociales</li>
+            <li data-i18n="servicios.musicaVivo.feature2">Fiestas corporativas</li>
+            <li data-i18n="servicios.musicaVivo.feature3">Presentaciones especiales</li>
+            <li data-i18n="servicios.musicaVivo.feature4">Grupos de 3 a 6 músicos</li>
+          </ul>
+          <div class="service-pricing">
+            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price" data-i18n="servicios.musicaVivo.price">$800.000/evento</span>
+          </div>
+          <a href="musica-en-vivo.html" class="btn btn-outline" data-i18n="servicios.learnMore">Más Información</a>
+        </div>
+      </div>
+
+      <!-- Servicio 3: Venta de Instrumentos -->
+      <div class="service-detailed-card" id="instrumentos">
+        <div class="service-detailed-icon">
+          <i class="fas fa-guitar" aria-hidden="true"></i>
+        </div>
+        <div class="service-detailed-content">
+          <h3 class="service-detailed-title" data-i18n="servicios.instrumentos.title">Venta y Asesoría de Instrumentos</h3>
+          <p class="service-detailed-description" data-i18n="servicios.instrumentos.description">Encuentra el instrumento perfecto para tu práctica. Te asesoramos en la selección y mantenimiento de tu equipo musical.</p>
+          <ul class="service-features">
+            <li data-i18n="servicios.instrumentos.feature1">Acordeones profesionales Hohner</li>
+            <li data-i18n="servicios.instrumentos.feature2">Cajas y guacharacas artesanales</li>
+            <li data-i18n="servicios.instrumentos.feature3">Accesorios y mantenimiento</li>
+            <li data-i18n="servicios.instrumentos.feature4">Financiación disponible</li>
+          </ul>
+          <div class="service-pricing">
+            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price" data-i18n="servicios.instrumentos.price">$120.000</span>
+          </div>
+          <a href="instrumentos.html" class="btn btn-outline" data-i18n="servicios.learnMore">Ver Instrumentos</a>
+        </div>
+      </div>
+
+      <!-- Servicio 4: Talleres Especializados -->
+      <div class="service-detailed-card" id="talleres">
+        <div class="service-detailed-icon">
+          <i class="fas fa-users" aria-hidden="true"></i>
+        </div>
+        <div class="service-detailed-content">
+          <h3 class="service-detailed-title" data-i18n="servicios.talleres.title">Talleres y Workshops</h3>
+          <p class="service-detailed-description" data-i18n="servicios.talleres.description">Programas intensivos y especializados para profundizar en aspectos específicos del vallenato.</p>
+          <ul class="service-features">
+            <li data-i18n="servicios.talleres.feature1">Talleres de composición</li>
+            <li data-i18n="servicios.talleres.feature2">Improvisación vallenata</li>
+            <li data-i18n="servicios.talleres.feature3">Historia y teoría musical</li>
+            <li data-i18n="servicios.talleres.feature4">Sesiones con maestros invitados</li>
+          </ul>
+          <div class="service-pricing">
+            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price" data-i18n="servicios.talleres.price">$200.000/taller</span>
+          </div>
+          <a href="contacto.html" class="btn btn-outline" data-i18n="servicios.learnMore">Próximos Talleres</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Proceso de Trabajo -->
+<section class="work-process section-padding bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="servicios.process.title">Nuestro Proceso</h2>
+      <p class="section-subtitle" data-i18n="servicios.process.subtitle">Cómo trabajamos para garantizar tu satisfacción</p>
+    </div>
+    
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3 data-i18n="servicios.process.step1.title">Consulta Inicial</h3>
+          <p data-i18n="servicios.process.step1.description">Evaluamos tus necesidades y objetivos musicales para recomendarte el mejor servicio.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3 data-i18n="servicios.process.step2.title">Personalización</h3>
+          <p data-i18n="servicios.process.step2.description">Adaptamos nuestro approach a tu nivel, horarios y metas específicas.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3 data-i18n="servicios.process.step3.title">Ejecución</h3>
+          <p data-i18n="servicios.process.step3.description">Implementamos el servicio con los mejores estándares de calidad y profesionalismo.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3 data-i18n="servicios.process.step4.title">Seguimiento</h3>
+          <p data-i18n="servicios.process.step4.description">Aseguramos tu satisfacción con seguimiento continuo y ajustes cuando sea necesario.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Beneficios -->
+<section class="benefits section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="servicios.benefits.title">¿Por Qué Elegirnos?</h2>
+      <p class="section-subtitle" data-i18n="servicios.benefits.subtitle">Ventajas de aprender y trabajar con nosotros</p>
+    </div>
+    
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <i class="fas fa-award" aria-hidden="true"></i>
+        <h3 data-i18n="servicios.benefits.quality.title">Calidad Garantizada</h3>
+        <p data-i18n="servicios.benefits.quality.description">Más de 10 años formando músicos exitosos en el género vallenato.</p>
+      </div>
+      <div class="benefit-card">
+        <i class="fas fa-user-tie" aria-hidden="true"></i>
+        <h3 data-i18n="servicios.benefits.professors.title">Profesores Expertos</h3>
+        <p data-i18n="servicios.benefits.professors.description">Maestros con experiencia en escenarios nacionales e internacionales.</p>
+      </div>
+      <div class="benefit-card">
+        <i class="fas fa-flexibility" aria-hidden="true"></i>
+        <h3 data-i18n="servicios.benefits.flexibility.title">Flexibilidad Horaria</h3>
+        <p data-i18n="servicios.benefits.flexibility.description">Adaptamos horarios a tu disponibilidad, incluyendo fines de semana.</p>
+      </div>
+      <div class="benefit-card">
+        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+        <h3 data-i18n="servicios.benefits.guarantee.title">Garantía de Satisfacción</h3>
+        <p data-i18n="servicios.benefits.guarantee.description">Si no estás satisfecho, te devolvemos tu dinero en la primera clase.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta section-padding">
+  <div class="container">
+    <div class="cta-content">
+      <h2 class="cta-title" data-i18n="servicios.cta.title">¿Listo para Empezar?</h2>
+      <p class="cta-text" data-i18n="servicios.cta.text">Contáctanos hoy mismo y descubre cómo podemos ayudarte en tu journey musical.</p>
+      <div class="cta-actions">
+        <a href="contacto.html" class="btn btn-light" data-i18n="servicios.cta.contact">Contactar Ahora</a>
+        <a href="clases.html" class="btn btn-outline-light" data-i18n="servicios.cta.classes">Ver Clases</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="footer-logo-img" loading="lazy" width="40" height="40">
+          <span class="footer-logo-text">Academia del Vallenato</span>
+        </div>
+        <p class="footer-description" data-i18n="footer.description">Formando a los músicos vallenatos del futuro desde 2010.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          <a href="#" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.links.title">Enlaces rápidos</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html" data-i18n="footer.links.home">Inicio</a></li>
+          <li><a href="servicios.html" data-i18n="footer.links.services">Servicios</a></li>
+          <li><a href="clases.html" data-i18n="footer.links.classes">Clases</a></li>
+          <li><a href="instrumentos.html" data-i18n="footer.links.instruments">Instrumentos</a></li>
+          <li><a href="contacto.html" data-i18n="footer.links.contact">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.contact.title">Contacto</h3>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            <span data-i18n="footer.contact.address">Calle 45 # 12-34, Valledupar, Colombia</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+            <span>+57 300 123 4567</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span>info@academiadelvallenato.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.newsletter.title">Boletín informativo</h3>
+        <p class="footer-description" data-i18n="footer.newsletter.description">Suscríbete para recibir noticias sobre cursos y eventos.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Tu correo electrónico" required data-i18n-placeholder="footer.newsletter.placeholder">
+          <button type="submit" data-i18n="footer.newsletter.subscribe">Suscribirse</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p class="copyright" data-i18n="footer.copyright">© 2023 Academia del Vallenato. Todos los derechos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="#" data-i18n="footer.privacy">Política de privacidad</a>
+          <a href="#" data-i18n="footer.terms">Términos de servicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts optimizados -->
+<script src="../assets/js/script.js" defer></script>
+<script src="../assets/js/stats-system.js" defer></script>
+
+<!-- Traducciones específicas para servicios -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const translationSystem = window.translationSystem;
+  if (translationSystem) {
+    // Agregar traducciones específicas de servicios
+    const serviciosTranslations = {
+      es: {
+        'servicios.hero.title': 'Nuestros Servicios',
+        'servicios.hero.subtitle': 'Soluciones integrales para tu formación y disfrute de la música vallenata',
+        'servicios.hero.cta1': 'Ver Servicios',
+        'servicios.hero.cta2': 'Solicitar Información',
+        'servicios.main.title': 'Servicios Integrales',
+        'servicios.main.subtitle': 'Todo lo que necesitas para tu journey musical vallenato',
+        'servicios.pedagogia.title': 'Pedagogía Musical Especializada',
+        'servicios.pedagogia.description': 'Metodología adaptada a todas las edades y niveles. Desde niños hasta adultos mayores, nuestro sistema garantiza un aprendizaje efectivo y disfrutable.',
+        'servicios.pedagogia.feature1': 'Programas para niños (6-12 años)',
+        'servicios.pedagogia.feature2': 'Cursos para jóvenes y adultos',
+        'servicios.pedagogia.feature3': 'Clases personalizadas one-on-one',
+        'servicios.pedagogia.feature4': 'Grupos reducidos (máx. 5 personas)',
+        'servicios.pedagogia.price': '$150.000/mes',
+        'servicios.musicaVivo.title': 'Música en Vivo para Eventos',
+        'servicios.musicaVivo.description': 'Lleva la auténtica música vallenata a tus eventos. Contamos con agrupaciones profesionales para todo tipo de celebraciones.',
+        'servicios.musicaVivo.feature1': 'Bodas y eventos sociales',
+        'servicios.musicaVivo.feature2': 'Fiestas corporativas',
+        'servicios.musicaVivo.feature3': 'Presentaciones especiales',
+        'servicios.musicaVivo.feature4': 'Grupos de 3 a 6 músicos',
+        'servicios.musicaVivo.price': '$800.000/evento',
+        'servicios.instrumentos.title': 'Venta y Asesoría de Instrumentos',
+        'servicios.instrumentos.description': 'Encuentra el instrumento perfecto para tu práctica. Te asesoramos en la selección y mantenimiento de tu equipo musical.',
+        'servicios.instrumentos.feature1': 'Acordeones profesionales Hohner',
+        'servicios.instrumentos.feature2': 'Cajas y guacharacas artesanales',
+        'servicios.instrumentos.feature3': 'Accesorios y mantenimiento',
+        'servicios.instrumentos.feature4': 'Financiación disponible',
+        'servicios.instrumentos.price': '$120.000',
+        'servicios.talleres.title': 'Talleres y Workshops',
+        'servicios.talleres.description': 'Programas intensivos y especializados para profundizar en aspectos específicos del vallenato.',
+        'servicios.talleres.feature1': 'Talleres de composición',
+        'servicios.talleres.feature2': 'Improvisación vallenata',
+        'servicios.talleres.feature3': 'Historia y teoría musical',
+        'servicios.talleres.feature4': 'Sesiones con maestros invitados',
+        'servicios.talleres.price': '$200.000/taller',
+        'servicios.pricing.from': 'Desde',
+        'servicios.learnMore': 'Más Información',
+        'servicios.process.title': 'Nuestro Proceso',
+        'servicios.process.subtitle': 'Cómo trabajamos para garantizar tu satisfacción',
+        'servicios.process.step1.title': 'Consulta Inicial',
+        'servicios.process.step1.description': 'Evaluamos tus necesidades y objetivos musicales para recomendarte el mejor servicio.',
+        'servicios.process.step2.title': 'Personalización',
+        'servicios.process.step2.description': 'Adaptamos nuestro approach a tu nivel, horarios y metas específicas.',
+        'servicios.process.step3.title': 'Ejecución',
+        'servicios.process.step3.description': 'Implementamos el servicio con los mejores estándares de calidad y profesionalismo.',
+        'servicios.process.step4.title': 'Seguimiento',
+        'servicios.process.step4.description': 'Aseguramos tu satisfacción con seguimiento continuo y ajustes cuando sea necesario.',
+        'servicios.benefits.title': '¿Por Qué Elegirnos?',
+        'servicios.benefits.subtitle': 'Ventajas de aprender y trabajar con nosotros',
+        'servicios.benefits.quality.title': 'Calidad Garantizada',
+        'servicios.benefits.quality.description': 'Más de 10 años formando músicos exitosos en el género vallenato.',
+        'servicios.benefits.professors.title': 'Profesores Expertos',
+        'servicios.benefits.professors.description': 'Maestros con experiencia en escenarios nacionales e internacionales.',
+        'servicios.benefits.flexibility.title': 'Flexibilidad Horaria',
+        'servicios.benefits.flexibility.description': 'Adaptamos horarios a tu disponibilidad, incluyendo fines de semana.',
+        'servicios.benefits.guarantee.title': 'Garantía de Satisfacción',
+        'servicios.benefits.guarantee.description': 'Si no estás satisfecho, te devolvemos tu dinero en la primera clase.',
+        'servicios.cta.title': '¿Listo para Empezar?',
+        'servicios.cta.text': 'Contáctanos hoy mismo y descubre cómo podemos ayudarte en tu journey musical.',
+        'servicios.cta.contact': 'Contactar Ahora',
+        'servicios.cta.classes': 'Ver Clases'
+      },
+      en: {
+        'servicios.hero.title': 'Our Services',
+        'servicios.hero.subtitle': 'Comprehensive solutions for your vallenato music training and enjoyment',
+        'servicios.hero.cta1': 'View Services',
+        'servicios.hero.cta2': 'Request Information',
+        'servicios.main.title': 'Comprehensive Services',
+        'servicios.main.subtitle': 'Everything you need for your vallenato musical journey',
+        'servicios.pedagogia.title': 'Specialized Music Pedagogy',
+        'servicios.pedagogia.description': 'Methodology adapted to all ages and levels. From children to seniors, our system guarantees effective and enjoyable learning.',
+        'servicios.pedagogia.feature1': 'Programs for children (6-12 years)',
+        'servicios.pedagogia.feature2': 'Courses for youth and adults',
+        'servicios.pedagogia.feature3': 'Personalized one-on-one classes',
+        'servicios.pedagogia.feature4': 'Small groups (max. 5 people)',
+        'servicios.pedagogia.price': '$150,000/month',
+        'servicios.musicaVivo.title': 'Live Music for Events',
+        'servicios.musicaVivo.description': 'Bring authentic vallenato music to your events. We have professional groups for all types of celebrations.',
+        'servicios.musicaVivo.feature1': 'Weddings and social events',
+        'servicios.musicaVivo.feature2': 'Corporate parties',
+        'servicios.musicaVivo.feature3': 'Special presentations',
+        'servicios.musicaVivo.feature4': 'Groups of 3 to 6 musicians',
+        'servicios.musicaVivo.price': '$800,000/event',
+        'servicios.instrumentos.title': 'Instrument Sales and Advisory',
+        'servicios.instrumentos.description': 'Find the perfect instrument for your practice. We advise you on selection and maintenance of your musical equipment.',
+        'servicios.instrumentos.feature1': 'Professional Hohner accordions',
+        'servicios.instrumentos.feature2': 'Artisanal drums and guacharacas',
+        'servicios.instrumentos.feature3': 'Accessories and maintenance',
+        'servicios.instrumentos.feature4': 'Financing available',
+        'servicios.instrumentos.price': '$120,000',
+        'servicios.talleres.title': 'Workshops and Training',
+        'servicios.talleres.description': 'Intensive and specialized programs to deepen specific aspects of vallenato.',
+        'servicios.talleres.feature1': 'Composition workshops',
+        'servicios.talleres.feature2': 'Vallenato improvisation',
+        'servicios.talleres.feature3': 'Music history and theory',
+        'servicios.talleres.feature4': 'Sessions with guest masters',
+        'servicios.talleres.price': '$200,000/workshop',
+        'servicios.pricing.from': 'From',
+        'servicios.learnMore': 'Learn More',
+        'servicios.process.title': 'Our Process',
+        'servicios.process.subtitle': 'How we work to guarantee your satisfaction',
+        'servicios.process.step1.title': 'Initial Consultation',
+        'servicios.process.step1.description': 'We evaluate your needs and musical goals to recommend the best service.',
+        'servicios.process.step2.title': 'Customization',
+        'servicios.process.step2.description': 'We adapt our approach to your level, schedule and specific goals.',
+        'servicios.process.step3.title': 'Execution',
+        'servicios.process.step3.description': 'We implement the service with the highest standards of quality and professionalism.',
+        'servicios.process.step4.title': 'Follow-up',
+        'servicios.process.step4.description': 'We ensure your satisfaction with continuous monitoring and adjustments when needed.',
+        'servicios.benefits.title': 'Why Choose Us?',
+        'servicios.benefits.subtitle': 'Advantages of learning and working with us',
+        'servicios.benefits.quality.title': 'Guaranteed Quality',
+        'servicios.benefits.quality.description': 'Over 10 years training successful musicians in the vallenato genre.',
+        'servicios.benefits.professors.title': 'Expert Professors',
+        'servicios.benefits.professors.description': 'Teachers with experience in national and international stages.',
+        'servicios.benefits.flexibility.title': 'Schedule Flexibility',
+        'servicios.benefits.flexibility.description': 'We adapt schedules to your availability, including weekends.',
+        'servicios.benefits.guarantee.title': 'Satisfaction Guarantee',
+        'servicios.benefits.guarantee.description': 'If you are not satisfied, we refund your money after the first class.',
+        'servicios.cta.title': 'Ready to Start?',
+        'servicios.cta.text': 'Contact us today and discover how we can help you in your musical journey.',
+        'servicios.cta.contact': 'Contact Now',
+        'servicios.cta.classes': 'View Classes'
+      }
+    };
+
+    // Combinar traducciones
+    Object.keys(serviciosTranslations.es).forEach(key => {
+      translationSystem.translations.es[key] = serviciosTranslations.es[key];
+      translationSystem.translations.en[key] = serviciosTranslations.en[key];
+    });
+
+    // Aplicar traducciones
+    translationSystem.applyTranslations();
+  }
+});
+</script>
+
+</body>
+</html>
