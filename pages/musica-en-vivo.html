@@ -1,0 +1,918 @@
+=== ARCHIVO: pages/musica-en-vivo.html ===
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Música en Vivo - Academia del Vallenato Cartagena</title>
+<meta name="description" content="Contrata agrupaciones vallenatas profesionales para eventos. Bodas, fiestas, eventos corporativos con la auténtica música colombiana.">
+<meta name="keywords" content="música en vivo vallenato, eventos cartagena, bodas, fiestas corporativas, agrupaciones vallenatas, música colombiana">
+
+<!-- OPTIMIZACIÓN: Preconnect para fuentes externas -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+
+<!-- OPTIMIZACIÓN: Font Awesome con carga diferida -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+<!-- CSS principal optimizado -->
+<link rel="stylesheet" href="../assets/css/styles.css" media="all">
+<link rel="stylesheet" href="../assets/css/stats-styles.css" media="print" onload="this.media='all'">
+
+  <!-- ESTILOS ADICIONALES PARA MÚSICA EN VIVO -->
+<style>
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.event-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.event-image {
+  height: 200px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 3rem;
+}
+
+.event-content {
+  padding: 1.5rem;
+}
+
+.event-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.event-description {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.event-features {
+  list-style: none;
+  margin-bottom: 1.5rem;
+}
+
+.event-features li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-features li:last-child {
+  border-bottom: none;
+}
+
+.event-features i {
+  color: var(--primary-color);
+  width: 20px;
+}
+
+.bands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.band-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.band-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.band-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.band-size {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0.5rem 0;
+}
+
+.band-description {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.process-step {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.step-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--white);
+  font-size: 2rem;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+}
+
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.testimonial-text::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+  font-size: 3rem;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.client-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.client-avatar {
+  width: 50px;
+  height: 50px;
+  background: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.client-details h4 {
+  margin: 0;
+  color: var(--dark-color);
+}
+
+.client-details p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.quote-form {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  margin-top: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--light-color);
+  border-radius: var(--border-radius);
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .events-grid,
+  .bands-grid,
+  .process-steps,
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .event-image {
+    height: 150px;
+    font-size: 2rem;
+  }
+}
+</style>
+</head>
+
+<body>
+<!-- Botón de WhatsApp -->
+<a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
+  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+</a>
+
+<!-- Panel de estadísticas -->
+<div id="stats-panel" class="stats-panel" aria-hidden="true" hidden>
+  <div class="stats-header">
+    <h3>Estadísticas del Sitio</h3>
+    <button id="close-stats" class="close-stats" aria-label="Cerrar panel de estadísticas">&times;</button>
+  </div>
+  <div class="stats-content">
+    <div class="stat-item">
+      <span class="stat-label">Visitas totales:</span>
+      <span id="total-visits" class="stat-value">0</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Páginas más visitadas:</span>
+      <ul id="top-pages" class="stat-list"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a href="../index.html">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="logo-img" loading="eager" width="50" height="50">
+          <span class="logo-text">Academia del Vallenato</span>
+        </a>
+      </div>
+      <nav class="nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link" data-section="home">Inicio</a></li>
+          <li><a href="servicios.html" class="nav-link" data-section="services">Servicios</a></li>
+          <li><a href="clases.html" class="nav-link" data-section="classes">Clases</a></li>
+          <li><a href="musica-en-vivo.html" class="nav-link active" data-section="live-music">Música en Vivo</a></li>
+          <li><a href="instrumentos.html" class="nav-link" data-section="instruments">Instrumentos</a></li>
+          <li><a href="contacto.html" class="nav-link" data-section="contact">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="language-selector">
+          <button id="language-toggle" class="language-btn" aria-haspopup="true" aria-expanded="false">
+            <span class="language-flag">🇪🇸</span>
+            <span class="language-text">ES</span>
+            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="language-dropdown" role="menu" aria-hidden="true">
+            <button class="language-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
+            <button class="language-option" data-lang="en" role="menuitem">🇺🇸 English</button>
+          </div>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section Música en Vivo -->
+<section class="hero" id="musica-vivo-hero">
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title" data-i18n="musicaVivo.hero.title">Música Vallenata en Vivo</h1>
+      <p class="hero-subtitle" data-i18n="musicaVivo.hero.subtitle">Lleva la auténtica música colombiana a tu evento con nuestras agrupaciones profesionales</p>
+      <div class="hero-actions">
+        <a href="#cotizar" class="btn btn-primary" data-i18n="musicaVivo.hero.cta1">Solicitar Cotización</a>
+        <a href="#eventos" class="btn btn-secondary" data-i18n="musicaVivo.hero.cta2">Ver Eventos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Tipos de Eventos -->
+<section class="events section-padding" id="eventos">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="musicaVivo.events.title">Eventos para Todos los Momentos</h2>
+      <p class="section-subtitle" data-i18n="musicaVivo.events.subtitle">Adaptamos nuestra música a cualquier tipo de celebración</p>
+    </div>
+    
+    <div class="events-grid">
+      <!-- Evento 1: Bodas -->
+      <div class="event-card">
+        <div class="event-image">
+          <i class="fas fa-ring"></i>
+        </div>
+        <div class="event-content">
+          <h3 class="event-title" data-i18n="musicaVivo.events.wedding.title">Bodas y Matrimonios</h3>
+          <p class="event-description" data-i18n="musicaVivo.events.wedding.description">Haz de tu boda un evento inolvidable con la música que representa el amor y la tradición colombiana.</p>
+          <ul class="event-features">
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.wedding.feature1">Ceremonia y recepción</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.wedding.feature2">Repertorio romántico</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.wedding.feature3">Adaptación a tu programa</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.wedding.feature4">Soundcheck incluido</span></li>
+          </ul>
+          <a href="#cotizar" class="btn btn-outline" data-i18n="musicaVivo.events.quote">Cotizar Evento</a>
+        </div>
+      </div>
+
+      <!-- Evento 2: Corporativos -->
+      <div class="event-card">
+        <div class="event-image">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <div class="event-content">
+          <h3 class="event-title" data-i18n="musicaVivo.events.corporate.title">Eventos Corporativos</h3>
+          <p class="event-description" data-i18n="musicaVivo.events.corporate.description">Ambienta tus eventos empresariales con música elegante que refleje la cultura colombiana.</p>
+          <ul class="event-features">
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.corporate.feature1">Lanzamientos y conferencias</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.corporate.feature2">Fiestas de fin de año</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.corporate.feature3">Repertorio profesional</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.corporate.feature4">Puntualidad garantizada</span></li>
+          </ul>
+          <a href="#cotizar" class="btn btn-outline" data-i18n="musicaVivo.events.quote">Cotizar Evento</a>
+        </div>
+      </div>
+
+      <!-- Evento 3: Fiestas -->
+      <div class="event-card">
+        <div class="event-image">
+          <i class="fas fa-glass-cheers"></i>
+        </div>
+        <div class="event-content">
+          <h3 class="event-title" data-i18n="musicaVivo.events.party.title">Fiestas y Celebraciones</h3>
+          <p class="event-description" data-i18n="musicaVivo.events.party.description">Desde cumpleaños hasta aniversarios, hacemos de tu fiesta una experiencia musical única.</p>
+          <ul class="event-features">
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.party.feature1">Cumpleaños y aniversarios</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.party.feature2">Fiestas temáticas</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.party.feature3">Repertorio animado</span></li>
+            <li><i class="fas fa-check"></i> <span data-i18n="musicaVivo.events.party.feature4">Interacción con invitados</span></li>
+          </ul>
+          <a href="#cotizar" class="btn btn-outline" data-i18n="musicaVivo.events.quote">Cotizar Evento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Agrupaciones -->
+<section class="bands section-padding bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="musicaVivo.bands.title">Nuestras Agrupaciones</h2>
+      <p class="section-subtitle" data-i18n="musicaVivo.bands.subtitle">Diferentes formatos para adaptarnos a tu evento</p>
+    </div>
+    
+    <div class="bands-grid">
+      <!-- Trío Vallenato -->
+      <div class="band-card">
+        <div class="band-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3 class="band-title" data-i18n="musicaVivo.bands.trio.title">Trío Vallenato</h3>
+        <div class="band-size" data-i18n="musicaVivo.bands.trio.size">3 Músicos</div>
+        <p class="band-description" data-i18n="musicaVivo.bands.trio.description">Formación clásica perfecta para eventos íntimos y espacios reducidos.</p>
+        <div class="band-price">
+          <span class="price" data-i18n="musicaVivo.bands.trio.price">$800.000</span>
+          <span class="price-note" data-i18n="musicaVivo.bands.priceNote">por 3 horas</span>
+        </div>
+        <a href="#cotizar" class="btn btn-primary" data-i18n="musicaVivo.bands.book">Reservar</a>
+      </div>
+
+      <!-- Cuarteto Vallenato -->
+      <div class="band-card">
+        <div class="band-icon">
+          <i class="fas fa-user-friends"></i>
+        </div>
+        <h3 class="band-title" data-i18n="musicaVivo.bands.quartet.title">Cuarteto Vallenato</h3>
+        <div class="band-size" data-i18n="musicaVivo.bands.quartet.size">4 Músicos</div>
+        <p class="band-description" data-i18n="musicaVivo.bands.quartet.description">Sonido completo con bajo eléctrico para eventos medianos y grandes.</p>
+        <div class="band-price">
+          <span class="price" data-i18n="musicaVivo.bands.quartet.price">$1.200.000</span>
+          <span class="price-note" data-i18n="musicaVivo.bands.priceNote">por 3 horas</span>
+        </div>
+        <a href="#cotizar" class="btn btn-primary" data-i18n="musicaVivo.bands.book">Reservar</a>
+      </div>
+
+      <!-- Conjunto Vallenato -->
+      <div class="band-card">
+        <div class="band-icon">
+          <i class="fas fa-music"></i>
+        </div>
+        <h3 class="band-title" data-i18n="musicaVivo.bands.ensemble.title">Conjunto Vallenato</h3>
+        <div class="band-size" data-i18n="musicaVivo.bands.ensemble.size">5-6 Músicos</div>
+        <p class="band-description" data-i18n="musicaVivo.bands.ensemble.description">Formación completa con percusión adicional para eventos especiales.</p>
+        <div class="band-price">
+          <span class="price" data-i18n="musicaVivo.bands.ensemble.price">$1.800.000</span>
+          <span class="price-note" data-i18n="musicaVivo.bands.priceNote">por 3 horas</span>
+        </div>
+        <a href="#cotizar" class="btn btn-primary" data-i18n="musicaVivo.bands.book">Reservar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Proceso de Contratación -->
+<section class="process section-padding">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="musicaVivo.process.title">Cómo Contratar Nuestros Servicios</h2>
+      <p class="section-subtitle" data-i18n="musicaVivo.process.subtitle">Simple, rápido y profesional</p>
+    </div>
+    
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <h3 data-i18n="musicaVivo.process.step1.title">Consulta y Disponibilidad</h3>
+        <p data-i18n="musicaVivo.process.step1.description">Contáctanos con la fecha de tu evento y verificamos disponibilidad inmediatamente.</p>
+      </div>
+      
+      <div class="process-step">
+        <div class="step-icon">
+          <i class="fas fa-file-signature"></i>
+        </div>
+        <h3 data-i18n="musicaVivo.process.step2.title">Cotización y Contrato</h3>
+        <p data-i18n="musicaVivo.process.step2.description">Te enviamos una cotización detallada y el contrato de servicios.</p>
+      </div>
+      
+      <div class="process-step">
+        <div class="step-icon">
+          <i class="fas fa-money-bill-wave"></i>
+        </div>
+        <h3 data-i18n="musicaVivo.process.step3.title">Confirmación y Pago</h3>
+        <p data-i18n="musicaVivo.process.step3.description">Confirmamos tu reserva con un anticipo del 50% del valor acordado.</p>
+      </div>
+      
+      <div class="process-step">
+        <div class="step-icon">
+          <i class="fas fa-guitar"></i>
+        </div>
+        <h3 data-i18n="musicaVivo.process.step4.title">Presentación</h3>
+        <p data-i18n="musicaVivo.process.step4.description">Llegamos puntuales a tu evento y hacemos una presentación memorable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Testimonios -->
+<section class="testimonials-live section-padding bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="musicaVivo.testimonials.title">Lo Que Dicen Nuestros Clientes</h2>
+      <p class="section-subtitle" data-i18n="musicaVivo.testimonials.subtitle">Experiencias reales de eventos con nuestra música</p>
+    </div>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-text" data-i18n="musicaVivo.testimonials.testimonial1.text">
+          "Contratamos el trío vallenato para nuestra boda y fue la mejor decisión. Los invitados no paraban de bailar y el ambiente fue increíble."
+        </div>
+        <div class="client-info">
+          <div class="client-avatar">MC</div>
+          <div class="client-details">
+            <h4 data-i18n="musicaVivo.testimonials.testimonial1.client">María y Carlos</h4>
+            <p data-i18n="musicaVivo.testimonials.testimonial1.event">Boda en Cartagena</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-text" data-i18n="musicaVivo.testimonials.testimonial2.text">
+          "Excelente profesionalismo y talento. El cuarteto hizo de nuestra fiesta corporativa un evento que todos recordarán por mucho tiempo."
+        </div>
+        <div class="client-info">
+          <div class="client-avatar">ET</div>
+          <div class="client-details">
+            <h4 data-i18n="musicaVivo.testimonials.testimonial2.client">Empresa Tecnología</h4>
+            <p data-i18n="musicaVivo.testimonials.testimonial2.event">Fiesta de Fin de Año</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-text" data-i18n="musicaVivo.testimonials.testimonial3.text">
+          "Por el cumpleaños de mi madre contraté el conjunto vallenato y fue mágico. Superaron todas nuestras expectativas, ¡totalmente recomendados!"
+        </div>
+        <div class="client-info">
+          <div class="client-avatar">AG</div>
+          <div class="client-details">
+            <h4 data-i18n="musicaVivo.testimonials.testimonial3.client">Ana González</h4>
+            <p data-i18n="musicaVivo.testimonials.testimonial3.event">Cumpleaños Familiar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Cotización -->
+<section class="quote section-padding" id="cotizar">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="musicaVivo.quote.title">Solicita tu Cotización</h2>
+      <p class="section-subtitle" data-i18n="musicaVivo.quote.subtitle">Completa el formulario y te contactaremos en menos de 24 horas</p>
+    </div>
+    
+    <div class="quote-form">
+      <form id="music-quote-form">
+        <div class="form-group">
+          <label for="event-type" data-i18n="musicaVivo.quote.form.eventType">Tipo de Evento</label>
+          <select id="event-type" required>
+            <option value="" data-i18n="musicaVivo.quote.form.selectOption">Selecciona una opción</option>
+            <option value="wedding" data-i18n="musicaVivo.quote.form.wedding">Boda/Matrimonio</option>
+            <option value="corporate" data-i18n="musicaVivo.quote.form.corporate">Evento Corporativo</option>
+            <option value="party" data-i18n="musicaVivo.quote.form.party">Fiesta/Celebración</option>
+            <option value="other" data-i18n="musicaVivo.quote.form.other">Otro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-date" data-i18n="musicaVivo.quote.form.eventDate">Fecha del Evento</label>
+          <input type="date" id="event-date" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="band-type" data-i18n="musicaVivo.quote.form.bandType">Agrupación de Interés</label>
+          <select id="band-type" required>
+            <option value="" data-i18n="musicaVivo.quote.form.selectOption">Selecciona una opción</option>
+            <option value="trio" data-i18n="musicaVivo.quote.form.trio">Trío Vallenato</option>
+            <option value="quartet" data-i18n="musicaVivo.quote.form.quartet">Cuarteto Vallenato</option>
+            <option value="ensemble" data-i18n="musicaVivo.quote.form.ensemble">Conjunto Vallenato</option>
+            <option value="not-sure" data-i18n="musicaVivo.quote.form.notSure">No estoy seguro</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="guest-count" data-i18n="musicaVivo.quote.form.guestCount">Número Aproximado de Invitados</label>
+          <input type="number" id="guest-count" min="1" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="event-location" data-i18n="musicaVivo.quote.form.eventLocation">Lugar del Evento</label>
+          <input type="text" id="event-location" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="special-requests" data-i18n="musicaVivo.quote.form.specialRequests">Solicitudes Especiales</label>
+          <textarea id="special-requests" rows="4" placeholder="Canciones específicas, horarios especiales, etc."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact-name" data-i18n="musicaVivo.quote.form.contactName">Nombre Completo</label>
+          <input type="text" id="contact-name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact-phone" data-i18n="musicaVivo.quote.form.contactPhone">Teléfono</label>
+          <input type="tel" id="contact-phone" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact-email" data-i18n="musicaVivo.quote.form.contactEmail">Correo Electrónico</label>
+          <input type="email" id="contact-email" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="musicaVivo.quote.form.submit">Solicitar Cotización</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="footer-logo-img" loading="lazy" width="40" height="40">
+          <span class="footer-logo-text">Academia del Vallenato</span>
+        </div>
+        <p class="footer-description" data-i18n="footer.description">Formando a los músicos vallenatos del futuro desde 2010.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          <a href="#" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.links.title">Enlaces rápidos</h3>
+        <ul class="footer-links">
+          <li><a href="../index.html" data-i18n="footer.links.home">Inicio</a></li>
+          <li><a href="servicios.html" data-i18n="footer.links.services">Servicios</a></li>
+          <li><a href="clases.html" data-i18n="footer.links.classes">Clases</a></li>
+          <li><a href="instrumentos.html" data-i18n="footer.links.instruments">Instrumentos</a></li>
+          <li><a href="contacto.html" data-i18n="footer.links.contact">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.contact.title">Contacto</h3>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            <span data-i18n="footer.contact.address">Calle 45 # 12-34, Valledupar, Colombia</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone" aria-hidden="true"></i>
+            <span>+57 300 123 4567</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <span>info@academiadelvallenato.com</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title" data-i18n="footer.newsletter.title">Boletín informativo</h3>
+        <p class="footer-description" data-i18n="footer.newsletter.description">Suscríbete para recibir noticias sobre cursos y eventos.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Tu correo electrónico" required data-i18n-placeholder="footer.newsletter.placeholder">
+          <button type="submit" data-i18n="footer.newsletter.subscribe">Suscribirse</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p class="copyright" data-i18n="footer.copyright">© 2023 Academia del Vallenato. Todos los derechos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="#" data-i18n="footer.privacy">Política de privacidad</a>
+          <a href="#" data-i18n="footer.terms">Términos de servicio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts optimizados -->
+<script src="../assets/js/script.js" defer></script>
+<script src="../assets/js/stats-system.js" defer></script>
+  
+<!-- Script específico para música en vivo -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Manejo del formulario de cotización
+  const quoteForm = document.getElementById('music-quote-form');
+  if (quoteForm) {
+    quoteForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Gracias por tu solicitud. Te contactaremos dentro de 24 horas.');
+      quoteForm.reset();
+    });
+  }
+
+  const translationSystem = window.translationSystem;
+  if (translationSystem) {
+    // Agregar traducciones específicas de música en vivo
+    const musicaVivoTranslations = {
+      es: {
+        'musicaVivo.hero.title': 'Música Vallenata en Vivo',
+        'musicaVivo.hero.subtitle': 'Lleva la auténtica música colombiana a tu evento con nuestras agrupaciones profesionales',
+        'musicaVivo.hero.cta1': 'Solicitar Cotización',
+        'musicaVivo.hero.cta2': 'Ver Eventos',
+        'musicaVivo.events.title': 'Eventos para Todos los Momentos',
+        'musicaVivo.events.subtitle': 'Adaptamos nuestra música a cualquier tipo de celebración',
+        'musicaVivo.events.wedding.title': 'Bodas y Matrimonios',
+        'musicaVivo.events.wedding.description': 'Haz de tu boda un evento inolvidable con la música que representa el amor y la tradición colombiana.',
+        'musicaVivo.events.wedding.feature1': 'Ceremonia y recepción',
+        'musicaVivo.events.wedding.feature2': 'Repertorio romántico',
+        'musicaVivo.events.wedding.feature3': 'Adaptación a tu programa',
+        'musicaVivo.events.wedding.feature4': 'Soundcheck incluido',
+        'musicaVivo.events.corporate.title': 'Eventos Corporativos',
+        'musicaVivo.events.corporate.description': 'Ambienta tus eventos empresariales con música elegante que refleje la cultura colombiana.',
+        'musicaVivo.events.corporate.feature1': 'Lanzamientos y conferencias',
+        'musicaVivo.events.corporate.feature2': 'Fiestas de fin de año',
+        'musicaVivo.events.corporate.feature3': 'Repertorio profesional',
+        'musicaVivo.events.corporate.feature4': 'Puntualidad garantizada',
+        'musicaVivo.events.party.title': 'Fiestas y Celebraciones',
+        'musicaVivo.events.party.description': 'Desde cumpleaños hasta aniversarios, hacemos de tu fiesta una experiencia musical única.',
+        'musicaVivo.events.party.feature1': 'Cumpleaños y aniversarios',
+        'musicaVivo.events.party.feature2': 'Fiestas temáticas',
+        'musicaVivo.events.party.feature3': 'Repertorio animado',
+        'musicaVivo.events.party.feature4': 'Interacción con invitados',
+        'musicaVivo.events.quote': 'Cotizar Evento',
+        'musicaVivo.bands.title': 'Nuestras Agrupaciones',
+        'musicaVivo.bands.subtitle': 'Diferentes formatos para adaptarnos a tu evento',
+        'musicaVivo.bands.trio.title': 'Trío Vallenato',
+        'musicaVivo.bands.trio.size': '3 Músicos',
+        'musicaVivo.bands.trio.description': 'Formación clásica perfecta para eventos íntimos y espacios reducidos.',
+        'musicaVivo.bands.trio.price': '$800.000',
+        'musicaVivo.bands.quartet.title': 'Cuarteto Vallenato',
+        'musicaVivo.bands.quartet.size': '4 Músicos',
+        'musicaVivo.bands.quartet.description': 'Sonido completo con bajo eléctrico para eventos medianos y grandes.',
+        'musicaVivo.bands.quartet.price': '$1.200.000',
+        'musicaVivo.bands.ensemble.title': 'Conjunto Vallenato',
+        'musicaVivo.bands.ensemble.size': '5-6 Músicos',
+        'musicaVivo.bands.ensemble.description': 'Formación completa con percusión adicional para eventos especiales.',
+        'musicaVivo.bands.ensemble.price': '$1.800.000',
+        'musicaVivo.bands.priceNote': 'por 3 horas',
+        'musicaVivo.bands.book': 'Reservar',
+        'musicaVivo.process.title': 'Cómo Contratar Nuestros Servicios',
+        'musicaVivo.process.subtitle': 'Simple, rápido y profesional',
+        'musicaVivo.process.step1.title': 'Consulta y Disponibilidad',
+        'musicaVivo.process.step1.description': 'Contáctanos con la fecha de tu evento y verificamos disponibilidad inmediatamente.',
+        'musicaVivo.process.step2.title': 'Cotización y Contrato',
+        'musicaVivo.process.step2.description': 'Te enviamos una cotización detallada y el contrato de servicios.',
+        'musicaVivo.process.step3.title': 'Confirmación y Pago',
+        'musicaVivo.process.step3.description': 'Confirmamos tu reserva con un anticipo del 50% del valor acordado.',
+        'musicaVivo.process.step4.title': 'Presentación',
+        'musicaVivo.process.step4.description': 'Llegamos puntuales a tu evento y hacemos una presentación memorable.',
+        'musicaVivo.testimonials.title': 'Lo Que Dicen Nuestros Clientes',
+        'musicaVivo.testimonials.subtitle': 'Experiencias reales de eventos con nuestra música',
+        'musicaVivo.testimonials.testimonial1.text': '"Contratamos el trío vallenato para nuestra boda y fue la mejor decisión. Los invitados no paraban de bailar y el ambiente fue increíble."',
+        'musicaVivo.testimonials.testimonial1.client': 'María y Carlos',
+        'musicaVivo.testimonials.testimonial1.event': 'Boda en Cartagena',
+        'musicaVivo.testimonials.testimonial2.text': '"Excelente profesionalismo y talento. El cuarteto hizo de nuestra fiesta corporativa un evento que todos recordarán por mucho tiempo."',
+        'musicaVivo.testimonials.testimonial2.client': 'Empresa Tecnología',
+        'musicaVivo.testimonials.testimonial2.event': 'Fiesta de Fin de Año',
+        'musicaVivo.testimonials.testimonial3.text': '"Por el cumpleaños de mi madre contraté el conjunto vallenato y fue mágico. Superaron todas nuestras expectativas, ¡totalmente recomendados!"',
+        'musicaVivo.testimonials.testimonial3.client': 'Ana González',
+        'musicaVivo.testimonials.testimonial3.event': 'Cumpleaños Familiar',
+        'musicaVivo.quote.title': 'Solicita tu Cotización',
+        'musicaVivo.quote.subtitle': 'Completa el formulario y te contactaremos en menos de 24 horas',
+        'musicaVivo.quote.form.eventType': 'Tipo de Evento',
+        'musicaVivo.quote.form.selectOption': 'Selecciona una opción',
+        'musicaVivo.quote.form.wedding': 'Boda/Matrimonio',
+        'musicaVivo.quote.form.corporate': 'Evento Corporativo',
+        'musicaVivo.quote.form.party': 'Fiesta/Celebración',
+        'musicaVivo.quote.form.other': 'Otro',
+        'musicaVivo.quote.form.eventDate': 'Fecha del Evento',
+        'musicaVivo.quote.form.bandType': 'Agrupación de Interés',
+        'musicaVivo.quote.form.trio': 'Trío Vallenato',
+        'musicaVivo.quote.form.quartet': 'Cuarteto Vallenato',
+        'musicaVivo.quote.form.ensemble': 'Conjunto Vallenato',
+        'musicaVivo.quote.form.notSure': 'No estoy seguro',
+        'musicaVivo.quote.form.guestCount': 'Número Aproximado de Invitados',
+        'musicaVivo.quote.form.eventLocation': 'Lugar del Evento',
+        'musicaVivo.quote.form.specialRequests': 'Solicitudes Especiales',
+        'musicaVivo.quote.form.contactName': 'Nombre Completo',
+        'musicaVivo.quote.form.contactPhone': 'Teléfono',
+        'musicaVivo.quote.form.contactEmail': 'Correo Electrónico',
+        'musicaVivo.quote.form.submit': 'Solicitar Cotización'
+      },
+      en: {
+        'musicaVivo.hero.title': 'Live Vallenato Music',
+        'musicaVivo.hero.subtitle': 'Bring authentic Colombian music to your event with our professional groups',
+        'musicaVivo.hero.cta1': 'Request Quote',
+        'musicaVivo.hero.cta2': 'View Events',
+        'musicaVivo.events.title': 'Events for Every Occasion',
+        'musicaVivo.events.subtitle': 'We adapt our music to any type of celebration',
+        'musicaVivo.events.wedding.title': 'Weddings and Marriages',
+        'musicaVivo.events.wedding.description': 'Make your wedding an unforgettable event with music that represents Colombian love and tradition.',
+        'musicaVivo.events.wedding.feature1': 'Ceremony and reception',
+        'musicaVivo.events.wedding.feature2': 'Romantic repertoire',
+        'musicaVivo.events.wedding.feature3': 'Adaptation to your program',
+        'musicaVivo.events.wedding.feature4': 'Soundcheck included',
+        'musicaVivo.events.corporate.title': 'Corporate Events',
+        'musicaVivo.events.corporate.description': 'Set the mood for your business events with elegant music that reflects Colombian culture.',
+        'musicaVivo.events.corporate.feature1': 'Launches and conferences',
+        'musicaVivo.events.corporate.feature2': 'End of year parties',
+        'musicaVivo.events.corporate.feature3': 'Professional repertoire',
+        'musicaVivo.events.corporate.feature4': 'Guaranteed punctuality',
+        'musicaVivo.events.party.title': 'Parties and Celebrations',
+        'musicaVivo.events.party.description': 'From birthdays to anniversaries, we make your party a unique musical experience.',
+        'musicaVivo.events.party.feature1': 'Birthdays and anniversaries',
+        'musicaVivo.events.party.feature2': 'Themed parties',
+        'musicaVivo.events.party.feature3': 'Lively repertoire',
+        'musicaVivo.events.party.feature4': 'Interaction with guests',
+        'musicaVivo.events.quote': 'Quote Event',
+        'musicaVivo.bands.title': 'Our Groups',
+        'musicaVivo.bands.subtitle': 'Different formats to adapt to your event',
+        'musicaVivo.bands.trio.title': 'Vallenato Trio',
+        'musicaVivo.bands.trio.size': '3 Musicians',
+        'musicaVivo.bands.trio.description': 'Classic formation perfect for intimate events and small spaces.',
+        'musicaVivo.bands.trio.price': '$800,000',
+        'musicaVivo.bands.quartet.title': 'Vallenato Quartet',
+        'musicaVivo.bands.quartet.size': '4 Musicians',
+        'musicaVivo.bands.quartet.description': 'Complete sound with electric bass for medium and large events.',
+        'musicaVivo.bands.quartet.price': '$1,200,000',
+        'musicaVivo.bands.ensemble.title': 'Vallenato Ensemble',
+        'musicaVivo.bands.ensemble.size': '5-6 Musicians',
+        'musicaVivo.bands.ensemble.description': 'Complete formation with additional percussion for special events.',
+        'musicaVivo.bands.ensemble.price': '$1,800,000',
+        'musicaVivo.bands.priceNote': 'for 3 hours',
+        'musicaVivo.bands.book': 'Book Now',
+        'musicaVivo.process.title': 'How to Hire Our Services',
+        'musicaVivo.process.subtitle': 'Simple, fast and professional',
+        'musicaVivo.process.step1.title': 'Consultation and Availability',
+        'musicaVivo.process.step1.description': 'Contact us with your event date and we check availability immediately.',
+        'musicaVivo.process.step2.title': 'Quote and Contract',
+        'musicaVivo.process.step2.description': 'We send you a detailed quote and service contract.',
+        'musicaVivo.process.step3.title': 'Confirmation and Payment',
+        'musicaVivo.process.step3.description': 'We confirm your reservation with a 50% deposit of the agreed amount.',
+        'musicaVivo.process.step4.title': 'Performance',
+        'musicaVivo.process.step4.description': 'We arrive punctually to your event and deliver a memorable performance.',
+        'musicaVivo.testimonials.title': 'What Our Clients Say',
+        'musicaVivo.testimonials.subtitle': 'Real experiences from events with our music',
+        'musicaVivo.testimonials.testimonial1.text': '"We hired the vallenato trio for our wedding and it was the best decision. The guests couldn\'t stop dancing and the atmosphere was incredible."',
+        'musicaVivo.testimonials.testimonial1.client': 'Maria and Carlos',
+        'musicaVivo.testimonials.testimonial1.event': 'Wedding in Cartagena',
+        'musicaVivo.testimonials.testimonial2.text': '"Excellent professionalism and talent. The quartet made our corporate party an event that everyone will remember for a long time."',
+        'musicaVivo.testimonials.testimonial2.client': 'Technology Company',
+        'musicaVivo.testimonials.testimonial2.event': 'End of Year Party',
+        'musicaVivo.testimonials.testimonial3.text': '"For my mother\'s birthday I hired the vallenato ensemble and it was magical. They exceeded all our expectations, totally recommended!"',
+        'musicaVivo.testimonials.testimonial3.client': 'Ana Gonzalez',
+        'musicaVivo.testimonials.testimonial3.event': 'Family Birthday',
+        'musicaVivo.quote.title': 'Request Your Quote',
+        'musicaVivo.quote.subtitle': 'Complete the form and we will contact you within 24 hours',
+        'musicaVivo.quote.form.eventType': 'Event Type',
+        'musicaVivo.quote.form.selectOption': 'Select an option',
+        'musicaVivo.quote.form.wedding': 'Wedding/Marriage',
+        'musicaVivo.quote.form.corporate': 'Corporate Event',
+        'musicaVivo.quote.form.party': 'Party/Celebration',
+        'musicaVivo.quote.form.other': 'Other',
+        'musicaVivo.quote.form.eventDate': 'Event Date',
+        'musicaVivo.quote.form.bandType': 'Group of Interest',
+        'musicaVivo.quote.form.trio': 'Vallenato Trio',
+        'musicaVivo.quote.form.quartet': 'Vallenato Quartet',
+        'musicaVivo.quote.form.ensemble': 'Vallenato Ensemble',
+        'musicaVivo.quote.form.notSure': "I'm not sure",
+        'musicaVivo.quote.form.guestCount': 'Approximate Number of Guests',
+        'musicaVivo.quote.form.eventLocation': 'Event Location',
+        'musicaVivo.quote.form.specialRequests': 'Special Requests',
+        'musicaVivo.quote.form.contactName': 'Full Name',
+        'musicaVivo.quote.form.contactPhone': 'Phone',
+        'musicaVivo.quote.form.contactEmail': 'Email',
+        'musicaVivo.quote.form.submit': 'Request Quote'
+      }
+    };
+
+    // Combinar traducciones
+    Object.keys(musicaVivoTranslations.es).forEach(key => {
+      translationSystem.translations.es[key] = musicaVivoTranslations.es[key];
+      translationSystem.translations.en[key] = musicaVivoTranslations.en[key];
+    });
+
+    // Aplicar traducciones
+    translationSystem.applyTranslations();
+  }
+});
+</script>
+
+</body>
+</html>
