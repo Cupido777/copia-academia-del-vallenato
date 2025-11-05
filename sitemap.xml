@@ -1,0 +1,52 @@
+=== ARCHIVO: sitemap.xml ===
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ===========================================================
+     SITEMAP DE LA ACADEMIA DEL VALLENATO
+     -----------------------------------------------------------
+     Este archivo ayuda a los motores de búsqueda (Google, Bing)
+     a indexar correctamente todas las páginas del sitio web.
+     =========================================================== -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Página principal -->
+  <url>
+    <loc>https://www.academiadelvallenato.com/</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <!-- Página de servicios -->
+  <url>
+    <loc>https://www.academiadelvallenato.com/pages/servicios.html</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Página de clases -->
+  <url>
+    <loc>https://www.academiadelvallenato.com/pages/clases.html</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Página de música en vivo -->
+  <url>
+    <loc>https://www.academiadelvallenato.com/pages/musica-en-vivo.html</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Página de instrumentos -->
+  <url>
+    <loc>https://www.academiadelvallenato.com/pages/instrumentos.html</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Página de contacto -->
+  <url>
+    <loc>https://www.academiadelvallenato.com/pages/contacto.html</loc>
+    <lastmod>2025-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

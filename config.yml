@@ -1,0 +1,96 @@
+=== ARCHIVO: _config.yml ===
+# CONFIGURACIÓN ACADEMIA DEL VALLENATO CARTAGENA
+# Archivo de configuración principal - NO MODIFICAR MANUALMENTE
+
+# ======================
+# CONFIGURACIÓN BÁSICA
+# ======================
+title: "Academia del Vallenato Cartagena"
+description: "Aprende vallenato en la Academia del Vallenato Cartagena. Clases de acordeón, caja y guacharaca. Venta de instrumentos y servicios de música en vivo."
+baseurl: ""
+url: "https://www.academiadelvallenatocartagena.com"
+
+# ======================
+# CONFIGURACIÓN JEKYLL
+# ======================
+theme: null
+plugins: []
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# ======================
+# INFORMACIÓN ACADEMIA
+# ======================
+academia:
+  nombre: "Academia del Vallenato Cartagena"
+  fundacion: 2010
+  ubicacion: "Cartagena, Colombia"
+  email: "info@academiadelvallenatocartagena.com"
+  telefono: "+57 300 123 4567"
+
+# ======================
+# CONFIGURACIÓN SEO
+# ======================
+google_analytics: null # AGREGAR ID DE GOOGLE ANALYTICS SI SE REQUIERE
+lang: "es"
+timezone: "America/Bogota"
+encoding: "UTF-8"
+
+# ======================
+# OPCIONES BUILD
+# ======================
+exclude:
+  - "node_modules"
+  - "README.md"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "package.json"
+  - "package-lock.json"
+  - "vendor"
+  - ".git"
+  - ".svn"
+
+include:
+  - "_pages"
+  - "_includes"
+
+# ======================
+# CONFIGURACIÓN SITEMAP
+# ======================
+sitemap:
+  filename: "sitemap.xml"
+  exclude:
+    - "/404.html"
+    - "/assets/js/"
+    - "/assets/css/"
+
+# ======================
+# CONFIGURACIÓN PÁGINAS
+# ======================
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+      permalink: "/:basename/"
+
+# ======================
+# OPTIMIZACIÓN RENDIMIENTO
+# ======================
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+
+# ======================
+# CONFIGURACIÓN MULTI-IDIOMA
+# ======================
+languages: ["es", "en"]
+default_lang: "es"
+exclude_from_localization: ["assets", "images", "js", "css"]
