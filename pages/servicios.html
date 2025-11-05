@@ -1,6 +1,5 @@
-=== ARCHIVO: pages/servicios.html ===
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" itemscope itemtype="https://schema.org/Service">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,32 +7,383 @@
 <meta name="description" content="Servicios profesionales de enseñanza vallenata, música en vivo y venta de instrumentos. La mejor academia de vallenato en Cartagena.">
 <meta name="keywords" content="servicios vallenato, clases música cartagena, acordeón, caja vallenata, guacharaca, música en vivo">
 
-<!-- OPTIMIZACIÓN: Preconnect para fuentes externas -->
+<!-- Schema.org para Servicios -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Servicios de Enseñanza Vallenata",
+  "description": "Clases profesionales de acordeón, caja vallenata y guacharaca en Cartagena",
+  "provider": {
+    "@type": "MusicSchool",
+    "name": "Academia del Vallenato Cartagena"
+  },
+  "areaServed": "Cartagena, Colombia",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios Musicales",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Clases de Acordeón"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Música en Vivo"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Venta de Instrumentos"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- Preload crítico -->
+<link rel="preload" href="../assets/css/styles.css" as="style">
+<link rel="preload" href="../assets/js/script.js" as="script">
+
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- OPTIMIZACIÓN: Font Awesome con carga diferida -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- CSS principal optimizado -->
-<link rel="stylesheet" href="../assets/css/styles.css" media="all">
-<link rel="stylesheet" href="../assets/css/stats-styles.css" media="print" onload="this.media='all'">
+<!-- CSS -->
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/stats-styles.css">
+
+<!-- Estilos específicos para servicios -->
+<style>
+.services-detailed-grid {
+  display: grid;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.service-detailed-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-fast);
+  border-left: 4px solid var(--primary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-detailed-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.service-detailed-card:hover::before {
+  opacity: 1;
+}
+
+.service-detailed-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.service-detailed-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.service-detailed-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.service-detailed-description {
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.service-features {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.service-features li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.service-features li:last-child {
+  border-bottom: none;
+}
+
+.service-features i {
+  color: var(--primary-color);
+  width: 20px;
+}
+
+.service-pricing {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
+}
+
+.price-label {
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.payment-notice {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #856404;
+}
+
+.payment-notice i {
+  color: #f39c12;
+  margin-right: 0.5rem;
+}
+
+/* Proceso de Trabajo */
+.process-steps {
+  display: grid;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.process-step {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.process-step:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.step-number {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-color);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.step-content {
+  flex: 1;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-light);
+}
+
+.step-content h3 {
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+  font-size: 1.25rem;
+}
+
+.step-content p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Beneficios */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.benefit-card {
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+  transition: all var(--transition-fast);
+  border-top: 4px solid var(--primary-color);
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.benefit-card i {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.benefit-card h3 {
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+  font-size: 1.25rem;
+}
+
+.benefit-card p {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Garantías */
+.guarantees-section {
+  background: var(--light-color);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  margin-top: 3rem;
+}
+
+.guarantees-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.guarantee-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow-light);
+}
+
+.guarantee-icon {
+  width: 70px;
+  height: 70px;
+  background: var(--primary-color);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.75rem;
+}
+
+.guarantee-card h4 {
+  margin-bottom: 1rem;
+  color: var(--dark-color);
+}
+
+.guarantee-card p {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .service-detailed-card {
+    padding: 2rem;
+  }
+  
+  .process-step,
+  .process-step:nth-child(even) {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .step-number {
+    margin: 0 auto;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .guarantees-section {
+    padding: 2rem 1rem;
+  }
+  
+  .service-pricing {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-detailed-card {
+    padding: 1.5rem;
+  }
+  
+  .guarantees-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .step-content {
+    padding: 1.5rem;
+  }
+}
+</style>
 </head>
 
 <body>
-<!-- Botón de WhatsApp -->
-<a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp" rel="noopener noreferrer">
-  <i class="fab fa-whatsapp" aria-hidden="true"></i>
+<!-- Botón WhatsApp -->
+<a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chatear por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- Panel de estadísticas -->
+<!-- Panel Estadísticas -->
 <div id="stats-panel" class="stats-panel" aria-hidden="true" hidden>
   <div class="stats-header">
     <h3>Estadísticas del Sitio</h3>
-    <button id="close-stats" class="close-stats" aria-label="Cerrar panel de estadísticas">&times;</button>
+    <button id="close-stats" class="close-stats" aria-label="Cerrar panel">&times;</button>
   </div>
   <div class="stats-content">
     <div class="stat-item">
@@ -53,33 +403,36 @@
     <div class="header-content">
       <div class="logo">
         <a href="../index.html">
-          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="logo-img" loading="eager" width="50" height="50">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato Cartagena" width="50" height="50" loading="eager">
           <span class="logo-text">Academia del Vallenato</span>
         </a>
       </div>
+      
       <nav class="nav" aria-label="Navegación principal">
         <ul class="nav-list">
-          <li><a href="../index.html" class="nav-link" data-section="home">Inicio</a></li>
-          <li><a href="servicios.html" class="nav-link active" data-section="services">Servicios</a></li>
-          <li><a href="clases.html" class="nav-link" data-section="classes">Clases</a></li>
-          <li><a href="musica-en-vivo.html" class="nav-link" data-section="live-music">Música en Vivo</a></li>
-          <li><a href="instrumentos.html" class="nav-link" data-section="instruments">Instrumentos</a></li>
-          <li><a href="contacto.html" class="nav-link" data-section="contact">Contacto</a></li>
+          <li><a href="../index.html" class="nav-link">Inicio</a></li>
+          <li><a href="servicios.html" class="nav-link active">Servicios</a></li>
+          <li><a href="clases.html" class="nav-link">Clases</a></li>
+          <li><a href="musica-en-vivo.html" class="nav-link">Música en Vivo</a></li>
+          <li><a href="instrumentos.html" class="nav-link">Instrumentos</a></li>
+          <li><a href="contacto.html" class="nav-link">Contacto</a></li>
         </ul>
       </nav>
+
       <div class="header-actions">
         <div class="language-selector">
           <button id="language-toggle" class="language-btn" aria-haspopup="true" aria-expanded="false">
             <span class="language-flag">🇪🇸</span>
             <span class="language-text">ES</span>
-            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            <i class="fas fa-chevron-down"></i>
           </button>
-          <div class="language-dropdown" role="menu" aria-hidden="true">
-            <button class="language-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
-            <button class="language-option" data-lang="en" role="menuitem">🇺🇸 English</button>
+          <div class="language-dropdown">
+            <button class="language-option" data-lang="es">🇪🇸 Español</button>
+            <button class="language-option" data-lang="en">🇺🇸 English</button>
           </div>
         </div>
-        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+        
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menú móvil">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -89,14 +442,20 @@
 
 <!-- Hero Section Servicios -->
 <section class="hero" id="servicios-hero">
-  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
       <h1 class="hero-title" data-i18n="servicios.hero.title">Nuestros Servicios</h1>
       <p class="hero-subtitle" data-i18n="servicios.hero.subtitle">Soluciones integrales para tu formación y disfrute de la música vallenata</p>
       <div class="hero-actions">
-        <a href="#servicios" class="btn btn-primary" data-i18n="servicios.hero.cta1">Ver Servicios</a>
-        <a href="contacto.html" class="btn btn-secondary" data-i18n="servicios.hero.cta2">Solicitar Información</a>
+        <a href="#servicios" class="btn btn-primary" data-i18n="servicios.hero.cta1">
+          <i class="fas fa-list"></i>
+          Ver Servicios
+        </a>
+        <a href="contacto.html" class="btn btn-secondary" data-i18n="servicios.hero.cta2">
+          <i class="fas fa-info-circle"></i>
+          Solicitar Información
+        </a>
       </div>
     </div>
   </div>
@@ -114,88 +473,226 @@
       <!-- Servicio 1: Pedagogía Musical -->
       <div class="service-detailed-card" id="pedagogia">
         <div class="service-detailed-icon">
-          <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          <i class="fas fa-graduation-cap"></i>
         </div>
         <div class="service-detailed-content">
           <h3 class="service-detailed-title" data-i18n="servicios.pedagogia.title">Pedagogía Musical Especializada</h3>
           <p class="service-detailed-description" data-i18n="servicios.pedagogia.description">Metodología adaptada a todas las edades y niveles. Desde niños hasta adultos mayores, nuestro sistema garantiza un aprendizaje efectivo y disfrutable.</p>
+          
           <ul class="service-features">
-            <li data-i18n="servicios.pedagogia.feature1">Programas para niños (6-12 años)</li>
-            <li data-i18n="servicios.pedagogia.feature2">Cursos para jóvenes y adultos</li>
-            <li data-i18n="servicios.pedagogia.feature3">Clases personalizadas one-on-one</li>
-            <li data-i18n="servicios.pedagogia.feature4">Grupos reducidos (máx. 5 personas)</li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.pedagogia.feature1">Programas para niños (6-12 años)</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.pedagogia.feature2">Cursos para jóvenes y adultos</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.pedagogia.feature3">Clases personalizadas one-on-one</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.pedagogia.feature4">Grupos reducidos (máx. 5 personas)</span>
+            </li>
           </ul>
+          
           <div class="service-pricing">
-            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price-label" data-i18n="servicios.pricing.from">Inversión desde</span>
             <span class="price" data-i18n="servicios.pedagogia.price">$150.000/mes</span>
           </div>
-          <a href="clases.html" class="btn btn-outline" data-i18n="servicios.learnMore">Ver Clases</a>
+          
+          <div class="payment-notice">
+            <i class="fas fa-exclamation-circle"></i>
+            <span data-i18n="servicios.payment.notice">Pago mensual por adelantado requerido para confirmar inscripción</span>
+          </div>
+          
+          <a href="clases.html" class="btn btn-outline" data-i18n="servicios.learnMore">
+            <i class="fas fa-arrow-right"></i>
+            Ver Clases
+          </a>
         </div>
       </div>
 
       <!-- Servicio 2: Música en Vivo -->
       <div class="service-detailed-card" id="musica-vivo">
         <div class="service-detailed-icon">
-          <i class="fas fa-microphone-alt" aria-hidden="true"></i>
+          <i class="fas fa-microphone-alt"></i>
         </div>
         <div class="service-detailed-content">
           <h3 class="service-detailed-title" data-i18n="servicios.musicaVivo.title">Música en Vivo para Eventos</h3>
           <p class="service-detailed-description" data-i18n="servicios.musicaVivo.description">Lleva la auténtica música vallenata a tus eventos. Contamos con agrupaciones profesionales para todo tipo de celebraciones.</p>
+          
           <ul class="service-features">
-            <li data-i18n="servicios.musicaVivo.feature1">Bodas y eventos sociales</li>
-            <li data-i18n="servicios.musicaVivo.feature2">Fiestas corporativas</li>
-            <li data-i18n="servicios.musicaVivo.feature3">Presentaciones especiales</li>
-            <li data-i18n="servicios.musicaVivo.feature4">Grupos de 3 a 6 músicos</li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.musicaVivo.feature1">Bodas y eventos sociales</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.musicaVivo.feature2">Fiestas corporativas</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.musicaVivo.feature3">Presentaciones especiales</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.musicaVivo.feature4">Grupos de 3 a 6 músicos</span>
+            </li>
           </ul>
+          
           <div class="service-pricing">
-            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price-label" data-i18n="servicios.pricing.from">Inversión desde</span>
             <span class="price" data-i18n="servicios.musicaVivo.price">$800.000/evento</span>
           </div>
-          <a href="musica-en-vivo.html" class="btn btn-outline" data-i18n="servicios.learnMore">Más Información</a>
+          
+          <div class="payment-notice">
+            <i class="fas fa-exclamation-circle"></i>
+            <span data-i18n="servicios.payment.eventNotice">Reserva con 50% de anticipo - Saldo antes del evento</span>
+          </div>
+          
+          <a href="musica-en-vivo.html" class="btn btn-outline" data-i18n="servicios.learnMore">
+            <i class="fas fa-arrow-right"></i>
+            Más Información
+          </a>
         </div>
       </div>
 
       <!-- Servicio 3: Venta de Instrumentos -->
       <div class="service-detailed-card" id="instrumentos">
         <div class="service-detailed-icon">
-          <i class="fas fa-guitar" aria-hidden="true"></i>
+          <i class="fas fa-guitar"></i>
         </div>
         <div class="service-detailed-content">
           <h3 class="service-detailed-title" data-i18n="servicios.instrumentos.title">Venta y Asesoría de Instrumentos</h3>
           <p class="service-detailed-description" data-i18n="servicios.instrumentos.description">Encuentra el instrumento perfecto para tu práctica. Te asesoramos en la selección y mantenimiento de tu equipo musical.</p>
+          
           <ul class="service-features">
-            <li data-i18n="servicios.instrumentos.feature1">Acordeones profesionales Hohner</li>
-            <li data-i18n="servicios.instrumentos.feature2">Cajas y guacharacas artesanales</li>
-            <li data-i18n="servicios.instrumentos.feature3">Accesorios y mantenimiento</li>
-            <li data-i18n="servicios.instrumentos.feature4">Financiación disponible</li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.instrumentos.feature1">Acordeones profesionales Hohner</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.instrumentos.feature2">Cajas y guacharacas artesanales</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.instrumentos.feature3">Accesorios y mantenimiento</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.instrumentos.feature4">Garantía en todos los instrumentos</span>
+            </li>
           </ul>
+          
           <div class="service-pricing">
-            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price-label" data-i18n="servicios.pricing.from">Inversión desde</span>
             <span class="price" data-i18n="servicios.instrumentos.price">$120.000</span>
           </div>
-          <a href="instrumentos.html" class="btn btn-outline" data-i18n="servicios.learnMore">Ver Instrumentos</a>
+          
+          <div class="payment-notice">
+            <i class="fas fa-exclamation-circle"></i>
+            <span data-i18n="servicios.payment.instrumentNotice">Pago completo requerido al momento de la compra</span>
+          </div>
+          
+          <a href="instrumentos.html" class="btn btn-outline" data-i18n="servicios.learnMore">
+            <i class="fas fa-arrow-right"></i>
+            Ver Instrumentos
+          </a>
         </div>
       </div>
 
       <!-- Servicio 4: Talleres Especializados -->
       <div class="service-detailed-card" id="talleres">
         <div class="service-detailed-icon">
-          <i class="fas fa-users" aria-hidden="true"></i>
+          <i class="fas fa-users"></i>
         </div>
         <div class="service-detailed-content">
           <h3 class="service-detailed-title" data-i18n="servicios.talleres.title">Talleres y Workshops</h3>
           <p class="service-detailed-description" data-i18n="servicios.talleres.description">Programas intensivos y especializados para profundizar en aspectos específicos del vallenato.</p>
+          
           <ul class="service-features">
-            <li data-i18n="servicios.talleres.feature1">Talleres de composición</li>
-            <li data-i18n="servicios.talleres.feature2">Improvisación vallenata</li>
-            <li data-i18n="servicios.talleres.feature3">Historia y teoría musical</li>
-            <li data-i18n="servicios.talleres.feature4">Sesiones con maestros invitados</li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.talleres.feature1">Talleres de composición</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.talleres.feature2">Improvisación vallenata</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.talleres.feature3">Historia y teoría musical</span>
+            </li>
+            <li>
+              <i class="fas fa-check"></i>
+              <span data-i18n="servicios.talleres.feature4">Sesiones con maestros invitados</span>
+            </li>
           </ul>
+          
           <div class="service-pricing">
-            <span class="price-label" data-i18n="servicios.pricing.from">Desde</span>
+            <span class="price-label" data-i18n="servicios.pricing.from">Inversión desde</span>
             <span class="price" data-i18n="servicios.talleres.price">$200.000/taller</span>
           </div>
-          <a href="contacto.html" class="btn btn-outline" data-i18n="servicios.learnMore">Próximos Talleres</a>
+          
+          <div class="payment-notice">
+            <i class="fas fa-exclamation-circle"></i>
+            <span data-i18n="servicios.payment.workshopNotice">Inscripción con pago completo requerida</span>
+          </div>
+          
+          <a href="contacto.html" class="btn btn-outline" data-i18n="servicios.learnMore">
+            <i class="fas fa-arrow-right"></i>
+            Próximos Talleres
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Garantías -->
+<section class="guarantees section-padding bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" data-i18n="servicios.guarantees.title">Nuestras Garantías</h2>
+      <p class="section-subtitle" data-i18n="servicios.guarantees.subtitle">Comprometidos con tu satisfacción y aprendizaje</p>
+    </div>
+    
+    <div class="guarantees-section">
+      <div class="guarantees-grid">
+        <div class="guarantee-card">
+          <div class="guarantee-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h4 data-i18n="servicios.guarantees.quality.title">Calidad Garantizada</h4>
+          <p data-i18n="servicios.guarantees.quality.description">Más de 10 años formando músicos exitosos en el género vallenato</p>
+        </div>
+        
+        <div class="guarantee-card">
+          <div class="guarantee-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h4 data-i18n="servicios.guarantees.professors.title">Profesores Expertos</h4>
+          <p data-i18n="servicios.guarantees.professors.description">Maestros con experiencia en escenarios nacionales e internacionales</p>
+        </div>
+        
+        <div class="guarantee-card">
+          <div class="guarantee-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h4 data-i18n="servicios.guarantees.flexibility.title">Flexibilidad Horaria</h4>
+          <p data-i18n="servicios.guarantees.flexibility.description">Adaptamos horarios a tu disponibilidad, incluyendo fines de semana</p>
+        </div>
+        
+        <div class="guarantee-card">
+          <div class="guarantee-icon">
+            <i class="fas fa-medal"></i>
+          </div>
+          <h4 data-i18n="servicios.guarantees.satisfaction.title">Garantía de Satisfacción</h4>
+          <p data-i18n="servicios.guarantees.satisfaction.description">Si no estás satisfecho, te devolvemos tu dinero en la primera clase</p>
         </div>
       </div>
     </div>
@@ -203,7 +700,7 @@
 </section>
 
 <!-- Sección Proceso de Trabajo -->
-<section class="work-process section-padding bg-light">
+<section class="work-process section-padding">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" data-i18n="servicios.process.title">Nuestro Proceso</h2>
@@ -215,28 +712,31 @@
         <div class="step-number">1</div>
         <div class="step-content">
           <h3 data-i18n="servicios.process.step1.title">Consulta Inicial</h3>
-          <p data-i18n="servicios.process.step1.description">Evaluamos tus necesidades y objetivos musicales para recomendarte el mejor servicio.</p>
+          <p data-i18n="servicios.process.step1.description">Evaluamos tus necesidades y objetivos musicales para recomendarte el mejor servicio. Confirmación con pago completo requerida.</p>
         </div>
       </div>
+      
       <div class="process-step">
         <div class="step-number">2</div>
         <div class="step-content">
           <h3 data-i18n="servicios.process.step2.title">Personalización</h3>
-          <p data-i18n="servicios.process.step2.description">Adaptamos nuestro approach a tu nivel, horarios y metas específicas.</p>
+          <p data-i18n="servicios.process.step2.description">Adaptamos nuestro approach a tu nivel, horarios y metas específicas. Todos los pagos deben realizarse antes de iniciar.</p>
         </div>
       </div>
+      
       <div class="process-step">
         <div class="step-number">3</div>
         <div class="step-content">
           <h3 data-i18n="servicios.process.step3.title">Ejecución</h3>
-          <p data-i18n="servicios.process.step3.description">Implementamos el servicio con los mejores estándares de calidad y profesionalismo.</p>
+          <p data-i18n="servicios.process.step3.description">Implementamos el servicio con los mejores estándares de calidad y profesionalismo. Servicio confirmado con pago completo.</p>
         </div>
       </div>
+      
       <div class="process-step">
         <div class="step-number">4</div>
         <div class="step-content">
           <h3 data-i18n="servicios.process.step4.title">Seguimiento</h3>
-          <p data-i18n="servicios.process.step4.description">Aseguramos tu satisfacción con seguimiento continuo y ajustes cuando sea necesario.</p>
+          <p data-i18n="servicios.process.step4.description">Aseguramos tu satisfacción con seguimiento continuo y ajustes cuando sea necesario. Renovación con pago mensual adelantado.</p>
         </div>
       </div>
     </div>
@@ -244,7 +744,7 @@
 </section>
 
 <!-- Sección Beneficios -->
-<section class="benefits section-padding">
+<section class="benefits section-padding bg-light">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title" data-i18n="servicios.benefits.title">¿Por Qué Elegirnos?</h2>
@@ -253,24 +753,27 @@
     
     <div class="benefits-grid">
       <div class="benefit-card">
-        <i class="fas fa-award" aria-hidden="true"></i>
+        <i class="fas fa-award"></i>
         <h3 data-i18n="servicios.benefits.quality.title">Calidad Garantizada</h3>
-        <p data-i18n="servicios.benefits.quality.description">Más de 10 años formando músicos exitosos en el género vallenato.</p>
+        <p data-i18n="servicios.benefits.quality.description">Más de 10 años formando músicos exitosos en el género vallenato. Inversión segura con resultados comprobados.</p>
       </div>
+      
       <div class="benefit-card">
-        <i class="fas fa-user-tie" aria-hidden="true"></i>
+        <i class="fas fa-user-tie"></i>
         <h3 data-i18n="servicios.benefits.professors.title">Profesores Expertos</h3>
-        <p data-i18n="servicios.benefits.professors.description">Maestros con experiencia en escenarios nacionales e internacionales.</p>
+        <p data-i18n="servicios.benefits.professors.description">Maestros con experiencia en escenarios nacionales e internacionales. Valor real por tu inversión educativa.</p>
       </div>
+      
       <div class="benefit-card">
-        <i class="fas fa-flexibility" aria-hidden="true"></i>
+        <i class="fas fa-calendar-alt"></i>
         <h3 data-i18n="servicios.benefits.flexibility.title">Flexibilidad Horaria</h3>
-        <p data-i18n="servicios.benefits.flexibility.description">Adaptamos horarios a tu disponibilidad, incluyendo fines de semana.</p>
+        <p data-i18n="servicios.benefits.flexibility.description">Adaptamos horarios a tu disponibilidad, incluyendo fines de semana. Pagos mensuales claros y transparentes.</p>
       </div>
+      
       <div class="benefit-card">
-        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+        <i class="fas fa-shield-alt"></i>
         <h3 data-i18n="servicios.benefits.guarantee.title">Garantía de Satisfacción</h3>
-        <p data-i18n="servicios.benefits.guarantee.description">Si no estás satisfecho, te devolvemos tu dinero en la primera clase.</p>
+        <p data-i18n="servicios.benefits.guarantee.description">Si no estás satisfecho, te devolvemos tu dinero después de la primera clase. Tu inversión protegida.</p>
       </div>
     </div>
   </div>
@@ -281,10 +784,16 @@
   <div class="container">
     <div class="cta-content">
       <h2 class="cta-title" data-i18n="servicios.cta.title">¿Listo para Empezar?</h2>
-      <p class="cta-text" data-i18n="servicios.cta.text">Contáctanos hoy mismo y descubre cómo podemos ayudarte en tu journey musical.</p>
+      <p class="cta-text" data-i18n="servicios.cta.text">Contáctanos hoy mismo y descubre cómo podemos ayudarte en tu journey musical. Todos los servicios requieren pago completo para confirmación.</p>
       <div class="cta-actions">
-        <a href="contacto.html" class="btn btn-light" data-i18n="servicios.cta.contact">Contactar Ahora</a>
-        <a href="clases.html" class="btn btn-outline-light" data-i18n="servicios.cta.classes">Ver Clases</a>
+        <a href="contacto.html" class="btn btn-light" data-i18n="servicios.cta.contact">
+          <i class="fas fa-phone"></i>
+          Contactar Ahora
+        </a>
+        <a href="clases.html" class="btn btn-outline-light" data-i18n="servicios.cta.classes">
+          <i class="fas fa-music"></i>
+          Ver Clases
+        </a>
       </div>
     </div>
   </div>
@@ -296,17 +805,18 @@
     <div class="footer-content">
       <div class="footer-section">
         <div class="footer-logo">
-          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" class="footer-logo-img" loading="lazy" width="40" height="40">
+          <img src="../assets/images/logo-academia-vallenato.png" alt="Academia del Vallenato" loading="lazy" width="40" height="40">
           <span class="footer-logo-text">Academia del Vallenato</span>
         </div>
         <p class="footer-description" data-i18n="footer.description">Formando a los músicos vallenatos del futuro desde 2010.</p>
         <div class="social-links">
-          <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-          <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-          <a href="#" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-          <a href="#" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
+      
       <div class="footer-section">
         <h3 class="footer-title" data-i18n="footer.links.title">Enlaces rápidos</h3>
         <ul class="footer-links">
@@ -317,35 +827,38 @@
           <li><a href="contacto.html" data-i18n="footer.links.contact">Contacto</a></li>
         </ul>
       </div>
+      
       <div class="footer-section">
         <h3 class="footer-title" data-i18n="footer.contact.title">Contacto</h3>
         <div class="contact-info">
           <div class="contact-item">
-            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-            <span data-i18n="footer.contact.address">Calle 45 # 12-34, Valledupar, Colombia</span>
+            <i class="fas fa-map-marker-alt"></i>
+            <span data-i18n="footer.contact.address">Centro Histórico, Cartagena, Colombia</span>
           </div>
           <div class="contact-item">
-            <i class="fas fa-phone" aria-hidden="true"></i>
+            <i class="fas fa-phone"></i>
             <span>+57 300 123 4567</span>
           </div>
           <div class="contact-item">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
+            <i class="fas fa-envelope"></i>
             <span>info@academiadelvallenato.com</span>
           </div>
         </div>
       </div>
+      
       <div class="footer-section">
         <h3 class="footer-title" data-i18n="footer.newsletter.title">Boletín informativo</h3>
         <p class="footer-description" data-i18n="footer.newsletter.description">Suscríbete para recibir noticias sobre cursos y eventos.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault();">
+        <form class="newsletter-form">
           <input type="email" placeholder="Tu correo electrónico" required data-i18n-placeholder="footer.newsletter.placeholder">
           <button type="submit" data-i18n="footer.newsletter.subscribe">Suscribirse</button>
         </form>
       </div>
     </div>
+    
     <div class="footer-bottom">
       <div class="footer-bottom-content">
-        <p class="copyright" data-i18n="footer.copyright">© 2023 Academia del Vallenato. Todos los derechos reservados.</p>
+        <p class="copyright" data-i18n="footer.copyright">© 2024 Academia del Vallenato. Todos los derechos reservados.</p>
         <div class="footer-bottom-links">
           <a href="#" data-i18n="footer.privacy">Política de privacidad</a>
           <a href="#" data-i18n="footer.terms">Términos de servicio</a>
@@ -355,154 +868,194 @@
   </div>
 </footer>
 
-<!-- Scripts optimizados -->
-<script src="../assets/js/script.js" defer></script>
-<script src="../assets/js/stats-system.js" defer></script>
+<!-- Scripts -->
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/stats-system.js"></script>
 
-<!-- Traducciones específicas para servicios -->
+<!-- Script específico para servicios -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  const translationSystem = window.translationSystem;
-  if (translationSystem) {
-    // Agregar traducciones específicas de servicios
-    const serviciosTranslations = {
-      es: {
-        'servicios.hero.title': 'Nuestros Servicios',
-        'servicios.hero.subtitle': 'Soluciones integrales para tu formación y disfrute de la música vallenata',
-        'servicios.hero.cta1': 'Ver Servicios',
-        'servicios.hero.cta2': 'Solicitar Información',
-        'servicios.main.title': 'Servicios Integrales',
-        'servicios.main.subtitle': 'Todo lo que necesitas para tu journey musical vallenato',
-        'servicios.pedagogia.title': 'Pedagogía Musical Especializada',
-        'servicios.pedagogia.description': 'Metodología adaptada a todas las edades y niveles. Desde niños hasta adultos mayores, nuestro sistema garantiza un aprendizaje efectivo y disfrutable.',
-        'servicios.pedagogia.feature1': 'Programas para niños (6-12 años)',
-        'servicios.pedagogia.feature2': 'Cursos para jóvenes y adultos',
-        'servicios.pedagogia.feature3': 'Clases personalizadas one-on-one',
-        'servicios.pedagogia.feature4': 'Grupos reducidos (máx. 5 personas)',
-        'servicios.pedagogia.price': '$150.000/mes',
-        'servicios.musicaVivo.title': 'Música en Vivo para Eventos',
-        'servicios.musicaVivo.description': 'Lleva la auténtica música vallenata a tus eventos. Contamos con agrupaciones profesionales para todo tipo de celebraciones.',
-        'servicios.musicaVivo.feature1': 'Bodas y eventos sociales',
-        'servicios.musicaVivo.feature2': 'Fiestas corporativas',
-        'servicios.musicaVivo.feature3': 'Presentaciones especiales',
-        'servicios.musicaVivo.feature4': 'Grupos de 3 a 6 músicos',
-        'servicios.musicaVivo.price': '$800.000/evento',
-        'servicios.instrumentos.title': 'Venta y Asesoría de Instrumentos',
-        'servicios.instrumentos.description': 'Encuentra el instrumento perfecto para tu práctica. Te asesoramos en la selección y mantenimiento de tu equipo musical.',
-        'servicios.instrumentos.feature1': 'Acordeones profesionales Hohner',
-        'servicios.instrumentos.feature2': 'Cajas y guacharacas artesanales',
-        'servicios.instrumentos.feature3': 'Accesorios y mantenimiento',
-        'servicios.instrumentos.feature4': 'Financiación disponible',
-        'servicios.instrumentos.price': '$120.000',
-        'servicios.talleres.title': 'Talleres y Workshops',
-        'servicios.talleres.description': 'Programas intensivos y especializados para profundizar en aspectos específicos del vallenato.',
-        'servicios.talleres.feature1': 'Talleres de composición',
-        'servicios.talleres.feature2': 'Improvisación vallenata',
-        'servicios.talleres.feature3': 'Historia y teoría musical',
-        'servicios.talleres.feature4': 'Sesiones con maestros invitados',
-        'servicios.talleres.price': '$200.000/taller',
-        'servicios.pricing.from': 'Desde',
-        'servicios.learnMore': 'Más Información',
-        'servicios.process.title': 'Nuestro Proceso',
-        'servicios.process.subtitle': 'Cómo trabajamos para garantizar tu satisfacción',
-        'servicios.process.step1.title': 'Consulta Inicial',
-        'servicios.process.step1.description': 'Evaluamos tus necesidades y objetivos musicales para recomendarte el mejor servicio.',
-        'servicios.process.step2.title': 'Personalización',
-        'servicios.process.step2.description': 'Adaptamos nuestro approach a tu nivel, horarios y metas específicas.',
-        'servicios.process.step3.title': 'Ejecución',
-        'servicios.process.step3.description': 'Implementamos el servicio con los mejores estándares de calidad y profesionalismo.',
-        'servicios.process.step4.title': 'Seguimiento',
-        'servicios.process.step4.description': 'Aseguramos tu satisfacción con seguimiento continuo y ajustes cuando sea necesario.',
-        'servicios.benefits.title': '¿Por Qué Elegirnos?',
-        'servicios.benefits.subtitle': 'Ventajas de aprender y trabajar con nosotros',
-        'servicios.benefits.quality.title': 'Calidad Garantizada',
-        'servicios.benefits.quality.description': 'Más de 10 años formando músicos exitosos en el género vallenato.',
-        'servicios.benefits.professors.title': 'Profesores Expertos',
-        'servicios.benefits.professors.description': 'Maestros con experiencia en escenarios nacionales e internacionales.',
-        'servicios.benefits.flexibility.title': 'Flexibilidad Horaria',
-        'servicios.benefits.flexibility.description': 'Adaptamos horarios a tu disponibilidad, incluyendo fines de semana.',
-        'servicios.benefits.guarantee.title': 'Garantía de Satisfacción',
-        'servicios.benefits.guarantee.description': 'Si no estás satisfecho, te devolvemos tu dinero en la primera clase.',
-        'servicios.cta.title': '¿Listo para Empezar?',
-        'servicios.cta.text': 'Contáctanos hoy mismo y descubre cómo podemos ayudarte en tu journey musical.',
-        'servicios.cta.contact': 'Contactar Ahora',
-        'servicios.cta.classes': 'Ver Clases'
-      },
-      en: {
-        'servicios.hero.title': 'Our Services',
-        'servicios.hero.subtitle': 'Comprehensive solutions for your vallenato music training and enjoyment',
-        'servicios.hero.cta1': 'View Services',
-        'servicios.hero.cta2': 'Request Information',
-        'servicios.main.title': 'Comprehensive Services',
-        'servicios.main.subtitle': 'Everything you need for your vallenato musical journey',
-        'servicios.pedagogia.title': 'Specialized Music Pedagogy',
-        'servicios.pedagogia.description': 'Methodology adapted to all ages and levels. From children to seniors, our system guarantees effective and enjoyable learning.',
-        'servicios.pedagogia.feature1': 'Programs for children (6-12 years)',
-        'servicios.pedagogia.feature2': 'Courses for youth and adults',
-        'servicios.pedagogia.feature3': 'Personalized one-on-one classes',
-        'servicios.pedagogia.feature4': 'Small groups (max. 5 people)',
-        'servicios.pedagogia.price': '$150,000/month',
-        'servicios.musicaVivo.title': 'Live Music for Events',
-        'servicios.musicaVivo.description': 'Bring authentic vallenato music to your events. We have professional groups for all types of celebrations.',
-        'servicios.musicaVivo.feature1': 'Weddings and social events',
-        'servicios.musicaVivo.feature2': 'Corporate parties',
-        'servicios.musicaVivo.feature3': 'Special presentations',
-        'servicios.musicaVivo.feature4': 'Groups of 3 to 6 musicians',
-        'servicios.musicaVivo.price': '$800,000/event',
-        'servicios.instrumentos.title': 'Instrument Sales and Advisory',
-        'servicios.instrumentos.description': 'Find the perfect instrument for your practice. We advise you on selection and maintenance of your musical equipment.',
-        'servicios.instrumentos.feature1': 'Professional Hohner accordions',
-        'servicios.instrumentos.feature2': 'Artisanal drums and guacharacas',
-        'servicios.instrumentos.feature3': 'Accessories and maintenance',
-        'servicios.instrumentos.feature4': 'Financing available',
-        'servicios.instrumentos.price': '$120,000',
-        'servicios.talleres.title': 'Workshops and Training',
-        'servicios.talleres.description': 'Intensive and specialized programs to deepen specific aspects of vallenato.',
-        'servicios.talleres.feature1': 'Composition workshops',
-        'servicios.talleres.feature2': 'Vallenato improvisation',
-        'servicios.talleres.feature3': 'Music history and theory',
-        'servicios.talleres.feature4': 'Sessions with guest masters',
-        'servicios.talleres.price': '$200,000/workshop',
-        'servicios.pricing.from': 'From',
-        'servicios.learnMore': 'Learn More',
-        'servicios.process.title': 'Our Process',
-        'servicios.process.subtitle': 'How we work to guarantee your satisfaction',
-        'servicios.process.step1.title': 'Initial Consultation',
-        'servicios.process.step1.description': 'We evaluate your needs and musical goals to recommend the best service.',
-        'servicios.process.step2.title': 'Customization',
-        'servicios.process.step2.description': 'We adapt our approach to your level, schedule and specific goals.',
-        'servicios.process.step3.title': 'Execution',
-        'servicios.process.step3.description': 'We implement the service with the highest standards of quality and professionalism.',
-        'servicios.process.step4.title': 'Follow-up',
-        'servicios.process.step4.description': 'We ensure your satisfaction with continuous monitoring and adjustments when needed.',
-        'servicios.benefits.title': 'Why Choose Us?',
-        'servicios.benefits.subtitle': 'Advantages of learning and working with us',
-        'servicios.benefits.quality.title': 'Guaranteed Quality',
-        'servicios.benefits.quality.description': 'Over 10 years training successful musicians in the vallenato genre.',
-        'servicios.benefits.professors.title': 'Expert Professors',
-        'servicios.benefits.professors.description': 'Teachers with experience in national and international stages.',
-        'servicios.benefits.flexibility.title': 'Schedule Flexibility',
-        'servicios.benefits.flexibility.description': 'We adapt schedules to your availability, including weekends.',
-        'servicios.benefits.guarantee.title': 'Satisfaction Guarantee',
-        'servicios.benefits.guarantee.description': 'If you are not satisfied, we refund your money after the first class.',
-        'servicios.cta.title': 'Ready to Start?',
-        'servicios.cta.text': 'Contact us today and discover how we can help you in your musical journey.',
-        'servicios.cta.contact': 'Contact Now',
-        'servicios.cta.classes': 'View Classes'
-      }
-    };
-
-    // Combinar traducciones
-    Object.keys(serviciosTranslations.es).forEach(key => {
-      translationSystem.translations.es[key] = serviciosTranslations.es[key];
-      translationSystem.translations.en[key] = serviciosTranslations.en[key];
+    // Trackear clics en servicios
+    document.querySelectorAll('.btn-outline').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (window.statsSystem) {
+                const serviceCard = this.closest('.service-detailed-card');
+                const serviceTitle = serviceCard?.querySelector('.service-detailed-title')?.textContent || 'unknown';
+                window.statsSystem.trackConversion('service_interest', {
+                    service: serviceTitle
+                });
+            }
+        });
     });
 
-    // Aplicar traducciones
-    translationSystem.applyTranslations();
-  }
+    // Sistema de traducciones específico para servicios
+    const translationSystem = window.academiaApp?.translationSystem || window.translationSystem;
+    if (translationSystem) {
+        const serviciosTranslations = {
+            es: {
+                'servicios.hero.title': 'Nuestros Servicios',
+                'servicios.hero.subtitle': 'Soluciones integrales para tu formación y disfrute de la música vallenata',
+                'servicios.hero.cta1': 'Ver Servicios',
+                'servicios.hero.cta2': 'Solicitar Información',
+                'servicios.main.title': 'Servicios Integrales',
+                'servicios.main.subtitle': 'Todo lo que necesitas para tu journey musical vallenato',
+                'servicios.pedagogia.title': 'Pedagogía Musical Especializada',
+                'servicios.pedagogia.description': 'Metodología adaptada a todas las edades y niveles. Desde niños hasta adultos mayores, nuestro sistema garantiza un aprendizaje efectivo y disfrutable.',
+                'servicios.pedagogia.feature1': 'Programas para niños (6-12 años)',
+                'servicios.pedagogia.feature2': 'Cursos para jóvenes y adultos',
+                'servicios.pedagogia.feature3': 'Clases personalizadas one-on-one',
+                'servicios.pedagogia.feature4': 'Grupos reducidos (máx. 5 personas)',
+                'servicios.pedagogia.price': '$150.000/mes',
+                'servicios.musicaVivo.title': 'Música en Vivo para Eventos',
+                'servicios.musicaVivo.description': 'Lleva la auténtica música vallenata a tus eventos. Contamos con agrupaciones profesionales para todo tipo de celebraciones.',
+                'servicios.musicaVivo.feature1': 'Bodas y eventos sociales',
+                'servicios.musicaVivo.feature2': 'Fiestas corporativas',
+                'servicios.musicaVivo.feature3': 'Presentaciones especiales',
+                'servicios.musicaVivo.feature4': 'Grupos de 3 a 6 músicos',
+                'servicios.musicaVivo.price': '$800.000/evento',
+                'servicios.instrumentos.title': 'Venta y Asesoría de Instrumentos',
+                'servicios.instrumentos.description': 'Encuentra el instrumento perfecto para tu práctica. Te asesoramos en la selección y mantenimiento de tu equipo musical.',
+                'servicios.instrumentos.feature1': 'Acordeones profesionales Hohner',
+                'servicios.instrumentos.feature2': 'Cajas y guacharacas artesanales',
+                'servicios.instrumentos.feature3': 'Accesorios y mantenimiento',
+                'servicios.instrumentos.feature4': 'Garantía en todos los instrumentos',
+                'servicios.instrumentos.price': '$120.000',
+                'servicios.talleres.title': 'Talleres y Workshops',
+                'servicios.talleres.description': 'Programas intensivos y especializados para profundizar en aspectos específicos del vallenato.',
+                'servicios.talleres.feature1': 'Talleres de composición',
+                'servicios.talleres.feature2': 'Improvisación vallenata',
+                'servicios.talleres.feature3': 'Historia y teoría musical',
+                'servicios.talleres.feature4': 'Sesiones con maestros invitados',
+                'servicios.talleres.price': '$200.000/taller',
+                'servicios.pricing.from': 'Inversión desde',
+                'servicios.learnMore': 'Más Información',
+                'servicios.payment.notice': 'Pago mensual por adelantado requerido para confirmar inscripción',
+                'servicios.payment.eventNotice': 'Reserva con 50% de anticipo - Saldo antes del evento',
+                'servicios.payment.instrumentNotice': 'Pago completo requerido al momento de la compra',
+                'servicios.payment.workshopNotice': 'Inscripción con pago completo requerida',
+                'servicios.guarantees.title': 'Nuestras Garantías',
+                'servicios.guarantees.subtitle': 'Comprometidos con tu satisfacción y aprendizaje',
+                'servicios.guarantees.quality.title': 'Calidad Garantizada',
+                'servicios.guarantees.quality.description': 'Más de 10 años formando músicos exitosos en el género vallenato',
+                'servicios.guarantees.professors.title': 'Profesores Expertos',
+                'servicios.guarantees.professors.description': 'Maestros con experiencia en escenarios nacionales e internacionales',
+                'servicios.guarantees.flexibility.title': 'Flexibilidad Horaria',
+                'servicios.guarantees.flexibility.description': 'Adaptamos horarios a tu disponibilidad, incluyendo fines de semana',
+                'servicios.guarantees.satisfaction.title': 'Garantía de Satisfacción',
+                'servicios.guarantees.satisfaction.description': 'Si no estás satisfecho, te devolvemos tu dinero en la primera clase',
+                'servicios.process.title': 'Nuestro Proceso',
+                'servicios.process.subtitle': 'Cómo trabajamos para garantizar tu satisfacción',
+                'servicios.process.step1.title': 'Consulta Inicial',
+                'servicios.process.step1.description': 'Evaluamos tus necesidades y objetivos musicales para recomendarte el mejor servicio. Confirmación con pago completo requerida.',
+                'servicios.process.step2.title': 'Personalización',
+                'servicios.process.step2.description': 'Adaptamos nuestro approach a tu nivel, horarios y metas específicas. Todos los pagos deben realizarse antes de iniciar.',
+                'servicios.process.step3.title': 'Ejecución',
+                'servicios.process.step3.description': 'Implementamos el servicio con los mejores estándares de calidad y profesionalismo. Servicio confirmado con pago completo.',
+                'servicios.process.step4.title': 'Seguimiento',
+                'servicios.process.step4.description': 'Aseguramos tu satisfacción con seguimiento continuo y ajustes cuando sea necesario. Renovación con pago mensual adelantado.',
+                'servicios.benefits.title': '¿Por Qué Elegirnos?',
+                'servicios.benefits.subtitle': 'Ventajas de aprender y trabajar con nosotros',
+                'servicios.benefits.quality.title': 'Calidad Garantizada',
+                'servicios.benefits.quality.description': 'Más de 10 años formando músicos exitosos en el género vallenato. Inversión segura con resultados comprobados.',
+                'servicios.benefits.professors.title': 'Profesores Expertos',
+                'servicios.benefits.professors.description': 'Maestros con experiencia en escenarios nacionales e internacionales. Valor real por tu inversión educativa.',
+                'servicios.benefits.flexibility.title': 'Flexibilidad Horaria',
+                'servicios.benefits.flexibility.description': 'Adaptamos horarios a tu disponibilidad, incluyendo fines de semana. Pagos mensuales claros y transparentes.',
+                'servicios.benefits.guarantee.title': 'Garantía de Satisfacción',
+                'servicios.benefits.guarantee.description': 'Si no estás satisfecho, te devolvemos tu dinero después de la primera clase. Tu inversión protegida.',
+                'servicios.cta.title': '¿Listo para Empezar?',
+                'servicios.cta.text': 'Contáctanos hoy mismo y descubre cómo podemos ayudarte en tu journey musical. Todos los servicios requieren pago completo para confirmación.',
+                'servicios.cta.contact': 'Contactar Ahora',
+                'servicios.cta.classes': 'Ver Clases'
+            },
+            en: {
+                'servicios.hero.title': 'Our Services',
+                'servicios.hero.subtitle': 'Comprehensive solutions for your vallenato music training and enjoyment',
+                'servicios.hero.cta1': 'View Services',
+                'servicios.hero.cta2': 'Request Information',
+                'servicios.main.title': 'Comprehensive Services',
+                'servicios.main.subtitle': 'Everything you need for your vallenato musical journey',
+                'servicios.pedagogia.title': 'Specialized Music Pedagogy',
+                'servicios.pedagogia.description': 'Methodology adapted to all ages and levels. From children to seniors, our system guarantees effective and enjoyable learning.',
+                'servicios.pedagogia.feature1': 'Programs for children (6-12 years)',
+                'servicios.pedagogia.feature2': 'Courses for youth and adults',
+                'servicios.pedagogia.feature3': 'Personalized one-on-one classes',
+                'servicios.pedagogia.feature4': 'Small groups (max. 5 people)',
+                'servicios.pedagogia.price': '$150,000/month',
+                'servicios.musicaVivo.title': 'Live Music for Events',
+                'servicios.musicaVivo.description': 'Bring authentic vallenato music to your events. We have professional groups for all types of celebrations.',
+                'servicios.musicaVivo.feature1': 'Weddings and social events',
+                'servicios.musicaVivo.feature2': 'Corporate parties',
+                'servicios.musicaVivo.feature3': 'Special presentations',
+                'servicios.musicaVivo.feature4': 'Groups of 3 to 6 musicians',
+                'servicios.musicaVivo.price': '$800,000/event',
+                'servicios.instrumentos.title': 'Instrument Sales and Advisory',
+                'servicios.instrumentos.description': 'Find the perfect instrument for your practice. We advise you on selection and maintenance of your musical equipment.',
+                'servicios.instrumentos.feature1': 'Professional Hohner accordions',
+                'servicios.instrumentos.feature2': 'Artisanal drums and guacharacas',
+                'servicios.instrumentos.feature3': 'Accessories and maintenance',
+                'servicios.instrumentos.feature4': 'Warranty on all instruments',
+                'servicios.instrumentos.price': '$120,000',
+                'servicios.talleres.title': 'Workshops and Training',
+                'servicios.talleres.description': 'Intensive and specialized programs to deepen specific aspects of vallenato.',
+                'servicios.talleres.feature1': 'Composition workshops',
+                'servicios.talleres.feature2': 'Vallenato improvisation',
+                'servicios.talleres.feature3': 'Music history and theory',
+                'servicios.talleres.feature4': 'Sessions with guest masters',
+                'servicios.talleres.price': '$200,000/workshop',
+                'servicios.pricing.from': 'Investment from',
+                'servicios.learnMore': 'Learn More',
+                'servicios.payment.notice': 'Monthly payment in advance required to confirm enrollment',
+                'servicios.payment.eventNotice': 'Reservation with 50% deposit - Balance before the event',
+                'servicios.payment.instrumentNotice': 'Full payment required at time of purchase',
+                'servicios.payment.workshopNotice': 'Registration with full payment required',
+                'servicios.guarantees.title': 'Our Guarantees',
+                'servicios.guarantees.subtitle': 'Committed to your satisfaction and learning',
+                'servicios.guarantees.quality.title': 'Guaranteed Quality',
+                'servicios.guarantees.quality.description': 'Over 10 years training successful musicians in the vallenato genre',
+                'servicios.guarantees.professors.title': 'Expert Professors',
+                'servicios.guarantees.professors.description': 'Teachers with experience in national and international stages',
+                'servicios.guarantees.flexibility.title': 'Schedule Flexibility',
+                'servicios.guarantees.flexibility.description': 'We adapt schedules to your availability, including weekends',
+                'servicios.guarantees.satisfaction.title': 'Satisfaction Guarantee',
+                'servicios.guarantees.satisfaction.description': 'If you are not satisfied, we refund your money after the first class',
+                'servicios.process.title': 'Our Process',
+                'servicios.process.subtitle': 'How we work to guarantee your satisfaction',
+                'servicios.process.step1.title': 'Initial Consultation',
+                'servicios.process.step1.description': 'We evaluate your needs and musical goals to recommend the best service. Confirmation with full payment required.',
+                'servicios.process.step2.title': 'Customization',
+                'servicios.process.step2.description': 'We adapt our approach to your level, schedule and specific goals. All payments must be made before starting.',
+                'servicios.process.step3.title': 'Execution',
+                'servicios.process.step3.description': 'We implement the service with the highest standards of quality and professionalism. Service confirmed with full payment.',
+                'servicios.process.step4.title': 'Follow-up',
+                'servicios.process.step4.description': 'We ensure your satisfaction with continuous monitoring and adjustments when needed. Renewal with monthly payment in advance.',
+                'servicios.benefits.title': 'Why Choose Us?',
+                'servicios.benefits.subtitle': 'Advantages of learning and working with us',
+                'servicios.benefits.quality.title': 'Guaranteed Quality',
+                'servicios.benefits.quality.description': 'Over 10 years training successful musicians in the vallenato genre. Secure investment with proven results.',
+                'servicios.benefits.professors.title': 'Expert Professors',
+                'servicios.benefits.professors.description': 'Teachers with experience in national and international stages. Real value for your educational investment.',
+                'servicios.benefits.flexibility.title': 'Schedule Flexibility',
+                'servicios.benefits.flexibility.description': 'We adapt schedules to your availability, including weekends. Clear and transparent monthly payments.',
+                'servicios.benefits.guarantee.title': 'Satisfaction Guarantee',
+                'servicios.benefits.guarantee.description': 'If you are not satisfied, we refund your money after the first class. Your investment protected.',
+                'servicios.cta.title': 'Ready to Start?',
+                'servicios.cta.text': 'Contact us today and discover how we can help you in your musical journey. All services require full payment for confirmation.',
+                'servicios.cta.contact': 'Contact Now',
+                'servicios.cta.classes': 'View Classes'
+            }
+        };
+
+        // Combinar traducciones
+        Object.keys(serviciosTranslations.es).forEach(key => {
+            translationSystem.translations.es[key] = serviciosTranslations.es[key];
+            translationSystem.translations.en[key] = serviciosTranslations.en[key];
+        });
+
+        // Aplicar traducciones
+        translationSystem.applyTranslations();
+    }
 });
 </script>
-
 </body>
 </html>
