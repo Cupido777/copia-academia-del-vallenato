@@ -1,28 +1,56 @@
-=== ARCHIVO: pages/contacto.html ===
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" itemscope itemtype="https://schema.org/ContactPage">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contacto - Academia del Vallenato Cartagena</title>
-<meta name="description" content="Contáctanos para información sobre clases, servicios de música en vivo o compra de instrumentos. Estamos en Cartagena para servirte.">
-<meta name="keywords" content="contacto academia vallenato, clases música cartagena, información vallenato, ubicación academia">
+<meta name="description" content="Contáctanos para información sobre clases de vallenato, música en vivo o instrumentos. Estamos en el Centro Histórico de Cartagena.">
+<meta name="keywords" content="contacto academia vallenato, clases música cartagena, información acordeón, ubicación academia vallenato">
 
-<!-- OPTIMIZACIÓN: Preconnect para fuentes externas -->
+<!-- Schema.org para Página de Contacto -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contacto - Academia del Vallenato Cartagena",
+  "description": "Página de contacto para información sobre clases de vallenato y servicios musicales",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Academia del Vallenato Cartagena",
+    "telephone": "+57-300-123-4567",
+    "email": "info@academiadelvallenato.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Centro Histórico",
+      "addressLocality": "Cartagena",
+      "addressRegion": "Bolívar",
+      "addressCountry": "CO"
+    },
+    "openingHours": [
+      "Mo-Fr 08:00-20:00",
+      "Sa 08:00-18:00"
+    ]
+  }
+}
+</script>
+
+<!-- Preload crítico -->
+<link rel="preload" href="../assets/css/styles.css" as="style">
+<link rel="preload" href="../assets/js/script.js" as="script">
+
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- OPTIMIZACIÓN: Font Awesome con carga diferida -->
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- CSS principal optimizado -->
-<link rel="stylesheet" href="../assets/css/styles.css" media="all">
-<link rel="stylesheet" href="../assets/css/stats-styles.css" media="print" onload="this.media='all'">
-  
-<!-- ESTILOS ADICIONALES PARA CONTACTO -->
+<!-- CSS -->
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/stats-styles.css">
+
+<!-- Estilos específicos para contacto -->
 <style>
 .contact-grid {
   display: grid;
@@ -32,64 +60,91 @@
 }
 
 .contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.contact-card {
   background: var(--white);
   border-radius: var(--border-radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow-light);
-  transition: all 0.3s ease;
+  height: fit-content;
 }
 
-.contact-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-medium);
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-method {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-fast);
+  border-left: 4px solid transparent;
+}
+
+.contact-method:hover {
+  background: var(--light-color);
+  border-left-color: var(--primary-color);
 }
 
 .contact-icon {
-  width: 60px;
-  height: 60px;
-  background: var(--light-color);
+  width: 50px;
+  height: 50px;
+  background: var(--primary-color);
+  color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  flex-shrink: 0;
 }
 
-.contact-card h3 {
+.contact-details h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.contact-details p {
+  color: var(--text-light);
+  margin: 0;
+}
+
+.business-hours {
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.business-hours h3 {
   margin-bottom: 1rem;
   color: var(--dark-color);
 }
 
-.contact-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.hours-list {
+  list-style: none;
 }
 
-.contact-item {
+.hours-list li {
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 0.75rem 0;
+  justify-content: space-between;
+  padding: 0.5rem 0;
   border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.contact-item:last-child {
+.hours-list li:last-child {
   border-bottom: none;
 }
 
-.contact-item i {
-  color: var(--primary-color);
-  margin-top: 0.25rem;
-  min-width: 20px;
+.day {
+  font-weight: 500;
+}
+
+.time {
+  color: var(--text-light);
 }
 
 .contact-form {
@@ -118,7 +173,7 @@
   border: 2px solid var(--light-color);
   border-radius: var(--border-radius);
   font-family: inherit;
-  transition: border-color 0.3s ease;
+  transition: border-color var(--transition-fast);
 }
 
 .form-group input:focus,
@@ -134,9 +189,8 @@
   gap: 1rem;
 }
 
-.btn-block {
-  width: 100%;
-  justify-content: center;
+.required {
+  color: var(--secondary-color);
 }
 
 .map-container {
@@ -148,83 +202,47 @@
 
 .map-placeholder {
   height: 300px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: var(--light-color);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--white);
-  text-align: center;
-  padding: 2rem;
+  color: var(--text-light);
+  font-size: 1.1rem;
 }
 
-.map-placeholder i {
-  font-size: 3rem;
+.contact-cta {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 3rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.contact-cta h2 {
+  color: var(--white);
   margin-bottom: 1rem;
 }
 
-.hours-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+.contact-cta p {
+  margin-bottom: 2rem;
+  opacity: 0.9;
 }
 
-.hour-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.hour-item:last-child {
-  border-bottom: none;
-}
-
-.day {
-  font-weight: 500;
-  color: var(--dark-color);
-}
-
-.time {
-  color: var(--text-light);
-}
-
-.social-contact {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.social-contact a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--light-color);
-  border-radius: 50%;
-  color: var(--primary-color);
-  transition: all 0.3s ease;
-}
-
-.social-contact a:hover {
-  background: var(--primary-color);
-  color: var(--white);
-  transform: translateY(-2px);
-}
-
-.emergency-contact {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--white);
-  padding: 1.5rem;
+.urgency-notice {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
   border-radius: var(--border-radius);
+  padding: 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  color: #856404;
   text-align: center;
-  margin-top: 1rem;
 }
 
-.emergency-contact .btn {
-  margin-top: 1rem;
+.urgency-notice i {
+  color: #f39c12;
+  margin-right: 0.5rem;
 }
 
 @media (max-width: 768px) {
@@ -237,8 +255,24 @@
     grid-template-columns: 1fr;
   }
   
-  .hours-grid {
-    grid-template-columns: 1fr;
+  .contact-cta {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-info,
+  .contact-form {
+    padding: 1.5rem;
+  }
+  
+  .contact-method {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .contact-icon {
+    margin: 0 auto;
   }
 }
 </style>
@@ -314,164 +348,142 @@
   <div class="container">
     <div class="hero-content">
       <h1 class="hero-title" data-i18n="contacto.hero.title">Contáctanos</h1>
-      <p class="hero-subtitle" data-i18n="contacto.hero.subtitle">Estamos aquí para responder todas tus preguntas sobre clases, servicios e instrumentos</p>
+      <p class="hero-subtitle" data-i18n="contacto.hero.subtitle">Estamos aquí para responder todas tus preguntas sobre clases, eventos e instrumentos</p>
       <div class="hero-actions">
         <a href="#formulario" class="btn btn-primary" data-i18n="contacto.hero.cta1">Enviar Mensaje</a>
-        <a href="https://wa.me/573001234567" class="btn btn-secondary" target="_blank" data-i18n="contacto.hero.cta2">WhatsApp Directo</a>
+        <a href="#ubicacion" class="btn btn-secondary" data-i18n="contacto.hero.cta2">Ver Ubicación</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Sección Contacto Principal -->
-<section class="contact section-padding" id="formulario">
+<!-- Sección Principal de Contacto -->
+<section class="contact section-padding">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title" data-i18n="contacto.main.title">Ponte en Contacto</h2>
-      <p class="section-subtitle" data-i18n="contacto.main.subtitle">Múltiples formas de comunicarte con nosotros</p>
+      <h2 class="section-title" data-i18n="contacto.main.title">Estamos para Ayudarte</h2>
+      <p class="section-subtitle" data-i18n="contacto.main.subtitle">Múltiples formas de contactarnos para tu comodidad</p>
     </div>
     
     <div class="contact-grid">
       <!-- Información de Contacto -->
       <div class="contact-info">
-        <!-- Información General -->
-        <div class="contact-card">
-          <div class="contact-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <h3 data-i18n="contacto.info.location.title">Nuestra Ubicación</h3>
-          <div class="contact-details">
-            <div class="contact-item">
-              <i class="fas fa-map-pin"></i>
-              <div>
-                <strong data-i18n="contacto.info.location.address">Dirección:</strong>
-                <span data-i18n="contacto.info.location.value">Calle 45 # 12-34, Centro Histórico, Cartagena, Colombia</span>
-              </div>
+        <h3 data-i18n="contacto.info.title">Información de Contacto</h3>
+        <p data-i18n="contacto.info.description">No dudes en contactarnos por cualquiera de estos medios. Te responderemos a la brevedad.</p>
+        
+        <div class="contact-methods">
+          <div class="contact-method">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
             </div>
-            <div class="contact-item">
-              <i class="fas fa-clock"></i>
-              <div>
-                <strong data-i18n="contacto.info.location.hours">Horario de Atención:</strong>
-                <span data-i18n="contacto.info.location.hoursValue">Lunes a Viernes: 8:00 AM - 8:00 PM</span>
-              </div>
+            <div class="contact-details">
+              <h3 data-i18n="contacto.info.address.title">Dirección</h3>
+              <p data-i18n="contacto.info.address.value">Centro Histórico, Cartagena, Colombia</p>
             </div>
           </div>
-        </div>
-
-        <!-- Contacto Directo -->
-        <div class="contact-card">
-          <div class="contact-icon">
-            <i class="fas fa-phone-alt"></i>
-          </div>
-          <h3 data-i18n="contacto.info.contact.title">Contacto Directo</h3>
-          <div class="contact-details">
-            <div class="contact-item">
+          
+          <div class="contact-method">
+            <div class="contact-icon">
               <i class="fas fa-phone"></i>
-              <div>
-                <strong data-i18n="contacto.info.contact.phone">Teléfono:</strong>
-                <span>+57 300 123 4567</span>
-              </div>
             </div>
-            <div class="contact-item">
+            <div class="contact-details">
+              <h3 data-i18n="contacto.info.phone.title">Teléfono</h3>
+              <p>+57 300 123 4567</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-icon">
               <i class="fas fa-envelope"></i>
-              <div>
-                <strong data-i18n="contacto.info.contact.email">Email:</strong>
-                <span>info@academiadelvallenato.com</span>
-              </div>
             </div>
-            <div class="contact-item">
+            <div class="contact-details">
+              <h3 data-i18n="contacto.info.email.title">Email</h3>
+              <p>info@academiadelvallenato.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-method">
+            <div class="contact-icon">
               <i class="fab fa-whatsapp"></i>
-              <div>
-                <strong data-i18n="contacto.info.contact.whatsapp">WhatsApp:</strong>
-                <span>+57 300 123 4567</span>
-              </div>
             </div>
-          </div>
-          <div class="social-contact">
-            <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="Twitter" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-          </div>
-        </div>
-
-        <!-- Horarios de Atención -->
-        <div class="contact-card">
-          <div class="contact-icon">
-            <i class="fas fa-calendar-alt"></i>
-          </div>
-          <h3 data-i18n="contacto.info.hours.title">Horarios de Clases</h3>
-          <div class="hours-grid">
-            <div class="hour-item">
-              <span class="day" data-i18n="contacto.info.hours.monday">Lunes - Viernes</span>
-              <span class="time" data-i18n="contacto.info.hours.mondayTime">7:00 AM - 9:00 PM</span>
-            </div>
-            <div class="hour-item">
-              <span class="day" data-i18n="contacto.info.hours.saturday">Sábados</span>
-              <span class="time" data-i18n="contacto.info.hours.saturdayTime">8:00 AM - 6:00 PM</span>
-            </div>
-            <div class="hour-item">
-              <span class="day" data-i18n="contacto.info.hours.sunday">Domingos</span>
-              <span class="time" data-i18n="contacto.info.hours.sundayTime">Cerrado</span>
+            <div class="contact-details">
+              <h3 data-i18n="contacto.info.whatsapp.title">WhatsApp</h3>
+              <p data-i18n="contacto.info.whatsapp.value">Respuesta inmediata</p>
             </div>
           </div>
         </div>
-
-        <!-- Contacto de Emergencia -->
-        <div class="emergency-contact">
-          <h3 data-i18n="contacto.info.emergency.title">¿Necesitas ayuda inmediata?</h3>
-          <p data-i18n="contacto.info.emergency.description">Contáctanos directamente por WhatsApp para una respuesta rápida</p>
-          <a href="https://wa.me/573001234567" class="btn btn-light" target="_blank" data-i18n="contacto.info.emergency.button">
-            <i class="fab fa-whatsapp"></i> WhatsApp Urgente
-          </a>
+        
+        <div class="business-hours">
+          <h3 data-i18n="contacto.hours.title">Horario de Atención</h3>
+          <ul class="hours-list">
+            <li>
+              <span class="day" data-i18n="contacto.hours.weekdays">Lunes a Viernes</span>
+              <span class="time" data-i18n="contacto.hours.weekdaysTime">8:00 AM - 8:00 PM</span>
+            </li>
+            <li>
+              <span class="day" data-i18n="contacto.hours.saturday">Sábados</span>
+              <span class="time" data-i18n="contacto.hours.saturdayTime">8:00 AM - 6:00 PM</span>
+            </li>
+            <li>
+              <span class="day" data-i18n="contacto.hours.sunday">Domingos</span>
+              <span class="time" data-i18n="contacto.hours.sundayTime">Cerrado</span>
+            </li>
+          </ul>
         </div>
       </div>
-
+      
       <!-- Formulario de Contacto -->
-      <div class="contact-form">
+      <div class="contact-form" id="formulario">
         <h3 data-i18n="contacto.form.title">Envíanos un Mensaje</h3>
-        <p data-i18n="contacto.form.subtitle">Completa el formulario y te responderemos en menos de 24 horas</p>
+        <p data-i18n="contacto.form.subtitle">Completa el formulario y te contactaremos dentro de 24 horas</p>
         
         <form id="contact-form">
           <div class="form-row">
             <div class="form-group">
-              <label for="contact-name" data-i18n="contacto.form.name">Nombre Completo *</label>
-              <input type="text" id="contact-name" required>
+              <label for="nombre" data-i18n="contacto.form.name">
+                Nombre Completo <span class="required">*</span>
+              </label>
+              <input type="text" id="nombre" required>
             </div>
             <div class="form-group">
-              <label for="contact-phone" data-i18n="contacto.form.phone">Teléfono *</label>
-              <input type="tel" id="contact-phone" required>
+              <label for="telefono" data-i18n="contacto.form.phone">
+                Teléfono <span class="required">*</span>
+              </label>
+              <input type="tel" id="telefono" required>
             </div>
           </div>
           
           <div class="form-group">
-            <label for="contact-email" data-i18n="contacto.form.email">Correo Electrónico *</label>
-            <input type="email" id="contact-email" required>
+            <label for="email" data-i18n="contacto.form.email">
+              Correo Electrónico <span class="required">*</span>
+            </label>
+            <input type="email" id="email" required>
           </div>
           
           <div class="form-group">
-            <label for="contact-subject" data-i18n="contacto.form.subject">Asunto *</label>
-            <select id="contact-subject" required>
+            <label for="asunto" data-i18n="contacto.form.subject">
+              Asunto <span class="required">*</span>
+            </label>
+            <select id="asunto" required>
               <option value="" data-i18n="contacto.form.selectOption">Selecciona una opción</option>
-              <option value="classes" data-i18n="contacto.form.subject.classes">Información sobre Clases</option>
-              <option value="instruments" data-i18n="contacto.form.subject.instruments">Compra de Instrumentos</option>
-              <option value="live-music" data-i18n="contacto.form.subject.liveMusic">Música en Vivo para Eventos</option>
-              <option value="workshops" data-i18n="contacto.form.subject.workshops">Talleres y Workshops</option>
-              <option value="partnership" data-i18n="contacto.form.subject.partnership">Alianzas y Colaboraciones</option>
-              <option value="other" data-i18n="contacto.form.subject.other">Otro</option>
+              <option value="clases" data-i18n="contacto.form.optionClasses">Información sobre Clases</option>
+              <option value="eventos" data-i18n="contacto.form.optionEvents">Música para Eventos</option>
+              <option value="instrumentos" data-i18n="contacto.form.optionInstruments">Compra de Instrumentos</option>
+              <option value="talleres" data-i18n="contacto.form.optionWorkshops">Talleres Especializados</option>
+              <option value="otros" data-i18n="contacto.form.optionOther">Otro</option>
             </select>
           </div>
           
           <div class="form-group">
-            <label for="contact-message" data-i18n="contacto.form.message">Mensaje *</label>
-            <textarea id="contact-message" rows="6" required data-i18n-placeholder="contacto.form.messagePlaceholder"></textarea>
+            <label for="mensaje" data-i18n="contacto.form.message">
+              Mensaje <span class="required">*</span>
+            </label>
+            <textarea id="mensaje" rows="5" required data-i18n-placeholder="contacto.form.messagePlaceholder"></textarea>
           </div>
           
-          <div class="form-group">
-            <label class="checkbox-label">
-              <input type="checkbox" required>
-              <span data-i18n="contacto.form.agree">Acepto la política de privacidad y el tratamiento de mis datos</span>
-            </label>
+          <div class="urgency-notice">
+            <i class="fas fa-exclamation-circle"></i>
+            <span data-i18n="contacto.form.urgency">Para consultas urgentes, recomendamos contactarnos por WhatsApp para respuesta inmediata</span>
           </div>
           
           <button type="submit" class="btn btn-primary btn-block" data-i18n="contacto.form.submit">
@@ -480,82 +492,25 @@
         </form>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Sección Mapa -->
-<section class="map-section section-padding bg-light">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title" data-i18n="contacto.map.title">Visítanos en Cartagena</h2>
-      <p class="section-subtitle" data-i18n="contacto.map.subtitle">Ubicados en el corazón del centro histórico</p>
-    </div>
     
-    <div class="map-container">
+    <!-- Mapa de Ubicación -->
+    <div class="map-container" id="ubicacion">
       <div class="map-placeholder">
         <i class="fas fa-map-marked-alt"></i>
-        <h3 data-i18n="contacto.map.locationTitle">Academia del Vallenato Cartagena</h3>
-        <p data-i18n="contacto.map.locationAddress">Calle 45 # 12-34, Centro Histórico</p>
-        <p data-i18n="contacto.map.locationCity">Cartagena, Colombia</p>
-        <small data-i18n="contacto.map.note">(Mapa interactivo se cargará aquí)</small>
-      </div>
-    </div>
-    
-    <div class="section-actions" style="margin-top: 2rem;">
-      <a href="https://maps.google.com/?q=Academia+del+Vallenato+Cartagena" class="btn btn-outline" target="_blank" data-i18n="contacto.map.directions">
-        <i class="fas fa-directions"></i> Cómo Llegar
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- Sección FAQ Rápida -->
-<section class="faq section-padding">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title" data-i18n="contacto.faq.title">Preguntas Frecuentes</h2>
-      <p class="section-subtitle" data-i18n="contacto.faq.subtitle">Respuestas rápidas a tus dudas más comunes</p>
-    </div>
-    
-    <div class="faq-grid">
-      <div class="faq-item">
-        <h3 data-i18n="contacto.faq.q1.question">¿Cuál es el horario de atención?</h3>
-        <p data-i18n="contacto.faq.q1.answer">Atendemos de lunes a viernes de 8:00 AM a 8:00 PM, y sábados de 8:00 AM a 6:00 PM. Domingos cerrado.</p>
-      </div>
-      
-      <div class="faq-item">
-        <h3 data-i18n="contacto.faq.q2.question">¿Ofrecen clases para principiantes?</h3>
-        <p data-i18n="contacto.faq.q2.answer">Sí, tenemos programas especializados para todos los niveles, desde principiantes hasta avanzados.</p>
-      </div>
-      
-      <div class="faq-item">
-        <h3 data-i18n="contacto.faq.q3.question">¿Puedo probar una clase antes de inscribirme?</h3>
-        <p data-i18n="contacto.faq.q3.answer">¡Claro! Ofrecemos una clase de prueba gratuita para que conozcas nuestra metodología.</p>
-      </div>
-      
-      <div class="faq-item">
-        <h3 data-i18n="contacto.faq.q4.question">¿Tienen instrumentos disponibles para alquiler?</h3>
-        <p data-i18n="contacto.faq.q4.answer">Sí, contamos con instrumentos disponibles para alquiler mientras adquieres el tuyo propio.</p>
+        <span data-i18n="contacto.map.placeholder">Mapa interactivo de nuestra ubicación en el Centro Histórico de Cartagena</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="cta section-padding">
+<!-- Sección CTA de Contacto -->
+<section class="contact-cta">
   <div class="container">
-    <div class="cta-content">
-      <h2 class="cta-title" data-i18n="contacto.cta.title">¿Listo para comenzar tu viaje musical?</h2>
-      <p class="cta-text" data-i18n="contacto.cta.text">No esperes más, contáctanos hoy mismo y descubre el músico que llevas dentro.</p>
-      <div class="cta-actions">
-        <a href="https://wa.me/573001234567" class="btn btn-light" target="_blank" data-i18n="contacto.cta.whatsapp">
-          <i class="fab fa-whatsapp"></i> Escríbenos por WhatsApp
-        </a>
-        <a href="tel:+573001234567" class="btn btn-outline-light" data-i18n="contacto.cta.call">
-          <i class="fas fa-phone"></i> Llamar Ahora
-        </a>
-      </div>
-    </div>
+    <h2 data-i18n="contacto.cta.title">¿Necesitas una respuesta inmediata?</h2>
+    <p data-i18n="contacto.cta.text">Contáctanos directamente por WhatsApp para atención personalizada al instante</p>
+    <a href="https://wa.me/573001234567" class="btn btn-light" target="_blank" rel="noopener" data-i18n="contacto.cta.button">
+      <i class="fab fa-whatsapp"></i> Chatear por WhatsApp
+    </a>
   </div>
 </section>
 
@@ -582,7 +537,7 @@
           <li><a href="../index.html" data-i18n="footer.links.home">Inicio</a></li>
           <li><a href="servicios.html" data-i18n="footer.links.services">Servicios</a></li>
           <li><a href="clases.html" data-i18n="footer.links.classes">Clases</a></li>
-          <li><a href="instrumentos.html" data-i18n="footer.links.instruments">Instrumentos</a></li>
+          <li><a href="musica-en-vivo.html" data-i18n="footer.links.instruments">Instrumentos</a></li>
           <li><a href="contacto.html" data-i18n="footer.links.contact">Contacto</a></li>
         </ul>
       </div>
@@ -591,7 +546,7 @@
         <div class="contact-info">
           <div class="contact-item">
             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-            <span data-i18n="footer.contact.address">Calle 45 # 12-34, Valledupar, Colombia</span>
+            <span data-i18n="footer.contact.address">Centro Histórico, Cartagena, Colombia</span>
           </div>
           <div class="contact-item">
             <i class="fas fa-phone" aria-hidden="true"></i>
@@ -614,7 +569,7 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-bottom-content">
-        <p class="copyright" data-i18n="footer.copyright">© 2023 Academia del Vallenato. Todos los derechos reservados.</p>
+        <p class="copyright" data-i18n="footer.copyright">© 2024 Academia del Vallenato. Todos los derechos reservados.</p>
         <div class="footer-bottom-links">
           <a href="#" data-i18n="footer.privacy">Política de privacidad</a>
           <a href="#" data-i18n="footer.terms">Términos de servicio</a>
@@ -624,170 +579,147 @@
   </div>
 </footer>
 
-<!-- Scripts optimizados -->
-<script src="../assets/js/script.js" defer></script>
-<script src="../assets/js/stats-system.js" defer></script>
-  
+<!-- Scripts -->
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/stats-system.js"></script>
+
 <!-- Script específico para contacto -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Manejo del formulario de contacto
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Gracias por tu mensaje. Te contactaremos dentro de 24 horas.');
-      contactForm.reset();
-    });
-  }
+    // Manejo del formulario de contacto
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validación básica
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const asunto = document.getElementById('asunto').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            if (!nombre || !email || !telefono || !asunto || !mensaje) {
+                alert('Por favor, completa todos los campos requeridos.');
+                return;
+            }
+            
+            // Simulación de envío exitoso
+            alert('¡Mensaje enviado con éxito! Te contactaremos dentro de 24 horas.');
+            contactForm.reset();
+            
+            // Trackear envío de formulario
+            if (window.statsSystem) {
+                window.statsSystem.trackConversion('contact_form_submit', {
+                    subject: asunto,
+                    source: 'contact_page'
+                });
+            }
+        });
+    }
 
-  const translationSystem = window.translationSystem;
-  if (translationSystem) {
-    // Agregar traducciones específicas de contacto
-    const contactTranslations = {
-      es: {
-        'contacto.hero.title': 'Contáctanos',
-        'contacto.hero.subtitle': 'Estamos aquí para responder todas tus preguntas sobre clases, servicios e instrumentos',
-        'contacto.hero.cta1': 'Enviar Mensaje',
-        'contacto.hero.cta2': 'WhatsApp Directo',
-        'contacto.main.title': 'Ponte en Contacto',
-        'contacto.main.subtitle': 'Múltiples formas de comunicarte con nosotros',
-        'contacto.info.location.title': 'Nuestra Ubicación',
-        'contacto.info.location.address': 'Dirección:',
-        'contacto.info.location.value': 'Calle 45 # 12-34, Centro Histórico, Cartagena, Colombia',
-        'contacto.info.location.hours': 'Horario de Atención:',
-        'contacto.info.location.hoursValue': 'Lunes a Viernes: 8:00 AM - 8:00 PM',
-        'contacto.info.contact.title': 'Contacto Directo',
-        'contacto.info.contact.phone': 'Teléfono:',
-        'contacto.info.contact.email': 'Email:',
-        'contacto.info.contact.whatsapp': 'WhatsApp:',
-        'contacto.info.hours.title': 'Horarios de Clases',
-        'contacto.info.hours.monday': 'Lunes - Viernes',
-        'contacto.info.hours.mondayTime': '7:00 AM - 9:00 PM',
-        'contacto.info.hours.saturday': 'Sábados',
-        'contacto.info.hours.saturdayTime': '8:00 AM - 6:00 PM',
-        'contacto.info.hours.sunday': 'Domingos',
-        'contacto.info.hours.sundayTime': 'Cerrado',
-        'contacto.info.emergency.title': '¿Necesitas ayuda inmediata?',
-        'contacto.info.emergency.description': 'Contáctanos directamente por WhatsApp para una respuesta rápida',
-        'contacto.info.emergency.button': 'WhatsApp Urgente',
-        'contacto.form.title': 'Envíanos un Mensaje',
-        'contacto.form.subtitle': 'Completa el formulario y te responderemos en menos de 24 horas',
-        'contacto.form.name': 'Nombre Completo *',
-        'contacto.form.phone': 'Teléfono *',
-        'contacto.form.email': 'Correo Electrónico *',
-        'contacto.form.subject': 'Asunto *',
-        'contacto.form.selectOption': 'Selecciona una opción',
-        'contacto.form.subject.classes': 'Información sobre Clases',
-        'contacto.form.subject.instruments': 'Compra de Instrumentos',
-        'contacto.form.subject.liveMusic': 'Música en Vivo para Eventos',
-        'contacto.form.subject.workshops': 'Talleres y Workshops',
-        'contacto.form.subject.partnership': 'Alianzas y Colaboraciones',
-        'contacto.form.subject.other': 'Otro',
-        'contacto.form.message': 'Mensaje *',
-        'contacto.form.messagePlaceholder': 'Cuéntanos en qué podemos ayudarte...',
-        'contacto.form.agree': 'Acepto la política de privacidad y el tratamiento de mis datos',
-        'contacto.form.submit': 'Enviar Mensaje',
-        'contacto.map.title': 'Visítanos en Cartagena',
-        'contacto.map.subtitle': 'Ubicados en el corazón del centro histórico',
-        'contacto.map.locationTitle': 'Academia del Vallenato Cartagena',
-        'contacto.map.locationAddress': 'Calle 45 # 12-34, Centro Histórico',
-        'contacto.map.locationCity': 'Cartagena, Colombia',
-        'contacto.map.note': '(Mapa interactivo se cargará aquí)',
-        'contacto.map.directions': 'Cómo Llegar',
-        'contacto.faq.title': 'Preguntas Frecuentes',
-        'contacto.faq.subtitle': 'Respuestas rápidas a tus dudas más comunes',
-        'contacto.faq.q1.question': '¿Cuál es el horario de atención?',
-        'contacto.faq.q1.answer': 'Atendemos de lunes a viernes de 8:00 AM a 8:00 PM, y sábados de 8:00 AM a 6:00 PM. Domingos cerrado.',
-        'contacto.faq.q2.question': '¿Ofrecen clases para principiantes?',
-        'contacto.faq.q2.answer': 'Sí, tenemos programas especializados para todos los niveles, desde principiantes hasta avanzados.',
-        'contacto.faq.q3.question': '¿Puedo probar una clase antes de inscribirme?',
-        'contacto.faq.q3.answer': '¡Claro! Ofrecemos una clase de prueba gratuita para que conozcas nuestra metodología.',
-        'contacto.faq.q4.question': '¿Tienen instrumentos disponibles para alquiler?',
-        'contacto.faq.q4.answer': 'Sí, contamos con instrumentos disponibles para alquiler mientras adquieres el tuyo propio.',
-        'contacto.cta.title': '¿Listo para comenzar tu viaje musical?',
-        'contacto.cta.text': 'No esperes más, contáctanos hoy mismo y descubre el músico que llevas dentro.',
-        'contacto.cta.whatsapp': 'Escríbenos por WhatsApp',
-        'contacto.cta.call': 'Llamar Ahora'
-      },
-      en: {
-        'contacto.hero.title': 'Contact Us',
-        'contacto.hero.subtitle': 'We are here to answer all your questions about classes, services and instruments',
-        'contacto.hero.cta1': 'Send Message',
-        'contacto.hero.cta2': 'Direct WhatsApp',
-        'contacto.main.title': 'Get in Touch',
-        'contacto.main.subtitle': 'Multiple ways to communicate with us',
-        'contacto.info.location.title': 'Our Location',
-        'contacto.info.location.address': 'Address:',
-        'contacto.info.location.value': 'Street 45 # 12-34, Historic Center, Cartagena, Colombia',
-        'contacto.info.location.hours': 'Attention Schedule:',
-        'contacto.info.location.hoursValue': 'Monday to Friday: 8:00 AM - 8:00 PM',
-        'contacto.info.contact.title': 'Direct Contact',
-        'contacto.info.contact.phone': 'Phone:',
-        'contacto.info.contact.email': 'Email:',
-        'contacto.info.contact.whatsapp': 'WhatsApp:',
-        'contacto.info.hours.title': 'Class Schedules',
-        'contacto.info.hours.monday': 'Monday - Friday',
-        'contacto.info.hours.mondayTime': '7:00 AM - 9:00 PM',
-        'contacto.info.hours.saturday': 'Saturdays',
-        'contacto.info.hours.saturdayTime': '8:00 AM - 6:00 PM',
-        'contacto.info.hours.sunday': 'Sundays',
-        'contacto.info.hours.sundayTime': 'Closed',
-        'contacto.info.emergency.title': 'Need immediate help?',
-        'contacto.info.emergency.description': 'Contact us directly via WhatsApp for a quick response',
-        'contacto.info.emergency.button': 'Urgent WhatsApp',
-        'contacto.form.title': 'Send Us a Message',
-        'contacto.form.subtitle': 'Complete the form and we will respond in less than 24 hours',
-        'contacto.form.name': 'Full Name *',
-        'contacto.form.phone': 'Phone *',
-        'contacto.form.email': 'Email *',
-        'contacto.form.subject': 'Subject *',
-        'contacto.form.selectOption': 'Select an option',
-        'contacto.form.subject.classes': 'Information about Classes',
-        'contacto.form.subject.instruments': 'Instrument Purchase',
-        'contacto.form.subject.liveMusic': 'Live Music for Events',
-        'contacto.form.subject.workshops': 'Workshops and Training',
-        'contacto.form.subject.partnership': 'Partnerships and Collaborations',
-        'contacto.form.subject.other': 'Other',
-        'contacto.form.message': 'Message *',
-        'contacto.form.messagePlaceholder': 'Tell us how we can help you...',
-        'contacto.form.agree': 'I accept the privacy policy and the processing of my data',
-        'contacto.form.submit': 'Send Message',
-        'contacto.map.title': 'Visit Us in Cartagena',
-        'contacto.map.subtitle': 'Located in the heart of the historic center',
-        'contacto.map.locationTitle': 'Vallenato Academy Cartagena',
-        'contacto.map.locationAddress': 'Street 45 # 12-34, Historic Center',
-        'contacto.map.locationCity': 'Cartagena, Colombia',
-        'contacto.map.note': '(Interactive map will load here)',
-        'contacto.map.directions': 'Get Directions',
-        'contacto.faq.title': 'Frequently Asked Questions',
-        'contacto.faq.subtitle': 'Quick answers to your most common questions',
-        'contacto.faq.q1.question': 'What are the business hours?',
-        'contacto.faq.q1.answer': 'We attend from Monday to Friday from 8:00 AM to 8:00 PM, and Saturdays from 8:00 AM to 6:00 PM. Sundays closed.',
-        'contacto.faq.q2.question': 'Do you offer classes for beginners?',
-        'contacto.faq.q2.answer': 'Yes, we have specialized programs for all levels, from beginners to advanced.',
-        'contacto.faq.q3.question': 'Can I try a class before enrolling?',
-        'contacto.faq.q3.answer': 'Of course! We offer a free trial class so you can get to know our methodology.',
-        'contacto.faq.q4.question': 'Do you have instruments available for rental?',
-        'contacto.faq.q4.answer': 'Yes, we have instruments available for rent while you acquire your own.',
-        'contacto.cta.title': 'Ready to Start Your Musical Journey?',
-        'contacto.cta.text': "Don't wait any longer, contact us today and discover the musician within you.",
-        'contacto.cta.whatsapp': 'Write us on WhatsApp',
-        'contacto.cta.call': 'Call Now'
-      }
-    };
+    // Sistema de traducciones específico para contacto
+    const translationSystem = window.academiaApp?.translationSystem || window.translationSystem;
+    if (translationSystem) {
+        const contactTranslations = {
+            es: {
+                'contacto.hero.title': 'Contáctanos',
+                'contacto.hero.subtitle': 'Estamos aquí para responder todas tus preguntas sobre clases, eventos e instrumentos',
+                'contacto.hero.cta1': 'Enviar Mensaje',
+                'contacto.hero.cta2': 'Ver Ubicación',
+                'contacto.main.title': 'Estamos para Ayudarte',
+                'contacto.main.subtitle': 'Múltiples formas de contactarnos para tu comodidad',
+                'contacto.info.title': 'Información de Contacto',
+                'contacto.info.description': 'No dudes en contactarnos por cualquiera de estos medios. Te responderemos a la brevedad.',
+                'contacto.info.address.title': 'Dirección',
+                'contacto.info.address.value': 'Centro Histórico, Cartagena, Colombia',
+                'contacto.info.phone.title': 'Teléfono',
+                'contacto.info.email.title': 'Email',
+                'contacto.info.whatsapp.title': 'WhatsApp',
+                'contacto.info.whatsapp.value': 'Respuesta inmediata',
+                'contacto.hours.title': 'Horario de Atención',
+                'contacto.hours.weekdays': 'Lunes a Viernes',
+                'contacto.hours.weekdaysTime': '8:00 AM - 8:00 PM',
+                'contacto.hours.saturday': 'Sábados',
+                'contacto.hours.saturdayTime': '8:00 AM - 6:00 PM',
+                'contacto.hours.sunday': 'Domingos',
+                'contacto.hours.sundayTime': 'Cerrado',
+                'contacto.form.title': 'Envíanos un Mensaje',
+                'contacto.form.subtitle': 'Completa el formulario y te contactaremos dentro de 24 horas',
+                'contacto.form.name': 'Nombre Completo',
+                'contacto.form.phone': 'Teléfono',
+                'contacto.form.email': 'Correo Electrónico',
+                'contacto.form.subject': 'Asunto',
+                'contacto.form.selectOption': 'Selecciona una opción',
+                'contacto.form.optionClasses': 'Información sobre Clases',
+                'contacto.form.optionEvents': 'Música para Eventos',
+                'contacto.form.optionInstruments': 'Compra de Instrumentos',
+                'contacto.form.optionWorkshops': 'Talleres Especializados',
+                'contacto.form.optionOther': 'Otro',
+                'contacto.form.message': 'Mensaje',
+                'contacto.form.messagePlaceholder': 'Cuéntanos en qué podemos ayudarte...',
+                'contacto.form.urgency': 'Para consultas urgentes, recomendamos contactarnos por WhatsApp para respuesta inmediata',
+                'contacto.form.submit': 'Enviar Mensaje',
+                'contacto.map.placeholder': 'Mapa interactivo de nuestra ubicación en el Centro Histórico de Cartagena',
+                'contacto.cta.title': '¿Necesitas una respuesta inmediata?',
+                'contacto.cta.text': 'Contáctanos directamente por WhatsApp para atención personalizada al instante',
+                'contacto.cta.button': 'Chatear por WhatsApp'
+            },
+            en: {
+                'contacto.hero.title': 'Contact Us',
+                'contacto.hero.subtitle': 'We are here to answer all your questions about classes, events and instruments',
+                'contacto.hero.cta1': 'Send Message',
+                'contacto.hero.cta2': 'View Location',
+                'contacto.main.title': 'We Are Here to Help',
+                'contacto.main.subtitle': 'Multiple ways to contact us for your convenience',
+                'contacto.info.title': 'Contact Information',
+                'contacto.info.description': 'Do not hesitate to contact us through any of these means. We will respond as soon as possible.',
+                'contacto.info.address.title': 'Address',
+                'contacto.info.address.value': 'Historic Center, Cartagena, Colombia',
+                'contacto.info.phone.title': 'Phone',
+                'contacto.info.email.title': 'Email',
+                'contacto.info.whatsapp.title': 'WhatsApp',
+                'contacto.info.whatsapp.value': 'Immediate response',
+                'contacto.hours.title': 'Business Hours',
+                'contacto.hours.weekdays': 'Monday to Friday',
+                'contacto.hours.weekdaysTime': '8:00 AM - 8:00 PM',
+                'contacto.hours.saturday': 'Saturdays',
+                'contacto.hours.saturdayTime': '8:00 AM - 6:00 PM',
+                'contacto.hours.sunday': 'Sundays',
+                'contacto.hours.sundayTime': 'Closed',
+                'contacto.form.title': 'Send Us a Message',
+                'contacto.form.subtitle': 'Complete the form and we will contact you within 24 hours',
+                'contacto.form.name': 'Full Name',
+                'contacto.form.phone': 'Phone',
+                'contacto.form.email': 'Email',
+                'contacto.form.subject': 'Subject',
+                'contacto.form.selectOption': 'Select an option',
+                'contacto.form.optionClasses': 'Information about Classes',
+                'contacto.form.optionEvents': 'Music for Events',
+                'contacto.form.optionInstruments': 'Instrument Purchase',
+                'contacto.form.optionWorkshops': 'Specialized Workshops',
+                'contacto.form.optionOther': 'Other',
+                'contacto.form.message': 'Message',
+                'contacto.form.messagePlaceholder': 'Tell us how we can help you...',
+                'contacto.form.urgency': 'For urgent inquiries, we recommend contacting us via WhatsApp for immediate response',
+                'contacto.form.submit': 'Send Message',
+                'contacto.map.placeholder': 'Interactive map of our location in the Historic Center of Cartagena',
+                'contacto.cta.title': 'Need an immediate response?',
+                'contacto.cta.text': 'Contact us directly via WhatsApp for instant personalized attention',
+                'contacto.cta.button': 'Chat on WhatsApp'
+            }
+        };
 
-    // Combinar traducciones
-    Object.keys(contactTranslations.es).forEach(key => {
-      translationSystem.translations.es[key] = contactTranslations.es[key];
-      translationSystem.translations.en[key] = contactTranslations.en[key];
-    });
+        // Combinar traducciones
+        Object.keys(contactTranslations.es).forEach(key => {
+            translationSystem.translations.es[key] = contactTranslations.es[key];
+            translationSystem.translations.en[key] = contactTranslations.en[key];
+        });
 
-    // Aplicar traducciones
-    translationSystem.applyTranslations();
-  }
+        // Aplicar traducciones
+        translationSystem.applyTranslations();
+    }
 });
 </script>
-
 </body>
 </html>
