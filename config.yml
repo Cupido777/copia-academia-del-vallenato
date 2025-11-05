@@ -1,46 +1,233 @@
-=== ARCHIVO: _config.yml ===
-# CONFIGURACIÓN ACADEMIA DEL VALLENATO CARTAGENA
-# Archivo de configuración principal - NO MODIFICAR MANUALMENTE
+# ===============================================
+# ACADEMIA DEL VALLENATO CARTAGENA - CONFIG.YML OPTIMIZADO
+# Versión: 2.0 | Integrado con sistemas existentes
+# ===============================================
 
 # ======================
-# CONFIGURACIÓN BÁSICA
+# CONFIGURACIÓN BÁSICA DEL SITIO
 # ======================
 title: "Academia del Vallenato Cartagena"
 description: "Aprende vallenato en la Academia del Vallenato Cartagena. Clases de acordeón, caja y guacharaca. Venta de instrumentos y servicios de música en vivo."
 baseurl: ""
 url: "https://www.academiadelvallenatocartagena.com"
+favicon: "/assets/images/favicon.ico"
 
 # ======================
-# CONFIGURACIÓN JEKYLL
+# CONFIGURACIÓN JEKYLL OPTIMIZADA
 # ======================
 theme: null
-plugins: []
+plugins: 
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+
 markdown: kramdown
+highlighter: rouge
+permalink: pretty
 
 kramdown:
   input: GFM
   hard_wrap: false
+  auto_ids: true
+  toc_levels: 2..6
+
+sass:
+  style: compressed
 
 # ======================
-# INFORMACIÓN ACADEMIA
+# INFORMACIÓN ACADEMIA (ACTUALIZADA)
 # ======================
 academia:
   nombre: "Academia del Vallenato Cartagena"
   fundacion: 2010
   ubicacion: "Cartagena, Colombia"
+  direccion: "Calle 45 # 12-34, Valledupar, Colombia"
   email: "info@academiadelvallenatocartagena.com"
   telefono: "+57 300 123 4567"
+  whatsapp: "+573001234567"
+  horario: "Lunes a Viernes: 8:00 AM - 8:00 PM, Sábados: 9:00 AM - 2:00 PM"
 
 # ======================
-# CONFIGURACIÓN SEO
+# CONFIGURACIÓN SEO AVANZADA
 # ======================
-google_analytics: null # AGREGAR ID DE GOOGLE ANALYTICS SI SE REQUIERE
 lang: "es"
 timezone: "America/Bogota"
 encoding: "UTF-8"
+author: "Academia del Vallenato Cartagena"
+
+# Meta tags avanzados
+seo:
+  title: "Academia del Vallenato Cartagena - Clases de Música Colombiana"
+  description: "Aprende acordeón, caja y guacharaca con los mejores maestros. Venta de instrumentos vallenatos y servicios de música en vivo."
+  keywords: 
+    - "vallenato"
+    - "acordeón"
+    - "clases de música"
+    - "música colombiana"
+    - "academia de música"
+    - "cartagena"
+    - "instrumentos vallenatos"
+  
+  social:
+    twitter: "@academiavallenato"
+    facebook: "AcademiaDelVallenatoCartagena"
+    instagram: "academiavallenatocartagena"
 
 # ======================
-# OPCIONES BUILD
+# CONFIGURACIÓN ESTADÍSTICAS (INTEGRACIÓN)
+# ======================
+analytics:
+  # Sistema de estadísticas interno (stats-system.js)
+  internal_tracking: true
+  track_conversions: true
+  track_events:
+    - "form_submission"
+    - "whatsapp_click"
+    - "class_signup"
+    - "instrument_purchase"
+  
+  # Google Analytics (opcional)
+  google_analytics: null
+  
+  # Configuración de métricas
+  metrics:
+    - "page_views"
+    - "session_duration"
+    - "bounce_rate"
+    - "conversion_rate"
+
+# ======================
+# CONFIGURACIÓN SISTEMA DE IDIOMAS
+# ======================
+i18n:
+  default_locale: "es"
+  supported_locales: 
+    - "es"
+    - "en"
+  
+  # Rutas localizadas
+  localized_paths:
+    es: "/"
+    en: "/en/"
+  
+  # Configuración de traducciones
+  translations:
+    es:
+      site_title: "Academia del Vallenato Cartagena"
+      site_description: "Aprende vallenato con los mejores maestros"
+    en:
+      site_title: "Vallenato Academy Cartagena"
+      site_description: "Learn vallenato with the best teachers"
+
+# ======================
+# CONFIGURACIÓN PERFORMANCE
+# ======================
+performance:
+  # Compresión y optimización
+  compress_html:
+    clippings: all
+    comments: all
+    endings: all
+    startings: []
+    blanklines: false
+  
+  # Cache settings
+  cache: true
+  cache_time: 3600
+  
+  # Asset optimization
+  optimize_images: true
+  optimize_js: true
+  optimize_css: true
+
+# ======================
+# CONFIGURACIÓN SITEMAP AVANZADA
+# ======================
+sitemap:
+  filename: "sitemap.xml"
+  priority: 0.7
+  changefreq: "weekly"
+  
+  exclude:
+    - "/404.html"
+    - "/assets/js/"
+    - "/assets/css/"
+    - "/admin/"
+    - "/private/"
+  
+  include:
+    - "/"
+    - "/clases/"
+    - "/servicios/"
+    - "/instrumentos/"
+    - "/contacto/"
+    - "/musica-en-vivo/"
+
+# ======================
+# CONFIGURACIÓN SEGURIDAD
+# ======================
+security:
+  # Headers de seguridad
+  security_headers: true
+  csp: true
+  
+  # Protecciones
+  xss_protection: true
+  frame_options: "SAMEORIGIN"
+  content_type_options: "nosniff"
+
+# ======================
+# CONFIGURACIÓN PÁGINAS Y ESTRUCTURA
+# ======================
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+      permalink: "/:basename/"
+      sitemap: true
+  
+  - scope:
+      path: "assets/images"
+    values:
+      image: true
+
+# ======================
+# CONFIGURACIÓN NAVEGACIÓN
+# ======================
+navigation:
+  main:
+    - title: "Inicio"
+      url: "/"
+      weight: 1
+    - title: "Servicios"
+      url: "/servicios/"
+      weight: 2
+    - title: "Clases"
+      url: "/clases/"
+      weight: 3
+    - title: "Instrumentos"
+      url: "/instrumentos/"
+      weight: 4
+    - title: "Música en Vivo"
+      url: "/musica-en-vivo/"
+      weight: 5
+    - title: "Contacto"
+      url: "/contacto/"
+      weight: 6
+
+# ======================
+# CONFIGURACIÓN REDES SOCIALES
+# ======================
+social_links:
+  facebook: "https://facebook.com/AcademiaDelVallenatoCartagena"
+  instagram: "https://instagram.com/academiavallenatocartagena"
+  youtube: "https://youtube.com/c/AcademiaDelVallenatoCartagena"
+  whatsapp: "https://wa.me/573001234567"
+
+# ======================
+# EXCLUSIONES Y INCLUSIONES OPTIMIZADAS
 # ======================
 exclude:
   - "node_modules"
@@ -52,45 +239,52 @@ exclude:
   - "vendor"
   - ".git"
   - ".svn"
+  - ".DS_Store"
+  - "Thumbs.db"
+  - "*.log"
 
 include:
   - "_pages"
   - "_includes"
+  - "_data"
+  - ".well-known"
 
 # ======================
-# CONFIGURACIÓN SITEMAP
+# CONFIGURACIÓN VARIABLES PERSONALIZADAS
 # ======================
-sitemap:
-  filename: "sitemap.xml"
-  exclude:
-    - "/404.html"
-    - "/assets/js/"
-    - "/assets/css/"
+# Colores del tema (coordinados con styles.css)
+colors:
+  primary: "#d4af37"
+  secondary: "#c44536"
+  accent: "#e67e22"
+  dark: "#2c3e50"
+  light: "#f9f7f2"
+
+# Configuración de servicios
+services:
+  clases:
+    - "acordeon"
+    - "caja_vallenata"
+    - "guacharaca"
+    - "canto"
+    - "teoria_musical"
+  
+  instrumentos:
+    - "acordeones"
+    - "cajas"
+    - "guacharacas"
+    - "accesorios"
 
 # ======================
-# CONFIGURACIÓN PÁGINAS
+# CONFIGURACIÓN ENTORNO
 # ======================
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "default"
-      permalink: "/:basename/"
+environment: "production"
 
-# ======================
-# OPTIMIZACIÓN RENDIMIENTO
-# ======================
-compress_html:
-  clippings: all
-  comments: all
-  endings: all
-  startings: []
-  blanklines: false
+# Entornos específicos
+development:
+  url: "http://localhost:4000"
+  analytics: false
 
-# ======================
-# CONFIGURACIÓN MULTI-IDIOMA
-# ======================
-languages: ["es", "en"]
-default_lang: "es"
-exclude_from_localization: ["assets", "images", "js", "css"]
+production:
+  url: "https://www.academiadelvallenatocartagena.com"
+  analytics: true
