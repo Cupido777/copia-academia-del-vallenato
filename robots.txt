@@ -1,37 +1,116 @@
-=== ARCHIVO: robots.txt ===
+# ===============================================
 # robots.txt - Academia del Vallenato Cartagena
 # Dominio: https://www.academiadelvallenatocartagena.com
-# Optimizado: 2025 - Mantiene estructura original
+# Última actualización: 2024
+# ===============================================
 
 User-agent: *
 Allow: /
 
-# Archivos y directorios excluidos del rastreo
+# ======================
+# DIRECTORIOS EXCLUIDOS
+# ======================
 Disallow: /admin/
 Disallow: /cgi-bin/
 Disallow: /tmp/
 Disallow: /includes/
 Disallow: /private/
+Disallow: /backup/
+Disallow: /logs/
+Disallow: /config/
 
-# Recursos esenciales permitidos
-Allow: /assets/
+# ======================
+# ARCHIVOS EXCLUIDOS
+# ======================
+Disallow: /search/
+Disallow: /?search=*
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.docx$
+Disallow: /*.xls$
+Disallow: /*.xlsx$
+
+# ======================
+# RECURSOS PERMITIDOS
+# ======================
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
 Allow: /pages/
-Allow: /css/
-Allow: /js/
-Allow: /images/
+Allow: /fonts/
 
-# Configuración específica por motor de búsqueda
+# ======================
+# CONFIGURACIÓN ESPECÍFICA
+# ======================
+
+# Googlebot
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
+Allow: /*.css$
+Allow: /*.js$
 
+# Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /assets/instruments/
+Disallow: /assets/images/private/
+
+# Bingbot
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 2
 
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 3
+
+# DuckDuckGo
 User-agent: DuckDuckBot
 Allow: /
+Crawl-delay: 1
 
+# Baidu (excluido por geolocalización)
 User-agent: Baiduspider
 Disallow: /
 
-# Sitemap principal
+# Otros bots no deseados
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+# ======================
+# SITEMAPS
+# ======================
 Sitemap: https://www.academiadelvallenatocartagena.com/sitemap.xml
+Sitemap: https://www.academiadelvallenatocartagena.com/sitemap-images.xml
+
+# ======================
+# CONFIGURACIÓN ADICIONAL
+# ======================
+
+# Velocidad de rastreo
+Crawl-delay: 1
+
+# Noindex para parámetros de URL específicos
+Disallow: /*?utm_*
+Disallow: /*?gclid=*
+Disallow: /*?fbclid=*
+
+# Archivos de sistema
+Disallow: /.*.php$
+Disallow: /.*.sql$
+Disallow: /.*.log$
+
+# ======================
+# COMPATIBILIDAD
+# ======================
+
+# Compatibilidad con estándar robots.txt
+# https://www.robotstxt.org/robotstxt.html
