@@ -1,537 +1,111 @@
-<!DOCTYPE html>
-<html lang="es" itemscope itemtype="https://schema.org/MusicSchool" data-theme="light">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Academia del Vallenato Cartagena - Clases de Acordeón, Caja y Guacharaca</title>
-<meta name="description" content="Aprende vallenato en Cartagena. Clases profesionales de acordeón, caja vallenata y guacharaca. Música en vivo para eventos. Maestros certificados. ¡Inscríbete hoy!">
-<meta name="keywords" content="clases vallenato cartagena, acordeón vallenato, caja vallenata, guacharaca, música colombiana, academia música cartagena, aprender vallenato">
-<meta name="author" content="Academia del Vallenato Cartagena">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ===========================================================
+     SITEMAP XML - ACADEMIA DEL VALLENATO CARTAGENA
+     -----------------------------------------------------------
+     Generado: 2024
+     Dominio: https://www.academiadelvallenatocartagena.com
+     =========================================================== -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-<!-- Canonical URL -->
-<link rel="canonical" href="https://www.academiadelvallenatocartagena.com/">
+  <!-- ======================
+       PÁGINAS PRINCIPALES
+       ====================== -->
+  
+  <!-- Página principal - Máxima prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.academiadelvallenatocartagena.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.academiadelvallenatocartagena.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.academiadelvallenatocartagena.com/"/>
+  </url>
 
-<!-- Open Graph Optimizado -->
-<meta property="og:title" content="Academia del Vallenato Cartagena - Clases de Música Tradicional Colombiana">
-<meta property="og:description" content="Aprende acordeón, caja y guacharaca con los mejores maestros de vallenato en Cartagena. Clases para todos los niveles.">
-<meta property="og:image" content="https://www.academiadelvallenatocartagena.com/assets/images/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://www.academiadelvallenatocartagena.com/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Academia del Vallenato Cartagena">
-<meta property="og:locale" content="es_CO">
+  <!-- Página de servicios - Alta prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/pages/servicios.html</loc>
+    <lastmod>2024-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.academiadelvallenatocartagena.com/pages/servicios.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.academiadelvallenatocartagena.com/en/services.html"/>
+  </url>
 
-<!-- Twitter Card Optimizado -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Academia del Vallenato Cartagena - Clases Profesionales">
-<meta name="twitter:description" content="Aprende vallenato en Cartagena con maestros certificados. Clases de acordeón, caja y guacharaca.">
-<meta name="twitter:image" content="https://www.academiadelvallenatocartagena.com/assets/images/twitter-image.jpg">
-<meta name="twitter:creator" content="@academiavallenato">
+  <!-- Página de clases - Alta prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/pages/clases.html</loc>
+    <lastmod>2024-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.academiadelvallenatocartagena.com/pages/clases.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.academiadelvallenatocartagena.com/en/classes.html"/>
+    <image:image>
+      <image:loc>https://www.academiadelvallenatocartagena.com/assets/images/clases-acordeon.jpg</image:loc>
+      <image:title>Clases de acordeón vallenato en Cartagena</image:title>
+      <image:caption>Profesores certificados enseñando técnicas de acordeón vallenato</image:caption>
+    </image:image>
+  </url>
 
-<!-- Schema.org Markup Mejorado -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "MusicSchool",
-  "name": "Academia del Vallenato Cartagena",
-  "description": "Academia especializada en enseñanza de música vallenata tradicional colombiana en Cartagena",
-  "url": "https://www.academiadelvallenatocartagena.com",
-  "telephone": "+57-300-123-4567",
-  "email": "info@academiadelvallenatocartagena.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Centro Histórico",
-    "addressLocality": "Cartagena",
-    "addressRegion": "Bolívar",
-    "addressCountry": "CO",
-    "postalCode": "130001"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "10.3910",
-    "longitude": "-75.4794"
-  },
-  "openingHours": [
-    "Mo-Fr 08:00-20:00",
-    "Sa 08:00-18:00"
-  ],
-  "areaServed": "Cartagena, Bolívar, Colombia",
-  "knowsAbout": ["Vallenato", "Acordeón", "Música Colombiana", "Caja Vallenata", "Guacharaca", "Música Tradicional"],
-  "priceRange": "$$",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "ratingCount": "47"
-  },
-  "sameAs": [
-    "https://facebook.com/academiadelvallenatocartagena",
-    "https://instagram.com/academiadelvallenatocartagena",
-    "https://youtube.com/c/academiadelvallenatocartagena"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "description": "Clases de música vallenata",
-    "price": "150000",
-    "priceCurrency": "COP"
-  }
-}
-</script>
+  <!-- Página de instrumentos - Alta prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/pages/instrumentos.html</loc>
+    <lastmod>2024-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.academiadelvallenatocartagena.com/pages/instrumentos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.academiadelvallenatocartagena.com/en/instruments.html"/>
+    <image:image>
+      <image:loc>https://www.academiadelvallenatocartagena.com/assets/images/instruments/acordeon-hohner-corona-ii.jpg</image:loc>
+      <image:title>Acordeón Hohner Corona II para vallenato</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.academiadelvallenatocartagena.com/assets/images/caja-vallenata.jpg</image:loc>
+      <image:title>Caja vallenata profesional artesanal</image:title>
+    </image:image>
+  </url>
 
-<!-- Preload crítico optimizado -->
-<link rel="preload" href="assets/css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" href="assets/js/script.js" as="script">
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" as="style">
+  <!-- Página de música en vivo - Media prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/pages/musica-en-vivo.html</loc>
+    <lastmod>2024-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.academiadelvallenatocartagena.com/pages/musica-en-vivo.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.academiadelvallenatocartagena.com/en/live-music.html"/>
+  </url>
 
-<!-- Preconnect para rendimiento -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <!-- Página de contacto - Media prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/pages/contacto.html</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.academiadelvallenatocartagena.com/pages/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.academiadelvallenatocartagena.com/en/contact.html"/>
+  </url>
 
-<!-- Fuentes optimizadas -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <!-- ======================
+       PÁGINAS SECUNDARIAS
+       ====================== -->
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous">
+  <!-- Política de privacidad - Baja prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/politica-privacidad.html</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 
-<!-- CSS -->
-<link rel="stylesheet" href="assets/css/styles.css">
-<link rel="stylesheet" href="assets/css/stats-styles.css">
+  <!-- Términos de servicio - Baja prioridad -->
+  <url>
+    <loc>https://www.academiadelvallenatocartagena.com/terminos-servicio.html</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-
-<!-- Manifest -->
-<link rel="manifest" href="assets/manifest.json">
-<meta name="theme-color" content="#d4af37">
-</head>
-
-<body itemscope itemtype="https://schema.org/WebPage">
-<!-- Botón WhatsApp con tracking -->
-<a href="https://wa.me/573001234567?text=Hola,%20me%20interesan%20las%20clases%20de%20vallenato" 
-   class="whatsapp-float" 
-   target="_blank" 
-   rel="noopener nofollow"
-   aria-label="Chatear por WhatsApp"
-   onclick="window.statsSystem?.trackEvent('whatsapp_click', {source: 'homepage'})">
-  <i class="fab fa-whatsapp"></i>
-</a>
-
-<!-- Panel Estadísticas Mejorado -->
-<div id="stats-panel" class="stats-panel" aria-hidden="true" hidden role="dialog" aria-labelledby="stats-panel-title">
-  <div class="stats-header">
-    <h3 id="stats-panel-title">📊 Estadísticas del Sitio</h3>
-    <button id="close-stats" class="close-stats" aria-label="Cerrar panel de estadísticas">&times;</button>
-  </div>
-  <div class="stats-content">
-    <div class="stat-item">
-      <span class="stat-label">Visitas totales:</span>
-      <span id="total-visits" class="stat-value">0</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-label">Páginas más visitadas:</span>
-      <ul id="top-pages" class="stat-list"></ul>
-    </div>
-    <div class="stat-item">
-      <span class="stat-label">Tasa de conversión:</span>
-      <span id="conversion-rate" class="stat-value">0%</span>
-    </div>
-  </div>
-</div>
-
-<!-- Header Mejorado -->
-<header class="header" role="banner" itemscope itemtype="https://schema.org/Organization">
-  <div class="container">
-    <div class="header-content">
-      <div class="logo" itemprop="logo">
-        <a href="index.html" aria-label="Academia del Vallenato Cartagena - Página de inicio">
-          <img src="assets/images/logo-academia-vallenato.png" 
-               alt="Academia del Vallenato Cartagena - Clases de música tradicional" 
-               width="50" 
-               height="50" 
-               loading="eager"
-               itemprop="image">
-          <span class="logo-text" itemprop="name">Academia del Vallenato</span>
-        </a>
-      </div>
-      
-      <nav class="nav" aria-label="Navegación principal" role="navigation">
-        <ul class="nav-list">
-          <li><a href="index.html" class="nav-link active" aria-current="page">Inicio</a></li>
-          <li><a href="pages/servicios.html" class="nav-link">Servicios</a></li>
-          <li><a href="pages/clases.html" class="nav-link">Clases</a></li>
-          <li><a href="pages/musica-en-vivo.html" class="nav-link">Música en Vivo</a></li>
-          <li><a href="pages/instrumentos.html" class="nav-link">Instrumentos</a></li>
-          <li><a href="pages/contacto.html" class="nav-link">Contacto</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-actions">
-        <div class="language-selector">
-          <button id="language-toggle" class="language-btn" aria-haspopup="true" aria-expanded="false" aria-label="Selector de idioma">
-            <span class="language-flag">🇪🇸</span>
-            <span class="language-text">ES</span>
-            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-          </button>
-          <div class="language-dropdown" role="menu">
-            <button class="language-option" data-lang="es" role="menuitem">🇪🇸 Español</button>
-            <button class="language-option" data-lang="en" role="menuitem">🇺🇸 English</button>
-          </div>
-        </div>
-        
-        <button class="menu-toggle" id="menu-toggle" aria-label="Menú móvil" aria-expanded="false" aria-controls="nav">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- Hero Section Mejorada -->
-<section class="hero" id="home" role="banner" aria-labelledby="hero-title">
-  <div class="hero-overlay"></div>
-  <div class="container">
-    <div class="hero-content">
-      <h1 class="hero-title" id="hero-title" itemprop="headline">Descubre el Alma del Vallenato en Cartagena</h1>
-      <p class="hero-subtitle">Aprende los secretos del acordeón, la caja y la guacharaca con los mejores maestros de la música colombiana. Clases personalizadas para todos los niveles.</p>
-      <div class="hero-actions">
-        <a href="pages/clases.html" class="btn btn-primary" onclick="window.statsSystem?.trackEvent('cta_click', {type: 'classes', location: 'hero'})">
-          <i class="fas fa-music" aria-hidden="true"></i>
-          Ver Clases
-        </a>
-        <a href="pages/contacto.html" class="btn btn-secondary" onclick="window.statsSystem?.trackEvent('cta_click', {type: 'contact', location: 'hero'})">
-          <i class="fas fa-phone" aria-hidden="true"></i>
-          Contactar
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="hero-scroll">
-    <a href="#about" class="scroll-down" aria-label="Desplazar hacia la sección sobre nosotros">
-      <i class="fas fa-chevron-down" aria-hidden="true"></i>
-    </a>
-  </div>
-</section>
-
-<!-- About Section Mejorada -->
-<section class="about section-padding" id="about" aria-labelledby="about-title">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title" id="about-title">Sobre la Academia</h2>
-      <p class="section-subtitle">Preservando y enseñando la tradición vallenata desde 2010 en el corazón de Cartagena</p>
-    </div>
-    <div class="about-content">
-      <div class="about-text">
-        <h3>Nuestra Misión</h3>
-        <p>Formar músicos integrales en el género vallenato, preservando sus raíces tradicionales mientras incorporamos técnicas modernas de enseñanza adaptadas a cada estudiante.</p>
-        
-        <h3>Nuestra Visión</h3>
-        <p>Ser el centro de enseñanza de vallenato más reconocido del Caribe colombiano, formando a las nuevas generaciones de acordeoneros y músicos tradicionales.</p>
-        
-        <h3>Nuestra Historia</h3>
-        <p>Fundada en 2010 por el maestro acordeonero Rafael Martínez, la Academia del Vallenato Cartagena ha formado a más de 500 músicos que hoy llevan nuestra tradición por todo el mundo.</p>
-        
-        <div class="achievements">
-          <div class="achievement-item">
-            <span class="achievement-number">500+</span>
-            <span class="achievement-text">Estudiantes Formados</span>
-          </div>
-          <div class="achievement-item">
-            <span class="achievement-number">13+</span>
-            <span class="achievement-text">Años de Experiencia</span>
-          </div>
-          <div class="achievement-item">
-            <span class="achievement-number">98%</span>
-            <span class="achievement-text">Satisfacción</span>
-          </div>
-        </div>
-      </div>
-      <div class="about-image">
-        <img src="assets/images/acordeon-vallenato.jpg" 
-             alt="Maestro enseñando acordeón vallenato en la academia" 
-             loading="lazy" 
-             width="400" 
-             height="300"
-             itemprop="image">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Servicios Section Mejorada -->
-<section class="services section-padding bg-light" aria-labelledby="services-title">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title" id="services-title">Nuestros Servicios</h2>
-      <p class="section-subtitle">Todo lo que necesitas para tu formación musical en vallenato</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card" itemscope itemtype="https://schema.org/Service">
-        <div class="service-icon">
-          <i class="fas fa-music" aria-hidden="true"></i>
-        </div>
-        <h3 class="service-title" itemprop="name">Pedagogía Musical</h3>
-        <p class="service-description" itemprop="description">Metodología especializada para niños, jóvenes y adultos. Aprende a tu ritmo con nuestro sistema progresivo y personalizado.</p>
-        <a href="pages/servicios.html#pedagogia" class="service-link" onclick="window.statsSystem?.trackEvent('service_click', {service: 'pedagogy'})">
-          Más información <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      
-      <div class="service-card" itemscope itemtype="https://schema.org/Service">
-        <div class="service-icon">
-          <i class="fas fa-guitar" aria-hidden="true"></i>
-        </div>
-        <h3 class="service-title" itemprop="name">Clases de Música</h3>
-        <p class="service-description" itemprop="description">Clases prácticas de acordeón, caja vallenata, guacharaca, bajo eléctrico y canto. Enfoque 100% práctico y resultados garantizados.</p>
-        <a href="pages/clases.html" class="service-link" onclick="window.statsSystem?.trackEvent('service_click', {service: 'classes'})">
-          Más información <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-      
-      <div class="service-card" itemscope itemtype="https://schema.org/Service">
-        <div class="service-icon">
-          <i class="fas fa-microphone" aria-hidden="true"></i>
-        </div>
-        <h3 class="service-title" itemprop="name">Música en Vivo</h3>
-        <p class="service-description" itemprop="description">Contrata nuestras agrupaciones vallenatas para eventos privados, bodas, fiestas y presentaciones especiales. Repertorio tradicional y moderno.</p>
-        <a href="pages/musica-en-vivo.html" class="service-link" onclick="window.statsSystem?.trackEvent('service_click', {service: 'live_music'})">
-          Más información <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Instrumentos Destacados Mejorado -->
-<section class="instruments-preview section-padding" aria-labelledby="instruments-title">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title" id="instruments-title">Instrumentos Vallenatos</h2>
-      <p class="section-subtitle">Encuentra los mejores instrumentos profesionales para tu práctica musical</p>
-    </div>
-    <div class="instruments-grid">
-      <div class="instrument-card" itemscope itemtype="https://schema.org/Product">
-        <div class="instrument-image">
-          <img src="assets/images/instruments/acordeon-hohner-corona-ii.jpg" 
-               alt="Acordeón Hohner Corona II profesional para vallenato" 
-               loading="lazy" 
-               width="300" 
-               height="200"
-               itemprop="image">
-        </div>
-        <div class="instrument-info">
-          <h3 class="instrument-name" itemprop="name">Acordeón Hohner Corona II</h3>
-          <p class="instrument-description" itemprop="description">Acordeón profesional de 34 notas, ideal para vallenato tradicional. Calidad alemana garantizada.</p>
-          <div class="instrument-price">
-            <span class="price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-              <span itemprop="price" content="4500000">$4.500.000 COP</span>
-              <meta itemprop="priceCurrency" content="COP">
-            </span>
-          </div>
-          <div class="instrument-actions">
-            <a href="pages/instrumentos.html#acordeon-hohner" class="btn btn-outline" onclick="window.statsSystem?.trackEvent('instrument_click', {instrument: 'accordion'})">Ver detalles</a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="instrument-card" itemscope itemtype="https://schema.org/Product">
-        <div class="instrument-image">
-          <img src="assets/images/caja-vallenata.jpg" 
-               alt="Caja Vallenata Profesional artesanal en madera de roble" 
-               loading="lazy" 
-               width="300" 
-               height="200"
-               itemprop="image">
-        </div>
-        <div class="instrument-info">
-          <h3 class="instrument-name" itemprop="name">Caja Vallenata Profesional</h3>
-          <p class="instrument-description" itemprop="description">Caja artesanal en madera de roble con parches de cuero natural. Sonido auténtico y duradero.</p>
-          <div class="instrument-price">
-            <span class="price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-              <span itemprop="price" content="350000">$350.000 COP</span>
-              <meta itemprop="priceCurrency" content="COP">
-            </span>
-          </div>
-          <div class="instrument-actions">
-            <a href="pages/instrumentos.html#caja-vallenata" class="btn btn-outline" onclick="window.statsSystem?.trackEvent('instrument_click', {instrument: 'caja'})">Ver detalles</a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="instrument-card" itemscope itemtype="https://schema.org/Product">
-        <div class="instrument-image">
-          <img src="assets/images/guacharaca.jpg" 
-               alt="Guacharaca Tradicional artesanal en madera de guayacán" 
-               loading="lazy" 
-               width="300" 
-               height="200"
-               itemprop="image">
-        </div>
-        <div class="instrument-info">
-          <h3 class="instrument-name" itemprop="name">Guacharaca Tradicional</h3>
-          <p class="instrument-description" itemprop="description">Guacharaca artesanal en madera de guayacán con rascador de metal. Sonido característico del vallenato.</p>
-          <div class="instrument-price">
-            <span class="price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-              <span itemprop="price" content="120000">$120.000 COP</span>
-              <meta itemprop="priceCurrency" content="COP">
-            </span>
-          </div>
-          <div class="instrument-actions">
-            <a href="pages/instrumentos.html#guacharaca" class="btn btn-outline" onclick="window.statsSystem?.trackEvent('instrument_click', {instrument: 'guacharaca'})">Ver detalles</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section-actions">
-      <a href="pages/instrumentos.html" class="btn btn-primary" onclick="window.statsSystem?.trackEvent('cta_click', {type: 'instruments', location: 'section'})">Ver todos los instrumentos</a>
-    </div>
-  </div>
-</section>
-
-<!-- Testimonios Mejorados -->
-<section class="testimonials section-padding bg-light" aria-labelledby="testimonials-title">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title" id="testimonials-title">Testimonios</h2>
-      <p class="section-subtitle">Lo que dicen nuestros estudiantes y clientes</p>
-    </div>
-    <div class="testimonials-slider">
-      <div class="testimonial" itemscope itemtype="https://schema.org/Review">
-        <div class="testimonial-content">
-          <p class="testimonial-text" itemprop="reviewBody">"La Academia del Vallenato transformó mi forma de entender la música. En 6 meses ya podía tocar varias canciones tradicionales. Los profesores son excelentes."</p>
-          <div class="testimonial-author">
-            <span class="author-name" itemprop="author">Carlos Mendoza</span>
-            <span class="author-role">Estudiante de acordeón - 2 años</span>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial" itemscope itemtype="https://schema.org/Review">
-        <div class="testimonial-content">
-          <p class="testimonial-text" itemprop="reviewBody">"Los profesores son excelentes y la metodología es muy práctica. Mi hijo de 10 años ya toca la guacharaca como un profesional. Muy recomendada."</p>
-          <div class="testimonial-author">
-            <span class="author-name" itemprop="author">María González</span>
-            <span class="author-role">Madre de estudiante</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA Final Mejorado -->
-<section class="cta section-padding" aria-labelledby="cta-title">
-  <div class="container">
-    <div class="cta-content">
-      <h2 class="cta-title" id="cta-title">¿Listo para comenzar tu viaje musical?</h2>
-      <p class="cta-text">Únete a nuestra comunidad y descubre el fascinante mundo del vallenato en el corazón de Cartagena.</p>
-      <div class="cta-actions">
-        <a href="pages/contacto.html" class="btn btn-light" onclick="window.statsSystem?.trackEvent('cta_click', {type: 'contact', location: 'final_cta'})">Contáctanos</a>
-        <a href="pages/clases.html" class="btn btn-outline-light" onclick="window.statsSystem?.trackEvent('cta_click', {type: 'classes', location: 'final_cta'})">Ver clases</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer Mejorado -->
-<footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/Organization">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-section">
-        <div class="footer-logo">
-          <img src="assets/images/logo-academia-vallenato.png" 
-               alt="Academia del Vallenato Cartagena" 
-               loading="lazy" 
-               width="40" 
-               height="40"
-               itemprop="logo">
-          <span class="footer-logo-text" itemprop="name">Academia del Vallenato</span>
-        </div>
-        <p class="footer-description" itemprop="description">Formando a los músicos vallenatos del futuro desde 2010 en Cartagena, Colombia.</p>
-        <div class="social-links">
-          <a href="https://facebook.com/academiadelvallenatocartagena" aria-label="Síguenos en Facebook" rel="noopener nofollow" itemprop="sameAs"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://instagram.com/academiadelvallenatocartagena" aria-label="Síguenos en Instagram" rel="noopener nofollow" itemprop="sameAs"><i class="fab fa-instagram"></i></a>
-          <a href="https://youtube.com/c/academiadelvallenatocartagena" aria-label="Visita nuestro YouTube" rel="noopener nofollow" itemprop="sameAs"><i class="fab fa-youtube"></i></a>
-          <a href="https://wa.me/573001234567" aria-label="Escríbenos por WhatsApp" rel="noopener nofollow"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-      
-      <div class="footer-section">
-        <h3 class="footer-title">Enlaces rápidos</h3>
-        <ul class="footer-links">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="pages/servicios.html">Servicios</a></li>
-          <li><a href="pages/clases.html">Clases</a></li>
-          <li><a href="pages/instrumentos.html">Instrumentos</a></li>
-          <li><a href="pages/contacto.html">Contacto</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section">
-        <h3 class="footer-title">Contacto</h3>
-        <div class="contact-info" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-            <span itemprop="streetAddress">Centro Histórico</span>, 
-            <span itemprop="addressLocality">Cartagena</span>, 
-            <span itemprop="addressRegion">Bolívar</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-phone" aria-hidden="true"></i>
-            <span itemprop="telephone">+57 300 123 4567</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-            <span itemprop="email">info@academiadelvallenato.com</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="footer-section">
-        <h3 class="footer-title">Boletín informativo</h3>
-        <p class="footer-description">Suscríbete para recibir noticias sobre cursos, eventos y promociones especiales.</p>
-        <form class="newsletter-form" onsubmit="window.statsSystem?.trackEvent('newsletter_subscription', {source: 'footer'})">
-          <input type="email" placeholder="Tu correo electrónico" required aria-label="Correo electrónico para boletín">
-          <button type="submit">Suscribirse</button>
-        </form>
-      </div>
-    </div>
-    
-    <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <p class="copyright">© 2024 Academia del Vallenato Cartagena. Todos los derechos reservados.</p>
-        <div class="footer-bottom-links">
-          <a href="politica-privacidad.html">Política de privacidad</a>
-          <a href="terminos-servicio.html">Términos de servicio</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- Scripts optimizados -->
-<script src="assets/js/script.js" defer></script>
-<script src="assets/js/stats-system.js" defer></script>
-
-<!-- Structured Data para Breadcrumb -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Inicio",
-      "item": "https://www.academiadelvallenatocartagena.com/"
-    }
-  ]
-}
-</script>
-</body>
-</html>
+</urlset>
