@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones - Academia del Vallenato Cartagena</title>
+    <meta name="description" content="Términos y condiciones de uso para servicios educativos musicales de la Academia del Vallenato en Cartagena. Contratos legales para clases y compras.">
+    
+    <!-- Schema.org para Terms of Service -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Términos y Condiciones - Academia del Vallenato Cartagena",
+        "description": "Términos y condiciones legales para servicios educativos musicales",
+        "publisher": {
+            "@type": "MusicSchool",
+            "name": "Academia del Vallenato Cartagena",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Cartagena",
+                "addressRegion": "Bolívar",
+                "addressCountry": "CO"
+            }
+        }
+    }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .legal-page {
+            padding: 2rem 0;
+            background: var(--light-color);
+            min-height: 100vh;
+        }
+
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .legal-header {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .legal-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .legal-meta {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .legal-content {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 2rem;
+        }
+
+        .legal-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .legal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .legal-text {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .legal-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .legal-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .legal-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-icon {
+            color: var(--primary-color);
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .list-content {
+            flex: 1;
+        }
+
+        .highlight-box {
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .highlight-box.warning {
+            background: rgba(196, 69, 54, 0.05);
+            border-left-color: var(--secondary-color);
+        }
+
+        .contact-legal {
+            background: var(--dark-color);
+            color: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-legal h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .legal-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--light-color);
+        }
+
+        .last-updated {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Tablas para tarifas */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-color);
+        }
+
+        .pricing-table th {
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table tr:hover {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .legal-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .legal-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .legal-title {
+                font-size: 2rem;
+            }
+
+            .legal-navigation {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .pricing-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .legal-container {
+                padding: 0 1rem;
+            }
+
+            .legal-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .legal-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" aria-label="Academia del Vallenato Cartagena - Página de inicio">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="50" 
+                             height="50">
+                        <span class="logo-text">Academia del Vallenato</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Inicio</a></li>
+                        <li><a href="clases.html" class="nav-link">Clases</a></li>
+                        <li><a href="instrumentos.html" class="nav-link">Instrumentos</a></li>
+                        <li><a href="proceso-pago.html" class="nav-link">Pagar</a></li>
+                        <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="https://wa.me/573006677447" 
+                       class="btn-whatsapp-header" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="legal-page">
+        <div class="legal-container">
+            <!-- Encabezado -->
+            <div class="legal-header">
+                <h1 class="legal-title">Términos y Condiciones</h1>
+                <p class="legal-meta">
+                    <i class="fas fa-file-contract"></i> 
+                    Contrato de servicios educativos musicales
+                </p>
+            </div>
+
+            <!-- Contenido Legal -->
+            <div class="legal-content">
+                <!-- Introducción -->
+                <div class="legal-section">
+                    <h2 class="section-title">1. Aceptación de los Términos</h2>
+                    <p class="legal-text">
+                        Al utilizar los servicios de la Academia del Vallenato Cartagena, usted acepta cumplir y estar sujeto a los siguientes términos y condiciones de uso. Si no está de acuerdo con alguno de estos términos, le recomendamos no utilizar nuestros servicios.
+                    </p>
+                </div>
+
+                <!-- Servicios Educativos -->
+                <div class="legal-section">
+                    <h2 class="section-title">2. Servicios Educativos</h2>
+                    <p class="legal-text">
+                        La Academia del Vallenato Cartagena ofrece servicios de educación musical especializada en música vallenata tradicional, incluyendo:
+                    </p>
+                    
+                    <ul class="legal-list">
+                        <li>
+                            <i class="fas fa-music list-icon"></i>
+                            <div class="list-content">
+                                <strong>Clases personalizadas</strong> de acordeón, caja vallenata y guacharaca
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-guitar list-icon"></i>
+                            <div class="list-content">
+                                <strong>Cursos grupales</strong> y talleres intensivos
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-shopping-cart list-icon"></i>
+                            <div class="list-content">
+                                <strong>Venta de instrumentos</strong> musicales profesionales
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-microphone list-icon"></i>
+                            <div class="list-content">
+                                <strong>Servicios de música en vivo</strong> para eventos
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Política de Pagos -->
+                <div class="legal-section">
+                    <h2 class="section-title">3. Política de Pagos y Precios</h2>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-credit-card"></i> Métodos de Pago Aceptados</h4>
+                        <p>Aceptamos los siguientes métodos de pago para tu comodidad y seguridad:</p>
+                        <ul class="legal-list">
+                            <li>PayPal (procesamiento internacional seguro)</li>
+                            <li>Nequi (transferencias inmediatas en Colombia)</li>
+                            <li>Daviplata (pagos desde tu celular)</li>
+                            <li>Efectivo (en nuestra sede física)</li>
+                        </ul>
+                    </div>
+
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Servicio</th>
+                                <th>Duración</th>
+                                <th>Precio</th>
+                                <th>Modalidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Clases Individuales Acordeón</td>
+                                <td>4 sesiones/mes</td>
+                                <td>$200.000 COP</td>
+                                <td>Presencial/Virtual</td>
+                            </tr>
+                            <tr>
+                                <td>Clases Grupales Vallenato</td>
+                                <td>8 sesiones/mes</td>
+                                <td>$150.000 COP</td>
+                                <td>Presencial</td>
+                            </tr>
+                            <tr>
+                                <td>Taller Intensivo</td>
+                                <td>12 horas</td>
+                                <td>$300.000 COP</td>
+                                <td>Presencial</td>
+                            </tr>
+                            <tr>
+                                <td>Música en Vivo</td>
+                                <td>3 horas</td>
+                                <td>$500.000 COP</td>
+                                <td>Eventos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Cancelaciones y Reembolsos -->
+                <div class="legal-section">
+                    <h2 class="section-title">4. Cancelaciones y Reembolsos</h2>
+                    
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-calendar-times"></i> Política de Cancelación</h4>
+                        <p>Para cancelaciones y reprogramaciones, aplican las siguientes condiciones:</p>
+                        <ul class="legal-list">
+                            <li>Cancelación con 24+ horas de anticipación: Reembolso del 100%</li>
+                            <li>Cancelación con 12-24 horas: Reembolso del 50%</li>
+                            <li>Cancelación con menos de 12 horas: No aplica reembolso</li>
+                            <li>Clases no tomadas: Válidas por 30 días naturales</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box warning">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Condiciones Especiales</h4>
+                        <p>No se realizan reembolsos por:</p>
+                        <ul class="legal-list">
+                            <li>Material didáctico digital entregado</li>
+                            <li>Instrumentos musicales usados o personalizados</li>
+                            <li>Servicios de música en vivo confirmados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Propiedad Intelectual -->
+                <div class="legal-section">
+                    <h2 class="section-title">5. Propiedad Intelectual</h2>
+                    <p class="legal-text">
+                        Todo el material didáctico, métodos de enseñanza, partituras y contenido educativo proporcionado por la Academia del Vallenato Cartagena está protegido por derechos de autor y es para uso exclusivo de nuestros estudiantes durante su formación.
+                    </p>
+                    <p class="legal-text">
+                        Queda prohibida la reproducción, distribución o comercialización del material sin autorización escrita de la academia.
+                    </p>
+                </div>
+
+                <!-- Responsabilidades -->
+                <div class="legal-section">
+                    <h2 class="section-title">6. Responsabilidades del Estudiante</h2>
+                    
+                    <ul class="legal-list">
+                        <li>
+                            <i class="fas fa-user-check list-icon"></i>
+                            <div class="list-content">
+                                <strong>Puntualidad:</strong> Llegar a tiempo a las clases programadas
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-book list-icon"></i>
+                            <div class="list-content">
+                                <strong>Práctica:</strong> Dedicar tiempo fuera de clase para practicar
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-tools list-icon"></i>
+                            <div class="list-content">
+                                <strong>Instrumentos:</strong> Mantener en buen estado los instrumentos propios o alquilados
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-users list-icon"></i>
+                            <div class="list-content">
+                                <strong>Respeto:</strong> Mantener un ambiente de respeto con profesores y compañeros
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Limitación de Responsabilidad -->
+                <div class="legal-section">
+                    <h2 class="section-title">7. Limitación de Responsabilidad</h2>
+                    <p class="legal-text">
+                        La Academia del Vallenato Cartagena no se hace responsable por:
+                    </p>
+                    <ul class="legal-list">
+                        <li>Daños o pérdidas de instrumentos personales</li>
+                        <li>Lesiones durante el uso incorrecto de instrumentos</li>
+                        <li>Resultados de aprendizaje variables entre estudiantes</li>
+                        <li>Eventos de fuerza mayor que impidan la prestación del servicio</li>
+                    </ul>
+                </div>
+
+                <!-- Modificaciones -->
+                <div class="legal-section">
+                    <h2 class="section-title">8. Modificaciones de los Términos</h2>
+                    <p class="legal-text">
+                        Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. Los cambios entrarán en vigor inmediatamente después de su publicación en nuestro sitio web. El uso continuado de nuestros servicios después de dichos cambios constituye su aceptación de los nuevos términos.
+                    </p>
+                </div>
+
+                <!-- Jurisdicción -->
+                <div class="legal-section">
+                    <h2 class="section-title">9. Jurisdicción y Ley Aplicable</h2>
+                    <p class="legal-text">
+                        Estos términos se rigen por las leyes de la República de Colombia. Cualquier disputa relacionada con estos términos o nuestros servicios será resuelta en los tribunales competentes de Cartagena, Bolívar.
+                    </p>
+                </div>
+
+                <!-- Navegación -->
+                <div class="legal-navigation">
+                    <a href="politica-privacidad.html" class="btn btn-outline">
+                        <i class="fas fa-shield-alt"></i> Política de Privacidad
+                    </a>
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-home"></i> Volver al Inicio
+                    </a>
+                </div>
+
+                <!-- Fecha de actualización -->
+                <div class="last-updated">
+                    <i class="fas fa-sync-alt"></i> 
+                    Última actualización: 20 de Enero, 2024
+                </div>
+            </div>
+
+            <!-- Contacto Legal -->
+            <div class="contact-legal">
+                <h3><i class="fas fa-question-circle"></i> ¿Tienes preguntas sobre nuestros términos?</h3>
+                <p>Nuestro equipo legal está disponible para aclarar cualquier duda sobre nuestros servicios y condiciones.</p>
+                <div style="margin-top: 1.5rem;">
+                    <a href="https://wa.me/573006677447?text=Hola,%20tengo%20una%20consulta%20sobre%20los%20términos%20y%20condiciones" 
+                       class="btn whatsapp-confirm" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="40" 
+                             height="40">
+                        <span class="footer-logo-text">Academia del Vallenato</span>
+                    </div>
+                    <p class="footer-description">Formando músicos vallenatos en Cartagena desde 2010</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces Legales</h3>
+                    <ul class="footer-links">
+                        <li><a href="terminos-condiciones.html" class="active">Términos y Condiciones</a></li>
+                        <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="proceso-pago.html">Proceso de Pago</a></li>
+                        <li><a href="confirmacion-pago.html">Confirmación</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Contacto Legal</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+57 300 667 7447</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>legal@academiadelvallenato.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Cartagena, Bolívar, Colombia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">© 2024 Academia del Vallenato Cartagena. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-container">
+        <a href="https://wa.me/573006677447?text=Hola,%20tengo%20una%20consulta%20legal%20sobre%20los%20servicios" 
+           class="whatsapp-float" 
+           target="_blank" 
+           rel="noopener nofollow">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-pulse"></span>
+        </a>
+        <div class="whatsapp-tooltip">
+            Consultas legales +57 300 667 7447
+        </div>
+    </div>
+</body>
+</html>
