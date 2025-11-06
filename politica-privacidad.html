@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - Academia del Vallenato Cartagena</title>
+    <meta name="description" content="Política de privacidad y protección de datos personales para estudiantes y clientes de la Academia del Vallenato en Cartagena.">
+    
+    <!-- Schema.org para Privacy Policy -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Política de Privacidad - Academia del Vallenato Cartagena",
+        "description": "Política de protección de datos personales y privacidad",
+        "publisher": {
+            "@type": "MusicSchool",
+            "name": "Academia del Vallenato Cartagena",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Cartagena",
+                "addressRegion": "Bolívar",
+                "addressCountry": "CO"
+            }
+        }
+    }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .privacy-page {
+            padding: 2rem 0;
+            background: var(--light-color);
+            min-height: 100vh;
+        }
+
+        .privacy-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .privacy-header {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-light);
+            text-align: center;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--whatsapp-color);
+        }
+
+        .privacy-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .privacy-meta {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .privacy-content {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 2rem;
+        }
+
+        .privacy-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .privacy-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .privacy-text {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .privacy-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .privacy-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light-color);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .privacy-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-icon {
+            color: var(--whatsapp-color);
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .list-content {
+            flex: 1;
+        }
+
+        .data-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-category {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .data-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .data-category h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .data-category p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .security-features {
+            background: rgba(37, 211, 102, 0.05);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--whatsapp-color);
+        }
+
+        .rights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .right-item {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--light-color);
+        }
+
+        .right-icon {
+            color: var(--whatsapp-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-privacy {
+            background: var(--dark-color);
+            color: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact-privacy h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .privacy-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--light-color);
+        }
+
+        .last-updated {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .compliance-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .compliance-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+        }
+
+        .compliance-badge i {
+            color: var(--whatsapp-color);
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .privacy-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .privacy-header {
+                padding: 2rem 1.5rem;
+            }
+
+            .privacy-title {
+                font-size: 2rem;
+            }
+
+            .privacy-navigation {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .rights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .data-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .compliance-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .privacy-container {
+                padding: 0 1rem;
+            }
+
+            .privacy-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .privacy-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" aria-label="Academia del Vallenato Cartagena - Página de inicio">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="50" 
+                             height="50">
+                        <span class="logo-text">Academia del Vallenato</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Inicio</a></li>
+                        <li><a href="clases.html" class="nav-link">Clases</a></li>
+                        <li><a href="instrumentos.html" class="nav-link">Instrumentos</a></li>
+                        <li><a href="proceso-pago.html" class="nav-link">Pagar</a></li>
+                        <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="https://wa.me/573006677447" 
+                       class="btn-whatsapp-header" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="privacy-page">
+        <div class="privacy-container">
+            <!-- Encabezado -->
+            <div class="privacy-header">
+                <h1 class="privacy-title">Política de Privacidad</h1>
+                <p class="privacy-meta">
+                    <i class="fas fa-shield-alt"></i> 
+                    Protección y tratamiento de datos personales
+                </p>
+            </div>
+
+            <!-- Contenido de Privacidad -->
+            <div class="privacy-content">
+                <!-- Introducción -->
+                <div class="privacy-section">
+                    <h2 class="section-title">1. Introducción</h2>
+                    <p class="privacy-text">
+                        En la Academia del Vallenato Cartagena, valoramos y respetamos tu privacidad. Esta política describe cómo recopilamos, usamos, protegemos y compartimos tu información personal cuando utilizas nuestros servicios educativos musicales.
+                    </p>
+                    <p class="privacy-text">
+                        Nos regimos por la Ley 1581 de 2012 de Protección de Datos Personales de Colombia y nos comprometemos a manejar tu información de manera responsable y transparente.
+                    </p>
+                </div>
+
+                <!-- Información Recopilada -->
+                <div class="privacy-section">
+                    <h2 class="section-title">2. Información que Recopilamos</h2>
+                    
+                    <div class="data-categories">
+                        <div class="data-category">
+                            <i class="fas fa-user data-icon"></i>
+                            <h4>Datos Personales</h4>
+                            <p>Nombre, documento, contacto, dirección y datos demográficos</p>
+                        </div>
+                        <div class="data-category">
+                            <i class="fas fa-graduation-cap data-icon"></i>
+                            <h4>Datos Académicos</h4>
+                            <p>Nivel musical, progreso, asistencia y evaluaciones</p>
+                        </div>
+                        <div class="data-category">
+                            <i class="fas fa-credit-card data-icon"></i>
+                            <h4>Datos de Pago</h4>
+                            <p>Información de transacciones y métodos de pago</p>
+                        </div>
+                    </div>
+
+                    <p class="privacy-text">
+                        Recopilamos información a través de:
+                    </p>
+                    <ul class="privacy-list">
+                        <li>
+                            <i class="fas fa-edit list-icon"></i>
+                            <div class="list-content">
+                                <strong>Formularios de inscripción</strong> en nuestro sitio web
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-comments list-icon"></i>
+                            <div class="list-content">
+                                <strong>Comunicaciones</strong> por WhatsApp, email o teléfono
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-shopping-cart list-icon"></i>
+                            <div class="list-content">
+                                <strong>Procesos de compra</strong> de instrumentos y servicios
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-line list-icon"></i>
+                            <div class="list-content">
+                                <strong>Interacciones</strong> con nuestro sitio web y servicios
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Uso de la Información -->
+                <div class="privacy-section">
+                    <h2 class="section-title">3. Uso de la Información</h2>
+                    <p class="privacy-text">
+                        Utilizamos tu información personal para los siguientes fines:
+                    </p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <i class="fas fa-rocket list-icon"></i>
+                            <div class="list-content">
+                                <strong>Prestación de servicios educativos</strong> personalizados
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-bell list-icon"></i>
+                            <div class="list-content">
+                                <strong>Comunicaciones importantes</strong> sobre tu formación musical
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-bar list-icon"></i>
+                            <div class="list-content">
+                                <strong>Mejora continua</strong> de nuestros programas educativos
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-shield-alt list-icon"></i>
+                            <div class="list-content">
+                                <strong>Cumplimiento legal</strong> y regulatorio aplicable
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Protección de Datos -->
+                <div class="privacy-section">
+                    <h2 class="section-title">4. Protección de Datos</h2>
+                    
+                    <div class="security-features">
+                        <h4><i class="fas fa-lock"></i> Medidas de Seguridad Implementadas</h4>
+                        <p>Hemos establecido protocolos robustos para proteger tu información:</p>
+                        <ul class="privacy-list">
+                            <li>Encriptación SSL en todas las transacciones</li>
+                            <li>Acceso restringido a datos sensibles</li>
+                            <li>Copias de seguridad seguras y periódicas</li>
+                            <li>Capacitación continua del personal en protección de datos</li>
+                        </ul>
+                    </div>
+
+                    <div class="compliance-badges">
+                        <div class="compliance-badge">
+                            <i class="fas fa-user-shield"></i>
+                            <div>
+                                <strong>Ley 1581 de 2012</strong>
+                                <div>Protección Datos Colombia</div>
+                            </div>
+                        </div>
+                        <div class="compliance-badge">
+                            <i class="fas fa-lock"></i>
+                            <div>
+                                <strong>SSL Encriptado</strong>
+                                <div>Comunicaciones Seguras</div>
+                            </div>
+                        </div>
+                        <div class="compliance-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <strong>Políticas Internas</strong>
+                                <div>Protección de Información</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Derechos del Titular -->
+                <div class="privacy-section">
+                    <h2 class="section-title">5. Tus Derechos</h2>
+                    <p class="privacy-text">
+                        Como titular de tus datos personales, tienes derecho a:
+                    </p>
+                    
+                    <div class="rights-grid">
+                        <div class="right-item">
+                            <i class="fas fa-eye right-icon"></i>
+                            <h4>Acceso</h4>
+                            <p>Conocer la información que tenemos sobre ti y cómo la utilizamos</p>
+                        </div>
+                        <div class="right-item">
+                            <i class="fas fa-edit right-icon"></i>
+                            <h4>Rectificación</h4>
+                            <p>Solicitar la corrección de información inexacta o incompleta</p>
+                        </div>
+                        <div class="right-item">
+                            <i class="fas fa-trash-alt right-icon"></i>
+                            <h4>Supresión</h4>
+                            <p>Solicitar la eliminación de tu información personal cuando aplique</p>
+                        </div>
+                        <div class="right-item">
+                            <i class="fas fa-ban right-icon"></i>
+                            <h4>Revocación</h4>
+                            <p>Revocar el consentimiento para el tratamiento de tus datos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cookies y Tecnologías Similares -->
+                <div class="privacy-section">
+                    <h2 class="section-title">6. Cookies y Tecnologías Similares</h2>
+                    <p class="privacy-text">
+                        Utilizamos cookies y tecnologías similares para mejorar tu experiencia en nuestro sitio web:
+                    </p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <i class="fas fa-cookie list-icon"></i>
+                            <div class="list-content">
+                                <strong>Cookies Esenciales:</strong> Necesarias para el funcionamiento básico del sitio
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-chart-pie list-icon"></i>
+                            <div class="list-content">
+                                <strong>Cookies Analíticas:</strong> Nos ayudan a entender cómo usas nuestro sitio
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-bullseye list-icon"></i>
+                            <div class="list-content">
+                                <strong>Cookies de Preferencias:</strong> Recuerdan tus configuraciones y elecciones
+                            </div>
+                        </li>
+                    </ul>
+
+                    <p class="privacy-text">
+                        Puedes gestionar tus preferencias de cookies a través de la configuración de tu navegador.
+                    </p>
+                </div>
+
+                <!-- Compartición de Información -->
+                <div class="privacy-section">
+                    <h2 class="section-title">7. Compartición de Información</h2>
+                    <p class="privacy-text">
+                        No vendemos, comerciamos ni transferimos tu información personal a terceros, excepto en los siguientes casos:
+                    </p>
+                    
+                    <ul class="privacy-list">
+                        <li>Proveedores de servicios que nos ayudan a operar nuestro negocio</li>
+                        <li>Cumplimiento de requisitos legales o regulatorios</li>
+                        <li>Protección de nuestros derechos, propiedad o seguridad</li>
+                        <li>Con tu consentimiento explícito</li>
+                    </ul>
+                </div>
+
+                <!-- Retención de Datos -->
+                <div class="privacy-section">
+                    <h2 class="section-title">8. Retención de Datos</h2>
+                    <p class="privacy-text">
+                        Conservamos tu información personal solo durante el tiempo necesario para cumplir con los fines descritos en esta política, a menos que la ley requiera o permita un período de retención más largo.
+                    </p>
+                    <p class="privacy-text">
+                        Los datos académicos se conservan por 5 años después de tu última interacción con nosotros, para fines de certificación y referencias.
+                    </p>
+                </div>
+
+                <!-- Cambios en la Política -->
+                <div class="privacy-section">
+                    <h2 class="section-title">9. Cambios en la Política</h2>
+                    <p class="privacy-text">
+                        Podemos actualizar esta política de privacidad periódicamente para reflejar cambios en nuestras prácticas o por otros motivos operativos, legales o regulatorios. Te notificaremos sobre cambios materiales mediante un aviso en nuestro sitio web.
+                    </p>
+                </div>
+
+                <!-- Contacto -->
+                <div class="privacy-section">
+                    <h2 class="section-title">10. Contacto</h2>
+                    <p class="privacy-text">
+                        Si tienes preguntas, inquietudes o quieres ejercer tus derechos sobre protección de datos, contáctanos:
+                    </p>
+                    
+                    <ul class="privacy-list">
+                        <li>
+                            <i class="fas fa-envelope list-icon"></i>
+                            <div class="list-content">
+                                <strong>Email:</strong> privacidad@academiadelvallenato.com
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone list-icon"></i>
+                            <div class="list-content">
+                                <strong>Teléfono:</strong> +57 300 667 7447
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt list-icon"></i>
+                            <div class="list-content">
+                                <strong>Dirección:</strong> Centro Histórico, Cartagena, Bolívar
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Navegación -->
+                <div class="privacy-navigation">
+                    <a href="terminos-condiciones.html" class="btn btn-outline">
+                        <i class="fas fa-file-contract"></i> Términos y Condiciones
+                    </a>
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-home"></i> Volver al Inicio
+                    </a>
+                </div>
+
+                <!-- Fecha de actualización -->
+                <div class="last-updated">
+                    <i class="fas fa-sync-alt"></i> 
+                    Última actualización: 20 de Enero, 2024
+                </div>
+            </div>
+
+            <!-- Contacto Privacidad -->
+            <div class="contact-privacy">
+                <h3><i class="fas fa-user-shield"></i> ¿Ejercer tus derechos de protección de datos?</h3>
+                <p>Nuestro oficial de protección de datos está disponible para atender tus solicitudes sobre tu información personal.</p>
+                <div style="margin-top: 1.5rem;">
+                    <a href="https://wa.me/573006677447?text=Hola,%20quiero%20ejercer%20mis%20derechos%20de%20protección%20de%20datos%20personales" 
+                       class="btn whatsapp-confirm" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i> Contactar Oficial de Datos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="40" 
+                             height="40">
+                        <span class="footer-logo-text">Academia del Vallenato</span>
+                    </div>
+                    <p class="footer-description">Protegiendo tus datos desde 2010</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces Legales</h3>
+                    <ul class="footer-links">
+                        <li><a href="terminos-condiciones.html">Términos y Condiciones</a></li>
+                        <li><a href="politica-privacidad.html" class="active">Política de Privacidad</a></li>
+                        <li><a href="proceso-pago.html">Proceso de Pago</a></li>
+                        <li><a href="confirmacion-pago.html">Confirmación</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Contacto Privacidad</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Oficial de Protección de Datos</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>privacidad@academiadelvallenato.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+57 300 667 7447</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">© 2024 Academia del Vallenato Cartagena. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-container">
+        <a href="https://wa.me/573006677447?text=Hola,%20tengo%20una%20consulta%20sobre%20protección%20de%20datos%20personales" 
+           class="whatsapp-float" 
+           target="_blank" 
+           rel="noopener nofollow">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-pulse"></span>
+        </a>
+        <div class="whatsapp-tooltip">
+            Consultas de privacidad +57 300 667 7447
+        </div>
+    </div>
+</body>
+</html>
