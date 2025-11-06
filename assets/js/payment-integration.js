@@ -1,7 +1,7 @@
-// payment-integration.js - Archivo completo optimizado
+// payment-integration.js - Sistema de pagos optimizado con seguridad avanzada
 
 // =============================================
-// SECCIÓN DE SEGURIDAD - DataSecurity Class
+// SISTEMA DE SEGURIDAD AVANZADO
 // =============================================
 class DataSecurity {
     constructor() {
@@ -101,7 +101,7 @@ class DataSecurity {
 }
 
 // =============================================
-// SECCIÓN DE VALIDACIÓN MEJORADA - FormValidator Class
+// SISTEMA DE VALIDACIÓN MEJORADO
 // =============================================
 class FormValidator {
     constructor() {
@@ -265,7 +265,109 @@ class FormValidator {
 }
 
 // =============================================
-// CLASE PRINCIPAL - PaymentIntegration
+// SISTEMA DE RATE LIMITING
+// =============================================
+class RateLimiter {
+    constructor(maxAttempts = 5, timeWindow = 900000) {
+        this.maxAttempts = maxAttempts;
+        this.timeWindow = timeWindow;
+    }
+    
+    checkLimit(action) {
+        const now = Date.now();
+        const attempts = JSON.parse(localStorage.getItem(`rate_limit_${action}`) || '[]');
+        
+        // Limpiar intentos antiguos
+        const recentAttempts = attempts.filter(time => now - time < this.timeWindow);
+        
+        if (recentAttempts.length >= this.maxAttempts) {
+            return false;
+        }
+        
+        // Registrar nuevo intento
+        recentAttempts.push(now);
+        localStorage.setItem(`rate_limit_${action}`, JSON.stringify(recentAttempts));
+        return true;
+    }
+    
+    getRemainingTime(action) {
+        const attempts = JSON.parse(localStorage.getItem(`rate_limit_${action}`) || '[]');
+        const now = Date.now();
+        const recentAttempts = attempts.filter(time => now - time < this.timeWindow);
+        
+        if (recentAttempts.length === 0) return 0;
+        
+        const oldestAttempt = Math.min(...recentAttempts);
+        return this.timeWindow - (now - oldestAttempt);
+    }
+}
+
+// =============================================
+// SISTEMA DE SANITIZACIÓN
+// =============================================
+class InputSanitizer {
+    static sanitizeHTML(input) {
+        const div = document.createElement('div');
+        div.textContent = input;
+        return div.innerHTML;
+    }
+    
+    static sanitizeSQL(input) {
+        return input.replace(/'/g, "''").replace(/;/g, '');
+    }
+    
+    static sanitizeEmail(email) {
+        return email.toLowerCase().trim().replace(/[^a-z0-9@._-]/g, '');
+    }
+    
+    static sanitizePhone(phone) {
+        return phone.replace(/\D/g, '').substring(0, 15);
+    }
+    
+    static sanitizeBasedOnType(field, value) {
+        switch(field.type) {
+            case 'email':
+                return this.sanitizeEmail(value);
+            case 'tel':
+                return this.sanitizePhone(value);
+            case 'text':
+                return this.sanitizeHTML(value);
+            default:
+                return this.sanitizeHTML(value);
+        }
+    }
+}
+
+// =============================================
+// SISTEMA DE PROTECCIÓN CSRF
+// =============================================
+class CSRFProtection {
+    static getToken() {
+        let token = localStorage.getItem('csrf_token');
+        if (!token) {
+            token = this.generateToken();
+            localStorage.setItem('csrf_token', token);
+        }
+        return token;
+    }
+    
+    static generateToken() {
+        return 'csrf_' + Math.random().toString(36).substring(2) + Date.now().toString(36);
+    }
+    
+    static addToForms() {
+        document.querySelectorAll('form').forEach(form => {
+            const tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = 'csrf_token';
+            tokenInput.value = this.getToken();
+            form.appendChild(tokenInput);
+        });
+    }
+}
+
+// =============================================
+// CLASE PRINCIPAL DE PAGOS OPTIMIZADA
 // =============================================
 class PaymentIntegration {
     constructor() {
@@ -277,6 +379,7 @@ class PaymentIntegration {
         };
         this.dataSecurity = new DataSecurity();
         this.formValidator = new FormValidator();
+        this.rateLimiter = new RateLimiter();
         this.init();
     }
 
@@ -284,6 +387,23 @@ class PaymentIntegration {
         this.setupEventListeners();
         this.loadPayPalSDK();
         this.initializeStats();
+        this.setupSecurityFeatures();
+    }
+
+    setupSecurityFeatures() {
+        // Aplicar protección CSRF
+        CSRFProtection.addToForms();
+        
+        // Configurar sanitización en tiempo real
+        this.setupInputSanitization();
+    }
+
+    setupInputSanitization() {
+        document.addEventListener('input', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                e.target.value = InputSanitizer.sanitizeBasedOnType(e.target, e.target.value);
+            }
+        });
     }
 
     setupEventListeners() {
@@ -294,14 +414,27 @@ class PaymentIntegration {
     }
 
     loadPayPalSDK() {
+        // Verificar que no se cargue múltiples veces
+        if (document.querySelector('script[src*="paypal.com/sdk/js"]')) {
+            this.initializePayPal();
+            return;
+        }
+
         const script = document.createElement('script');
         script.src = `https://www.paypal.com/sdk/js?client-id=${this.paypalClientId}&currency=COP`;
         script.addEventListener('load', () => this.initializePayPal());
+        script.addEventListener('error', () => {
+            console.error('Error cargando PayPal SDK');
+            this.handlePaymentError('paypal', new Error('No se pudo cargar el SDK de PayPal'));
+        });
         document.head.appendChild(script);
     }
 
     initializePayPal() {
-        if (typeof paypal == 'undefined') return;
+        if (typeof paypal == 'undefined') {
+            console.error('PayPal SDK no está disponible');
+            return;
+        }
         
         try {
             paypal.Buttons({
@@ -312,6 +445,10 @@ class PaymentIntegration {
                     label: 'paypal'
                 },
                 createOrder: (data, actions) => {
+                    if (!this.rateLimiter.checkLimit('paypal_payment')) {
+                        throw new Error('Demasiados intentos de pago. Por favor espere.');
+                    }
+
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
@@ -328,6 +465,8 @@ class PaymentIntegration {
                 onApprove: (data, actions) => {
                     return actions.order.capture().then(details => {
                         this.handlePayPalSuccess(details);
+                    }).catch(error => {
+                        this.handlePaymentError('paypal', error);
                     });
                 },
                 onError: (err) => {
@@ -339,6 +478,7 @@ class PaymentIntegration {
             }).render('#paypal-button-container');
         } catch (error) {
             console.error('Error initializing PayPal:', error);
+            this.handlePaymentError('paypal', error);
         }
     }
 
@@ -404,7 +544,9 @@ class PaymentIntegration {
         
         const qrContainer = document.getElementById(`${method}-qr-code`);
         if (qrContainer) {
-            qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code ${method}" class="qr-code">`;
+            // Agregar timestamp para evitar cache
+            const timestamp = Date.now();
+            qrContainer.innerHTML = `<img src="${qrUrl}&t=${timestamp}" alt="QR Code ${method}" class="qr-code" loading="lazy">`;
         }
     }
 
@@ -434,9 +576,21 @@ class PaymentIntegration {
     }
 
     async processPayment(method, data) {
+        // Verificar rate limiting
+        if (!this.rateLimiter.checkLimit('payment_attempt')) {
+            const remainingTime = this.rateLimiter.getRemainingTime('payment_attempt');
+            this.showErrorNotification(`Demasiados intentos. Espere ${Math.ceil(remainingTime / 60000)} minutos.`);
+            return;
+        }
+
         this.showLoading();
         
         try {
+            // Validar datos antes del procesamiento
+            if (!this.validatePaymentData(data)) {
+                throw new Error('Datos de pago inválidos');
+            }
+
             switch (method) {
                 case 'paypal':
                     await this.processPayPalPayment(data);
@@ -460,32 +614,57 @@ class PaymentIntegration {
         }
     }
 
+    validatePaymentData(data) {
+        // Validaciones básicas de datos de pago
+        if (!data || typeof data !== 'object') return false;
+        
+        // Aquí puedes agregar más validaciones específicas
+        return true;
+    }
+
     async processPayPalPayment(data) {
-        return new Promise(resolve => {
-            setTimeout(resolve, 1000);
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // Simular procesamiento de pago
+                if (Math.random() > 0.1) { // 90% de éxito
+                    resolve();
+                } else {
+                    reject(new Error('Error simulado en procesamiento PayPal'));
+                }
+            }, 1000);
         });
     }
 
     async processNequiPayment(data) {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
                 this.generateNequiInstructions(data);
-                resolve();
+                if (Math.random() > 0.1) { // 90% de éxito
+                    resolve();
+                } else {
+                    reject(new Error('Error simulado en procesamiento Nequi'));
+                }
             }, 1500);
         });
     }
 
     async processDaviplataPayment(data) {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
                 this.generateDaviplataInstructions(data);
-                resolve();
+                if (Math.random() > 0.1) { // 90% de éxito
+                    resolve();
+                } else {
+                    reject(new Error('Error simulado en procesamiento Daviplata'));
+                }
             }, 1500);
         });
     }
 
     generateNequiInstructions(data) {
         const amount = this.getOrderTotal();
+        const sanitizedAmount = InputSanitizer.sanitizeHTML(this.formatCurrency(amount));
+        
         const instructions = `
             <div class="payment-instructions">
                 <h4><i class="fas fa-mobile-alt"></i> Instrucciones para Pagar con Nequi</h4>
@@ -504,7 +683,7 @@ class PaymentIntegration {
                     </div>
                     <div class="step">
                         <span class="step-number">4</span>
-                        <span>Monto: <strong>$${this.formatCurrency(amount)} COP</strong></span>
+                        <span>Monto: <strong>$${sanitizedAmount} COP</strong></span>
                     </div>
                     <div class="step">
                         <span class="step-number">5</span>
@@ -517,7 +696,10 @@ class PaymentIntegration {
                 </div>
                 <div class="whatsapp-confirmation">
                     <p>Envía comprobante por WhatsApp:</p>
-                    <a href="https://wa.me/573006677447?text=Hola,%20acabo%20de%20realizar%20un%20pago%20por%20Nequi%20por%20valor%20de%20${amount}%20COP%20para%20las%20clases%20de%20vallenato" class="btn whatsapp-confirm" target="_blank">
+                    <a href="https://wa.me/573006677447?text=${encodeURIComponent(`Hola, acabo de realizar un pago por Nequi por valor de ${amount} COP para las clases de vallenato`)}" 
+                       class="btn whatsapp-confirm" 
+                       target="_blank"
+                       rel="noopener nofollow">
                         <i class="fab fa-whatsapp"></i> Enviar Comprobante
                     </a>
                 </div>
@@ -529,6 +711,8 @@ class PaymentIntegration {
 
     generateDaviplataInstructions(data) {
         const amount = this.getOrderTotal();
+        const sanitizedAmount = InputSanitizer.sanitizeHTML(this.formatCurrency(amount));
+        
         const instructions = `
             <div class="payment-instructions">
                 <h4><i class="fas fa-wallet"></i> Instrucciones para Pagar con Daviplata</h4>
@@ -547,7 +731,7 @@ class PaymentIntegration {
                     </div>
                     <div class="step">
                         <span class="step-number">4</span>
-                        <span>Monto: <strong>$${this.formatCurrency(amount)} COP</strong></span>
+                        <span>Monto: <strong>$${sanitizedAmount} COP</strong></span>
                     </div>
                     <div class="step">
                         <span class="step-number">5</span>
@@ -560,7 +744,10 @@ class PaymentIntegration {
                 </div>
                 <div class="whatsapp-confirmation">
                     <p>Envía comprobante por WhatsApp:</p>
-                    <a href="https://wa.me/573006677447?text=Hola,%20acabo%20de%20realizar%20un%20pago%20por%20Daviplata%20por%20valor%20de%20${amount}%20COP%20para%20las%20clases%20de%20vallenato" class="btn whatsapp-confirm" target="_blank">
+                    <a href="https://wa.me/573006677447?text=${encodeURIComponent(`Hola, acabo de realizar un pago por Daviplata por valor de ${amount} COP para las clases de vallenato`)}" 
+                       class="btn whatsapp-confirm" 
+                       target="_blank"
+                       rel="noopener nofollow">
                         <i class="fab fa-whatsapp"></i> Enviar Comprobante
                     </a>
                 </div>
@@ -576,7 +763,10 @@ class PaymentIntegration {
             container = document.createElement('div');
             container.id = 'payment-instructions-container';
             container.className = 'payment-instructions-container';
-            document.querySelector('.payment-details.active').appendChild(container);
+            const activeDetails = document.querySelector('.payment-details.active');
+            if (activeDetails) {
+                activeDetails.appendChild(container);
+            }
         }
         
         container.innerHTML = instructions;
@@ -584,27 +774,51 @@ class PaymentIntegration {
     }
 
     handlePayPalSuccess(details) {
-        const orderData = {
-            paymentMethod: 'paypal',
-            transactionId: details.id,
-            payer: details.payer,
-            amount: this.getOrderTotal(),
-            status: 'completed',
-            timestamp: new Date().toISOString()
-        };
+        try {
+            const orderData = {
+                paymentMethod: 'paypal',
+                transactionId: details.id,
+                payer: this.sanitizePayerData(details.payer),
+                amount: this.getOrderTotal(),
+                status: 'completed',
+                timestamp: new Date().toISOString()
+            };
+            
+            this.saveOrderData(orderData);
+            this.redirectToConfirmation('success', 'paypal');
+            this.trackEvent('payment_success', { 
+                method: 'paypal', 
+                transactionId: details.id, 
+                amount: this.getOrderTotal() 
+            });
+        } catch (error) {
+            console.error('Error procesando éxito de PayPal:', error);
+            this.handlePaymentError('paypal', error);
+        }
+    }
+
+    sanitizePayerData(payer) {
+        // Sanitizar datos sensibles del pagador
+        if (!payer) return null;
         
-        this.saveOrderData(orderData);
-        this.redirectToConfirmation('success', 'paypal');
-        this.trackEvent('payment_success', { 
-            method: 'paypal', 
-            transactionId: details.id, 
-            amount: this.getOrderTotal() 
-        });
+        return {
+            name: payer.name ? {
+                given_name: InputSanitizer.sanitizeHTML(payer.name.given_name || ''),
+                surname: InputSanitizer.sanitizeHTML(payer.name.surname || '')
+            } : null,
+            email_address: InputSanitizer.sanitizeEmail(payer.email_address || '')
+        };
     }
 
     handlePaymentError(method, error) {
         console.error(`Payment error (${method}):`, error);
-        this.showErrorNotification(`Error en el pago con ${method}. Por favor intenta nuevamente.`);
+        
+        // No mostrar detalles internos al usuario
+        const userMessage = error.message.includes('simulado') 
+            ? `Error en el pago con ${method}. Por favor intenta nuevamente.`
+            : `Error en el pago con ${method}. Por favor intenta nuevamente.`;
+            
+        this.showErrorNotification(userMessage);
         this.trackEvent('payment_error', { method: method, error: error.message });
     }
 
@@ -614,7 +828,7 @@ class PaymentIntegration {
         notification.innerHTML = `
             <div class="error-content">
                 <i class="fas fa-exclamation-triangle"></i>
-                <span>${message}</span>
+                <span>${InputSanitizer.sanitizeHTML(message)}</span>
                 <button class="close-error">&times;</button>
             </div>
         `;
@@ -628,7 +842,9 @@ class PaymentIntegration {
         }, 5000);
         
         notification.querySelector('.close-error').addEventListener('click', () => {
-            notification.parentNode.removeChild(notification);
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
         });
     }
 
@@ -671,12 +887,17 @@ class PaymentIntegration {
     }
 
     getCustomerData() {
+        const getValue = (id) => {
+            const element = document.getElementById(id);
+            return element ? InputSanitizer.sanitizeHTML(element.value) : '';
+        };
+
         return {
-            firstName: document.getElementById('firstName')?.value || '',
-            lastName: document.getElementById('lastName')?.value || '',
-            email: document.getElementById('email')?.value || '',
-            phone: document.getElementById('phone')?.value || '',
-            address: document.getElementById('address')?.value || ''
+            firstName: getValue('firstName'),
+            lastName: getValue('lastName'),
+            email: getValue('email'),
+            phone: getValue('phone'),
+            address: getValue('address')
         };
     }
 
@@ -689,13 +910,23 @@ class PaymentIntegration {
     }
 
     redirectToConfirmation(status, method) {
-        const orderId = this.saveOrderData({
-            paymentMethod: method,
-            status: status,
-            amount: this.getOrderTotal()
-        });
-        
-        window.location.href = `confirmacion-pago.html?status=${status}&method=${method}&order=${orderId}`;
+        try {
+            const orderId = this.saveOrderData({
+                paymentMethod: method,
+                status: status,
+                amount: this.getOrderTotal()
+            });
+            
+            // Sanitizar parámetros de URL
+            const sanitizedStatus = encodeURIComponent(status);
+            const sanitizedMethod = encodeURIComponent(method);
+            const sanitizedOrder = encodeURIComponent(orderId);
+            
+            window.location.href = `confirmacion-pago.html?status=${sanitizedStatus}&method=${sanitizedMethod}&order=${sanitizedOrder}`;
+        } catch (error) {
+            console.error('Error en redirección:', error);
+            this.showErrorNotification('Error procesando tu pago. Por favor contacta soporte.');
+        }
     }
 
     formatCurrency(amount) {
@@ -705,14 +936,26 @@ class PaymentIntegration {
     }
 
     trackEvent(eventName, data) {
-        window.statsSystem && window.statsSystem.trackEvent(eventName, data);
-        typeof gtag !== 'undefined' && gtag('event', eventName, data);
+        if (window.statsSystem) {
+            window.statsSystem.trackEvent(eventName, data);
+        }
+        if (typeof gtag !== 'undefined') {
+            gtag('event', eventName, data);
+        }
         console.log('Event tracked:', eventName, data);
+    }
+
+    // Método para limpiar datos sensibles
+    clearSensitiveData() {
+        this.dataSecurity.clearSecureData('lastOrder');
+        this.dataSecurity.clearSecureData('userData');
+        localStorage.removeItem('avx_encryption_key');
+        localStorage.removeItem('avx_data_saved_time');
     }
 }
 
 // =============================================
-// ESTILOS CSS COMPLETOS
+// ESTILOS CSS MEJORADOS
 // =============================================
 const paymentStyles = `
 .payment-loading {
@@ -726,6 +969,7 @@ const paymentStyles = `
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    backdrop-filter: blur(5px);
 }
 
 .loading-spinner {
@@ -734,13 +978,14 @@ const paymentStyles = `
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 2px solid #d4af37;
 }
 
 .spinner {
     width: 50px;
     height: 50px;
     border: 5px solid #f3f3f3;
-    border-left: 5px solid #d4af37;
+    border-top: 5px solid #d4af37;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: 0 auto 1rem;
@@ -762,6 +1007,7 @@ const paymentStyles = `
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 10000;
     max-width: 400px;
+    border-left: 4px solid #ff6b6b;
 }
 
 .error-content {
@@ -777,6 +1023,13 @@ const paymentStyles = `
     font-size: 1.2rem;
     cursor: pointer;
     margin-left: auto;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close-error:hover {
+    background: rgba(255,255,255,0.1);
 }
 
 .payment-instructions-container {
@@ -785,6 +1038,7 @@ const paymentStyles = `
     background: #f8f9fa;
     border-radius: 8px;
     border-left: 4px solid #25D366;
+    border: 1px solid #e9ecef;
 }
 
 .instruction-steps {
@@ -801,6 +1055,12 @@ const paymentStyles = `
     padding: .75rem;
     background: #fff;
     border-radius: 6px;
+    border: 1px solid #dee2e6;
+    transition: transform 0.2s ease;
+}
+
+.step:hover {
+    transform: translateX(5px);
 }
 
 .step-number {
@@ -819,6 +1079,10 @@ const paymentStyles = `
 .qr-container {
     text-align: center;
     margin: 1.5rem 0;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
 }
 
 .qr-code {
@@ -828,6 +1092,7 @@ const paymentStyles = `
     border-radius: 8px;
     padding: 1rem;
     background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .whatsapp-confirmation {
@@ -838,11 +1103,13 @@ const paymentStyles = `
 }
 
 .form-control.error {
-    border-color: #c44536;
+    border-color: #c44536 !important;
+    background-color: #fff5f5;
 }
 
 .form-control.success {
-    border-color: #25D366;
+    border-color: #25D366 !important;
+    background-color: #f0fff4;
 }
 
 .error-message {
@@ -852,6 +1119,10 @@ const paymentStyles = `
     color: #c44536;
     font-size: .875rem;
     margin-top: .25rem;
+    padding: 0.5rem;
+    background: #fff5f5;
+    border-radius: 4px;
+    border-left: 3px solid #c44536;
 }
 
 .form-notification {
@@ -866,10 +1137,12 @@ const paymentStyles = `
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 10000;
     max-width: 400px;
+    border-left: 4px solid #ff6b6b;
 }
 
 .form-notification.success {
     background: #25D366;
+    border-left-color: #20c997;
 }
 
 .notification-content {
@@ -885,15 +1158,98 @@ const paymentStyles = `
     font-size: 1.2rem;
     cursor: pointer;
     margin-left: auto;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close-notification:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Mejoras de seguridad visual */
+.security-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: #495057;
+}
+
+.security-badge i {
+    color: #25D366;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .payment-error-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .form-notification {
+        left: 10px;
+        right: 10px;
+        transform: none;
+        max-width: none;
+    }
+    
+    .step {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .qr-code {
+        max-width: 150px;
+    }
 }
 `;
 
-// Aplicar estilos al documento
-const styleSheet = document.createElement('style');
-styleSheet.textContent = paymentStyles;
-document.head.appendChild(styleSheet);
+// Inyectar estilos de forma segura
+const injectStyles = () => {
+    if (!document.getElementById('payment-integration-styles')) {
+        const styleSheet = document.createElement('style');
+        styleSheet.id = 'payment-integration-styles';
+        styleSheet.textContent = paymentStyles;
+        document.head.appendChild(styleSheet);
+    }
+};
 
-// Inicializar el sistema de pagos
-document.addEventListener('DOMContentLoaded', () => {
-    window.paymentSystem = new PaymentIntegration();
-});
+// Inicialización segura del sistema de pagos
+const initializePaymentSystem = () => {
+    try {
+        // Verificar que estamos en un entorno seguro
+        if (window.self !== window.top) {
+            console.warn('Payment system loaded in iframe - security restrictions may apply');
+        }
+
+        // Inyectar estilos
+        injectStyles();
+
+        // Inicializar sistema de pagos
+        window.paymentSystem = new PaymentIntegration();
+        
+        console.log('✅ Payment Integration System - Inicializado con seguridad mejorada');
+    } catch (error) {
+        console.error('❌ Error inicializando sistema de pagos:', error);
+    }
+};
+
+// Inicializar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePaymentSystem);
+} else {
+    initializePaymentSystem();
+}
+
+// Exportar para uso en otros módulos
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { PaymentIntegration, DataSecurity, FormValidator };
+}
