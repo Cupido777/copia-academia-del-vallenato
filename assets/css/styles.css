@@ -1,6 +1,6 @@
 /* ===============================================
    ACADEMIA DEL VALLENATO CARTAGENA - STYLES OPTIMIZADOS
-   Versión: 2.0 | Optimizado para GitHub Pages
+   Versión: 3.0 | Con integraciones de pago y WhatsApp
    =============================================== */
 
 /* === VARIABLES CSS === */
@@ -15,6 +15,12 @@
   --text-light: #777777;
   --white: #ffffff;
   --black: #000000;
+  
+  /* Colores de pagos */
+  --paypal-color: #0070ba;
+  --nequi-color: #7200a1;
+  --daviplata-color: #00a859;
+  --whatsapp-color: #25D366;
   
   /* Tipografía */
   --font-primary: 'Montserrat', sans-serif;
@@ -186,6 +192,50 @@ img {
   justify-content: center;
 }
 
+/* === BOTONES DE WHATSAPP MEJORADOS === */
+.btn-whatsapp {
+  background: var(--whatsapp-color);
+  color: var(--white);
+  border-color: var(--whatsapp-color);
+}
+
+.btn-whatsapp:hover {
+  background: #128C7E;
+  border-color: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.btn-whatsapp-light {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.btn-whatsapp-light:hover {
+  background: var(--whatsapp-color);
+  color: var(--white);
+  border-color: var(--whatsapp-color);
+}
+
+.btn-whatsapp-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--whatsapp-color);
+  color: var(--white);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.btn-whatsapp-header:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+}
+
 /* === HEADER Y NAVEGACIÓN === */
 .header {
   position: fixed;
@@ -255,6 +305,22 @@ img {
 .nav-link:hover::after,
 .nav-link.active::after {
   width: 100%;
+}
+
+.nav-highlight {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  margin-left: 1rem;
+}
+
+.nav-highlight:hover {
+  background: #c19b2a;
+}
+
+.nav-highlight::after {
+  display: none;
 }
 
 .header-actions {
@@ -403,6 +469,28 @@ img {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* === TRUST BADGES EN HERO === */
+.trust-badges {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.trust-badge i {
+  color: var(--primary-color);
+  font-size: 1.2rem;
 }
 
 .hero-scroll {
@@ -464,6 +552,10 @@ img {
 .section-actions {
   text-align: center;
   margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* === SECCIÓN ABOUT === */
@@ -483,11 +575,47 @@ img {
   margin-top: 0;
 }
 
-.about-img {
+.achievements {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.achievement-item {
+  text-align: center;
+  padding: 1rem;
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+}
+
+.achievement-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.achievement-text {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.about-image {
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-heavy);
+  overflow: hidden;
+}
+
+.about-image img {
   width: 100%;
   height: auto;
+  transition: transform var(--transition-slow);
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
 }
 
 /* === SECCIÓN SERVICIOS === */
@@ -504,6 +632,24 @@ img {
   box-shadow: var(--shadow-light);
   transition: all var(--transition-fast);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transition: transform var(--transition-fast);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
 }
 
 .service-card:hover {
@@ -534,6 +680,16 @@ img {
   margin-bottom: 1.5rem;
 }
 
+.service-price {
+  margin-bottom: 1.5rem;
+}
+
+.service-price .price {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
 .service-link {
   color: var(--primary-color);
   font-weight: 500;
@@ -551,6 +707,86 @@ img {
   transform: translateX(5px);
 }
 
+/* === CTA DE SERVICIOS === */
+.services-cta {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--light-color);
+  border-radius: var(--border-radius-lg);
+}
+
+.services-cta p {
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+}
+
+/* === SECCIÓN MÉTODOS DE PAGO === */
+.payment-methods {
+  background: var(--white);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.payment-method {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--light-color);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-fast);
+}
+
+.payment-method:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-light);
+}
+
+.payment-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  color: var(--white);
+}
+
+.payment-method:nth-child(1) .payment-icon {
+  background: var(--paypal-color);
+}
+.payment-method:nth-child(2) .payment-icon {
+  background: var(--nequi-color);
+}
+.payment-method:nth-child(3) .payment-icon {
+  background: var(--daviplata-color);
+}
+.payment-method:nth-child(4) .payment-icon {
+  background: var(--primary-color);
+}
+
+.payment-name {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+}
+
+.payment-desc {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
 /* === SECCIÓN INSTRUMENTOS === */
 .instruments-grid {
   display: grid;
@@ -564,6 +800,7 @@ img {
   overflow: hidden;
   box-shadow: var(--shadow-light);
   transition: all var(--transition-fast);
+  position: relative;
 }
 
 .instrument-card:hover {
@@ -615,9 +852,15 @@ img {
 .instrument-actions {
   display: flex;
   gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-/* === TESTIMONIOS === */
+.instrument-actions .btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* === TESTIMONIOS MEJORADOS === */
 .testimonials-slider {
   max-width: 800px;
   margin: 0 auto;
@@ -629,6 +872,14 @@ img {
   padding: 2rem;
   box-shadow: var(--shadow-light);
   margin: 0 1rem;
+  position: relative;
+}
+
+.testimonial-rating {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
 .testimonial-text {
@@ -690,7 +941,7 @@ img {
   flex-wrap: wrap;
 }
 
-/* === FOOTER === */
+/* === FOOTER MEJORADO === */
 .footer {
   background: var(--dark-color);
   color: var(--white);
@@ -769,6 +1020,12 @@ img {
   background: var(--primary-color);
 }
 
+.footer-subtitle {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
 .footer-links li {
   margin-bottom: 0.75rem;
 }
@@ -802,9 +1059,42 @@ img {
   min-width: 20px;
 }
 
+.contact-item a {
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.contact-item a:hover {
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+/* === MÉTODOS DE PAGO EN FOOTER === */
+.payment-methods-footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.payment-method-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+}
+
+.payment-method-footer i {
+  color: var(--primary-color);
+}
+
 .newsletter-form {
   display: flex;
   gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .newsletter-form input {
@@ -867,14 +1157,19 @@ img {
   opacity: 1;
 }
 
-/* === COMPONENTES FLOTANTES === */
-.whatsapp-float {
+/* === COMPONENTES FLOTANTES MEJORADOS === */
+.whatsapp-container {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+  z-index: 1000;
+}
+
+.whatsapp-float {
+  position: relative;
   width: 60px;
   height: 60px;
-  background: #25D366;
+  background: var(--whatsapp-color);
   color: var(--white);
   border-radius: 50%;
   display: flex;
@@ -882,13 +1177,82 @@ img {
   justify-content: center;
   font-size: 1.5rem;
   box-shadow: var(--shadow-medium);
-  z-index: 1000;
   transition: all var(--transition-fast);
+  animation: pulse 2s infinite;
 }
 
 .whatsapp-float:hover {
   transform: scale(1.1);
   box-shadow: var(--shadow-heavy);
+  animation: none;
+}
+
+.whatsapp-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--whatsapp-color);
+  animation: ripple 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: var(--dark-color);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  margin-bottom: 1rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-medium);
+}
+
+.whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 20px;
+  border: 5px solid transparent;
+  border-top-color: var(--dark-color);
+}
+
+.whatsapp-container:hover .whatsapp-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* === MEDIA QUERIES - RESPONSIVE === */
@@ -910,6 +1274,10 @@ img {
   
   .about-image {
     order: -1;
+  }
+  
+  .achievements {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -940,6 +1308,12 @@ img {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   
+  .nav-highlight {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    display: inline-block;
+  }
+  
   .menu-toggle {
     display: flex;
   }
@@ -957,8 +1331,31 @@ img {
     align-items: flex-start;
   }
   
+  .trust-badges {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
   .section-title {
     font-size: 1.75rem;
+  }
+  
+  .achievements {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .payment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .instrument-actions {
+    flex-direction: column;
+  }
+  
+  .section-actions {
+    flex-direction: column;
+    align-items: center;
   }
   
   .footer-bottom-content {
@@ -968,6 +1365,10 @@ img {
   
   .newsletter-form {
     flex-direction: column;
+  }
+  
+  .payment-methods-footer {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -997,7 +1398,24 @@ img {
     right: 1rem;
   }
   
+  .whatsapp-container {
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
   .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .instruments-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -1011,6 +1429,11 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  .whatsapp-float,
+  .whatsapp-pulse {
+    animation: none;
   }
 }
 
