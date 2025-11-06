@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso de Pago - Academia del Vallenato Cartagena</title>
+    <meta name="description" content="Proceso de pago seguro para clases de vallenato e instrumentos musicales en Cartagena. PayPal, Nequi, Daviplata.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Estilos específicos para proceso de pago */
+        .payment-process {
+            padding: 2rem 0;
+            background: var(--light-color);
+            min-height: 100vh;
+        }
+
+        .payment-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+        }
+
+        .payment-steps {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 2rem;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--light-color);
+            z-index: 1;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-color);
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: all var(--transition-fast);
+        }
+
+        .step.active .step-number {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .step.completed .step-number {
+            background: var(--whatsapp-color);
+            color: var(--white);
+        }
+
+        .step-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .step.active .step-text {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .form-section {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--light-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--light-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-control.error {
+            border-color: var(--secondary-color);
+        }
+
+        .error-message {
+            color: var(--secondary-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method-option {
+            border: 2px solid var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: var(--white);
+        }
+
+        .payment-method-option:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .payment-method-option.selected {
+            border-color: var(--primary-color);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .payment-icon-lg {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .payment-method-option:nth-child(1) .payment-icon-lg { color: var(--paypal-color); }
+        .payment-method-option:nth-child(2) .payment-icon-lg { color: var(--nequi-color); }
+        .payment-method-option:nth-child(3) .payment-icon-lg { color: var(--daviplata-color); }
+
+        .payment-details {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+        }
+
+        .payment-details.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .qr-code-container {
+            text-align: center;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+
+        .qr-code {
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .order-summary {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .order-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-color);
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info h4 {
+            margin-bottom: 0.25rem;
+            font-size: 1rem;
+        }
+
+        .item-info p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .order-totals {
+            border-top: 2px solid var(--light-color);
+            padding-top: 1rem;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .total-row.final {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-top: 1px solid var(--light-color);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .security-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-color);
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .security-badge i {
+            color: var(--whatsapp-color);
+        }
+
+        .btn-payment {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-payment:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--light-color);
+            border-left: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .payment-container {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+                margin-top: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-indicator {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .step-indicator::before {
+                display: none;
+            }
+
+            .step {
+                flex-direction: row;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" aria-label="Academia del Vallenato Cartagena - Página de inicio">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="50" 
+                             height="50">
+                        <span class="logo-text">Academia del Vallenato</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Inicio</a></li>
+                        <li><a href="clases.html" class="nav-link">Clases</a></li>
+                        <li><a href="instrumentos.html" class="nav-link">Instrumentos</a></li>
+                        <li><a href="proceso-pago.html" class="nav-link active">Pagar</a></li>
+                        <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="https://wa.me/573006677447" 
+                       class="btn-whatsapp-header" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Ayuda</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="payment-process">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Proceso de Pago Seguro</h1>
+                <p class="section-subtitle">Completa tu inscripción o compra de forma rápida y segura</p>
+            </div>
+
+            <div class="payment-container">
+                <!-- Formulario de Pago -->
+                <div class="payment-form">
+                    <!-- Indicador de Pasos -->
+                    <div class="payment-steps">
+                        <div class="step-indicator">
+                            <div class="step active" id="step1">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Información Personal</div>
+                            </div>
+                            <div class="step" id="step2">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Método de Pago</div>
+                            </div>
+                            <div class="step" id="step3">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Confirmación</div>
+                            </div>
+                        </div>
+
+                        <!-- Paso 1: Información Personal -->
+                        <div class="form-step active" id="formStep1">
+                            <div class="form-section">
+                                <h3><i class="fas fa-user"></i> Información Personal</h3>
+                                <form id="personalInfoForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="firstName">Nombres *</label>
+                                            <input type="text" id="firstName" class="form-control" required>
+                                            <div class="error-message" id="firstNameError">Por favor ingresa tus nombres</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastName">Apellidos *</label>
+                                            <input type="text" id="lastName" class="form-control" required>
+                                            <div class="error-message" id="lastNameError">Por favor ingresa tus apellidos</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="email">Correo Electrónico *</label>
+                                            <input type="email" id="email" class="form-control" required>
+                                            <div class="error-message" id="emailError">Por favor ingresa un correo válido</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone">Teléfono *</label>
+                                            <input type="tel" id="phone" class="form-control" required>
+                                            <div class="error-message" id="phoneError">Por favor ingresa tu teléfono</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address">Dirección (Opcional)</label>
+                                        <input type="text" id="address" class="form-control" placeholder="Para envío de instrumentos">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="notes">Notas adicionales (Opcional)</label>
+                                        <textarea id="notes" class="form-control" rows="3" placeholder="Información adicional sobre tu pedido..."></textarea>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <button class="btn btn-primary btn-payment" onclick="nextStep(2)">
+                                Continuar al Pago <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Paso 2: Método de Pago -->
+                        <div class="form-step" id="formStep2" style="display: none;">
+                            <div class="form-section">
+                                <h3><i class="fas fa-credit-card"></i> Selecciona Método de Pago</h3>
+                                
+                                <div class="payment-methods-grid">
+                                    <div class="payment-method-option" onclick="selectPaymentMethod('paypal')">
+                                        <i class="fab fa-paypal payment-icon-lg"></i>
+                                        <div>PayPal</div>
+                                        <small>Tarjetas Internacionales</small>
+                                    </div>
+                                    
+                                    <div class="payment-method-option" onclick="selectPaymentMethod('nequi')">
+                                        <i class="fas fa-mobile-alt payment-icon-lg"></i>
+                                        <div>Nequi</div>
+                                        <small>Transferencia Colombia</small>
+                                    </div>
+                                    
+                                    <div class="payment-method-option" onclick="selectPaymentMethod('daviplata')">
+                                        <i class="fas fa-wallet payment-icon-lg"></i>
+                                        <div>Daviplata</div>
+                                        <small>Pago desde celular</small>
+                                    </div>
+                                </div>
+
+                                <!-- Detalles PayPal -->
+                                <div class="payment-details" id="paypalDetails">
+                                    <h4><i class="fab fa-paypal"></i> Pago con PayPal</h4>
+                                    <p>Serás redirigido a PayPal para completar tu pago de forma segura.</p>
+                                    <div class="security-badges">
+                                        <div class="security-badge">
+                                            <i class="fas fa-shield-alt"></i>
+                                            <span>Pago Seguro</span>
+                                        </div>
+                                        <div class="security-badge">
+                                            <i class="fas fa-lock"></i>
+                                            <span>SSL Encriptado</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Detalles Nequi -->
+                                <div class="payment-details" id="nequiDetails">
+                                    <h4><i class="fas fa-mobile-alt"></i> Pago con Nequi</h4>
+                                    <p>Transfiere al siguiente número usando la app de Nequi:</p>
+                                    <div class="qr-code-container">
+                                        <div class="nequi-info">
+                                            <strong>Número Nequi:</strong>
+                                            <h3 style="color: var(--nequi-color); margin: 0.5rem 0;">+57 300 667 7447</h3>
+                                            <p><small>Nombre: Academia Vallenato</small></p>
+                                        </div>
+                                        <div style="margin: 1rem 0;">
+                                            <strong>O escanea este código QR:</strong>
+                                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; display: inline-block; margin-top: 0.5rem;">
+                                                <div style="width: 150px; height: 150px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.8rem;">
+                                                    QR CODE<br>Nequi App
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p><strong>Importante:</strong> Envía el comprobante por WhatsApp después del pago.</p>
+                                </div>
+
+                                <!-- Detalles Daviplata -->
+                                <div class="payment-details" id="daviplataDetails">
+                                    <h4><i class="fas fa-wallet"></i> Pago con Daviplata</h4>
+                                    <p>Transfiere al siguiente número usando Daviplata:</p>
+                                    <div class="qr-code-container">
+                                        <div class="daviplata-info">
+                                            <strong>Número Daviplata:</strong>
+                                            <h3 style="color: var(--daviplata-color); margin: 0.5rem 0;">+57 300 667 7447</h3>
+                                            <p><small>Nombre: Academia Vallenato</small></p>
+                                        </div>
+                                        <div style="margin: 1rem 0;">
+                                            <strong>O escanea este código QR:</strong>
+                                            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; display: inline-block; margin-top: 0.5rem;">
+                                                <div style="width: 150px; height: 150px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #666; font-size: 0.8rem;">
+                                                    QR CODE<br>Daviplata App
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p><strong>Importante:</strong> Envía el comprobante por WhatsApp después del pago.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button class="btn btn-outline" onclick="previousStep(1)">
+                                    <i class="fas fa-arrow-left"></i> Atrás
+                                </button>
+                                <button class="btn btn-primary" id="payButton" onclick="processPayment()" disabled>
+                                    Proceder al Pago <i class="fas fa-lock"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Loading State -->
+                        <div class="loading-spinner" id="loadingSpinner">
+                            <div class="spinner"></div>
+                            <p>Procesando tu pago...</p>
+                            <p><small>No cierres esta ventana</small></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen del Pedido -->
+                <div class="order-summary">
+                    <h3>Resumen de tu Pedido</h3>
+                    
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-info">
+                                <h4>Clases de Acordeón - Mensual</h4>
+                                <p>4 clases personalizadas</p>
+                            </div>
+                            <div class="item-price">$200.000</div>
+                        </div>
+                        
+                        <div class="order-item">
+                            <div class="item-info">
+                                <h4>Material Didáctico</h4>
+                                <p>Incluye partituras y métodos</p>
+                            </div>
+                            <div class="item-price">$30.000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-totals">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span>$230.000</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Descuento:</span>
+                            <span style="color: var(--whatsapp-color);">-$30.000</span>
+                        </div>
+                        <div class="total-row final">
+                            <span>Total a Pagar:</span>
+                            <span>$200.000 COP</span>
+                        </div>
+                    </div>
+
+                    <div class="security-badges">
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Pago 100% Seguro</span>
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-lock"></i>
+                            <span>Datos Protegidos</span>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <small style="color: var(--text-light);">
+                            ¿Problemas con el pago? <br>
+                            <a href="https://wa.me/573006677447" style="color: var(--primary-color);">Contáctanos por WhatsApp</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="40" 
+                             height="40">
+                        <span class="footer-logo-text">Academia del Vallenato</span>
+                    </div>
+                    <p class="footer-description">Formando músicos vallenatos en Cartagena desde 2010</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="clases.html">Clases</a></li>
+                        <li><a href="instrumentos.html">Instrumentos</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terminos-condiciones.html">Términos y Condiciones</a></li>
+                        <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">© 2024 Academia del Vallenato Cartagena. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-container">
+        <a href="https://wa.me/573006677447?text=Hola,%20necesito%20ayuda%20con%20el%20proceso%20de%20pago" 
+           class="whatsapp-float" 
+           target="_blank" 
+           rel="noopener nofollow">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-pulse"></span>
+        </a>
+        <div class="whatsapp-tooltip">
+            ¿Ayuda con el pago? +57 300 667 7447
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let currentStep = 1;
+        let selectedPaymentMethod = null;
+        let orderData = {
+            product: 'Clases de Acordeón Mensual',
+            amount: 200000,
+            currency: 'COP'
+        };
+
+        // Navegación entre pasos
+        function nextStep(step) {
+            if (step === 2 && !validatePersonalInfo()) {
+                return;
+            }
+            
+            if (step === 3 && !selectedPaymentMethod) {
+                alert('Por favor selecciona un método de pago');
+                return;
+            }
+
+            // Ocultar paso actual
+            document.getElementById(`formStep${currentStep}`).style.display = 'none';
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            
+            // Mostrar nuevo paso
+            currentStep = step;
+            document.getElementById(`formStep${currentStep}`).style.display = 'block';
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            
+            // Actualizar indicador de pasos anteriores
+            for (let i = 1; i < step; i++) {
+                document.getElementById(`step${i}`).classList.add('completed');
+            }
+        }
+
+        function previousStep(step) {
+            document.getElementById(`formStep${currentStep}`).style.display = 'none';
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            
+            currentStep = step;
+            document.getElementById(`formStep${currentStep}`).style.display = 'block';
+            document.getElementById(`step${currentStep}`).classList.add('active');
+        }
+
+        // Validación de información personal
+        function validatePersonalInfo() {
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            let isValid = true;
+
+            // Reset errores
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.form-control').forEach(el => el.classList.remove('error'));
+
+            // Validar nombres
+            if (!firstName) {
+                document.getElementById('firstNameError').style.display = 'block';
+                document.getElementById('firstName').classList.add('error');
+                isValid = false;
+            }
+
+            // Validar apellidos
+            if (!lastName) {
+                document.getElementById('lastNameError').style.display = 'block';
+                document.getElementById('lastName').classList.add('error');
+                isValid = false;
+            }
+
+            // Validar email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                document.getElementById('email').classList.add('error');
+                isValid = false;
+            }
+
+            // Validar teléfono (mínimo 10 dígitos)
+            const phoneRegex = /^[0-9]{10,}$/;
+            if (!phone || !phoneRegex.test(phone.replace(/\D/g, ''))) {
+                document.getElementById('phoneError').style.display = 'block';
+                document.getElementById('phone').classList.add('error');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Selección de método de pago
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // Remover selección anterior
+            document.querySelectorAll('.payment-method-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Ocultar detalles anteriores
+            document.querySelectorAll('.payment-details').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Activar selección actual
+            event.currentTarget.classList.add('selected');
+            document.getElementById(`${method}Details`).classList.add('active');
+            
+            // Habilitar botón de pago
+            document.getElementById('payButton').disabled = false;
+        }
+
+        // Procesar pago
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                alert('Por favor selecciona un método de pago');
+                return;
+            }
+
+            // Mostrar loading
+            document.getElementById('loadingSpinner').style.display = 'block';
+            document.getElementById('formStep2').style.display = 'none';
+
+            // Simular procesamiento de pago
+            setTimeout(() => {
+                // Guardar datos del pedido
+                const orderInfo = {
+                    customer: {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        address: document.getElementById('address').value,
+                        notes: document.getElementById('notes').value
+                    },
+                    paymentMethod: selectedPaymentMethod,
+                    order: orderData,
+                    orderId: 'ORD-' + Date.now(),
+                    timestamp: new Date().toISOString()
+                };
+
+                // Guardar en localStorage para la página de confirmación
+                localStorage.setItem('lastOrder', JSON.stringify(orderInfo));
+
+                // Redirigir según método de pago
+                if (selectedPaymentMethod === 'paypal') {
+                    // Simular redirección a PayPal
+                    setTimeout(() => {
+                        window.location.href = 'confirmacion-pago.html?status=success&method=paypal';
+                    }, 2000);
+                } else {
+                    // Para Nequi/Daviplata, redirigir directo a confirmación
+                    setTimeout(() => {
+                        window.location.href = 'confirmacion-pago.html?status=pending&method=' + selectedPaymentMethod;
+                    }, 2000);
+                }
+            }, 2000);
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevenir envío del formulario con Enter
+            document.getElementById('personalInfoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                nextStep(2);
+            });
+
+            // Formatear teléfono
+            document.getElementById('phone').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 0) {
+                    value = value.match(/.{1,3}/g).join(' ');
+                }
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>
