@@ -10,15 +10,15 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="https://www.academiadelvallenatocartagena.com/">
+<link rel="canonical" href="https://cupido777.github.io/copia-academia-del-vallenato/">
 
 <!-- Open Graph Optimizado -->
 <meta property="og:title" content="Academia del Vallenato Cartagena - Clases de Música Tradicional Colombiana">
 <meta property="og:description" content="Aprende acordeón, caja y guacharaca con los mejores maestros de vallenato en Cartagena. Clases para todos los niveles.">
-<meta property="og:image" content="https://www.academiadelvallenatocartagena.com/assets/images/og-image.jpg">
+<meta property="og:image" content="https://cupido777.github.io/copia-academia-del-vallenato/assets/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:url" content="https://www.academiadelvallenatocartagena.com/">
+<meta property="og:url" content="https://cupido777.github.io/copia-academia-del-vallenato/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Academia del Vallenato Cartagena">
 <meta property="og:locale" content="es_CO">
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Academia del Vallenato Cartagena - Clases Profesionales">
 <meta name="twitter:description" content="Aprende vallenato en Cartagena con maestros certificados. Clases de acordeón, caja y guacharaca.">
-<meta name="twitter:image" content="https://www.academiadelvallenatocartagena.com/assets/images/twitter-image.jpg">
+<meta name="twitter:image" content="https://cupido777.github.io/copia-academia-del-vallenato/assets/images/twitter-image.jpg">
 <meta name="twitter:creator" content="@academiavallenato">
 
 <!-- Schema.org Markup Mejorado -->
@@ -37,9 +37,9 @@
   "@type": "MusicSchool",
   "name": "Academia del Vallenato Cartagena",
   "description": "Academia especializada en enseñanza de música vallenata tradicional colombiana en Cartagena",
-  "url": "https://www.academiadelvallenatocartagena.com",
+  "url": "https://cupido777.github.io/copia-academia-del-vallenato",
   "telephone": "+57-300-667-7447",
-  "email": "info@academiadelvallenatocartagena.com",
+  "email": "pagos@academiadelvallenato.com",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Centro Histórico",
@@ -110,19 +110,56 @@
 <link rel="manifest" href="assets/manifest.json">
 <meta name="theme-color" content="#d4af37">
 
-<!-- Meta de Seguridad -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.paypal.com https://js.stripe.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.whatsapp.com https://www.paypal.com">
+<!-- Meta de Seguridad Mejorada -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.paypal.com https://js.stripe.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.whatsapp.com https://www.paypal.com https://api.qrserver.com">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 </head>
 
 <body itemscope itemtype="https://schema.org/WebPage">
-<!-- Botón WhatsApp Mejorado con número correcto -->
+<!-- Verificación de HTTPS Mejorada -->
+<script>
+// Verificación mejorada de HTTPS
+if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+    const httpsUrl = 'https:' + window.location.href.substring(window.location.protocol.length);
+    
+    // Solo redirigir si estamos en producción
+    if (!location.hostname.includes('localhost') && !location.hostname.includes('127.0.0.1')) {
+        // Mostrar notificación antes de redirigir
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #d4af37;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            z-index: 10000;
+            font-weight: bold;
+        `;
+        notification.textContent = '🔒 Mejorando su seguridad... Redirigiendo a conexión segura HTTPS';
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            window.location.href = httpsUrl;
+        }, 1000);
+    }
+}
+</script>
+
+<!-- Botón WhatsApp Mejorado con protección de clics -->
 <div class="whatsapp-container">
   <a href="https://wa.me/573006677447?text=Hola,%20me%20interesan%20las%20clases%20de%20vallenato%20en%20Cartagena.%20¿Podrían%20brindarme%20más%20información?" 
      class="whatsapp-float" 
      target="_blank" 
      rel="noopener nofollow"
      aria-label="Chatear por WhatsApp con Academia del Vallenato Cartagena"
-     onclick="window.statsSystem?.trackEvent('whatsapp_click', {source: 'homepage', type: 'float_button'})">
+     data-source="float_button"
+     data-type="general_inquiry">
     <i class="fab fa-whatsapp"></i>
     <span class="whatsapp-pulse"></span>
   </a>
@@ -194,7 +231,8 @@
            target="_blank" 
            rel="noopener nofollow"
            aria-label="Contactar por WhatsApp"
-           onclick="window.statsSystem?.trackEvent('whatsapp_click', {source: 'header', type: 'contact'})">
+           data-source="header"
+           data-type="contact">
           <i class="fab fa-whatsapp"></i>
           <span>WhatsApp</span>
         </a>
@@ -241,7 +279,8 @@
            class="btn btn-whatsapp"
            target="_blank"
            rel="noopener nofollow"
-           onclick="window.statsSystem?.trackEvent('whatsapp_click', {source: 'hero', type: 'free_trial'})">
+           data-source="hero"
+           data-type="free_trial">
           <i class="fab fa-whatsapp" aria-hidden="true"></i>
           Clase Gratis
         </a>
@@ -260,6 +299,10 @@
         <div class="trust-badge">
           <i class="fas fa-graduation-cap"></i>
           <span>Certificación Incluida</span>
+        </div>
+        <div class="trust-badge">
+          <i class="fas fa-lock"></i>
+          <span>Datos Protegidos</span>
         </div>
       </div>
     </div>
@@ -374,7 +417,8 @@
          class="btn btn-whatsapp"
          target="_blank"
          rel="noopener nofollow"
-         onclick="window.statsSystem?.trackEvent('whatsapp_click', {source: 'services', type: 'custom_plan'})">
+         data-source="services"
+         data-type="custom_plan">
         <i class="fab fa-whatsapp"></i>
         Plan Personalizado
       </a>
@@ -531,7 +575,8 @@
          class="btn btn-whatsapp"
          target="_blank"
          rel="noopener nofollow"
-         onclick="window.statsSystem?.trackEvent('whatsapp_click', {source: 'instruments', type: 'quote'})">
+         data-source="instruments"
+         data-type="quote">
         <i class="fab fa-whatsapp"></i>
         Cotizar por WhatsApp
       </a>
@@ -600,7 +645,8 @@
            class="btn btn-whatsapp-light"
            target="_blank"
            rel="noopener nofollow"
-           onclick="window.statsSystem?.trackEvent('whatsapp_click', {source: 'final_cta', type: 'information'})">
+           data-source="final_cta"
+           data-type="information">
           <i class="fab fa-whatsapp"></i>
           Consultar
         </a>
@@ -609,7 +655,7 @@
   </div>
 </section>
 
-<!-- Footer Mejorado -->
+<!-- Footer Mejorado con enlaces legales -->
 <footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/Organization">
   <div class="container">
     <div class="footer-content">
@@ -659,7 +705,7 @@
           </div>
           <div class="contact-item">
             <i class="fas fa-envelope" aria-hidden="true"></i>
-            <span itemprop="email">info@academiadelvallenato.com</span>
+            <span itemprop="email">pagos@academiadelvallenato.com</span>
           </div>
           <div class="contact-item">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
@@ -705,6 +751,7 @@
         <div class="footer-bottom-links">
           <a href="politica-privacidad.html">Política de privacidad</a>
           <a href="terminos-condiciones.html">Términos y condiciones</a>
+          <a href="aviso-cookies.html">Aviso de cookies</a>
           <a href="confirmacion-pago.html">Confirmación de pago</a>
         </div>
       </div>
@@ -727,38 +774,42 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Inicio",
-      "item": "https://www.academiadelvallenatocartagena.com/"
+      "item": "https://cupido777.github.io/copia-academia-del-vallenato/"
     }
   ]
 }
 </script>
 
-<!-- WhatsApp Integration Script -->
+<!-- WhatsApp Integration Script Mejorado -->
 <script>
 // WhatsApp Tracking and Enhanced Functionality
 document.addEventListener('DOMContentLoaded', function() {
-  // Enhanced WhatsApp click tracking
+  // Enhanced WhatsApp click tracking con protección
   const whatsappLinks = document.querySelectorAll('a[href*="wa.me"]');
   whatsappLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       const source = this.getAttribute('data-source') || this.closest('section')?.id || 'unknown';
       const type = this.getAttribute('data-type') || 'general';
       
-      // Track in stats system
-      if (window.statsSystem) {
-        window.statsSystem.trackEvent('whatsapp_click', {
-          source: source,
-          type: type,
-          timestamp: new Date().toISOString()
-        });
+      // Validar que es un click legítimo (no automatizado)
+      if (e.isTrusted) {
+        // Track in stats system
+        if (window.statsSystem) {
+          window.statsSystem.trackEvent('whatsapp_click', {
+            source: source,
+            type: type,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent
+          });
+        }
+        
+        // Enhanced analytics
+        console.log('WhatsApp click tracked:', { source, type });
       }
-      
-      // Enhanced analytics
-      console.log('WhatsApp click tracked:', { source, type });
     });
   });
   
-  // WhatsApp float button animation
+  // WhatsApp float button animation mejorada
   const whatsappFloat = document.querySelector('.whatsapp-float');
   if (whatsappFloat) {
     setInterval(() => {
@@ -769,11 +820,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
   }
 });
-</script>
 
-<!-- Security Headers Meta -->
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+// Protección contra bots y scripts maliciosos
+if (window.self !== window.top) {
+  document.body.innerHTML = '<div style="padding: 2rem; text-align: center;"><h2>Acceso no autorizado</h2><p>Esta página no puede ser embebida en iframes.</p></div>';
+}
+</script>
 </body>
 </html>
