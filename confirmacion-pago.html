@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pago - Academia del Vallenato Cartagena</title>
+    <meta name="description" content="Confirmación de pago exitoso para clases de vallenato e instrumentos musicales en Cartagena. Recibo digital y próximos pasos.">
+    
+    <!-- Schema.org para Confirmación de Pedido -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Order",
+        "orderNumber": "ORD-123456",
+        "orderStatus": "https://schema.org/OrderProcessing",
+        "paymentMethod": "PayPal",
+        "orderDate": "2024-01-20",
+        "acceptedOffer": {
+            "@type": "Offer",
+            "itemOffered": {
+                "@type": "Service",
+                "name": "Clases de Acordeón Vallenato"
+            },
+            "price": "200000",
+            "priceCurrency": "COP"
+        },
+        "customer": {
+            "@type": "Person",
+            "name": "Cliente Academia Vallenato"
+        },
+        "merchant": {
+            "@type": "MusicSchool",
+            "name": "Academia del Vallenato Cartagena"
+        }
+    }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .confirmation-page {
+            padding: 2rem 0;
+            background: var(--light-color);
+            min-height: 100vh;
+        }
+
+        .confirmation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .confirmation-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .confirmation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--whatsapp-color);
+        }
+
+        .status-success .confirmation-card::before {
+            background: var(--whatsapp-color);
+        }
+
+        .status-pending .confirmation-card::before {
+            background: var(--primary-color);
+        }
+
+        .status-error .confirmation-card::before {
+            background: var(--secondary-color);
+        }
+
+        .confirmation-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .status-success .confirmation-icon {
+            background: rgba(37, 211, 102, 0.1);
+            color: var(--whatsapp-color);
+        }
+
+        .status-pending .confirmation-icon {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-color);
+        }
+
+        .status-error .confirmation-icon {
+            background: rgba(196, 69, 54, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .confirmation-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .confirmation-message {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .order-details {
+            background: var(--light-color);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .detail-value {
+            color: var(--text-color);
+            text-align: right;
+        }
+
+        .detail-value.highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .next-steps {
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .next-steps h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .steps-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+        }
+
+        .steps-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .step-content p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .confirmation-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn-download {
+            background: var(--dark-color);
+            color: var(--white);
+        }
+
+        .btn-download:hover {
+            background: #1a2530;
+        }
+
+        .whatsapp-confirm {
+            background: var(--whatsapp-color);
+            color: var(--white);
+        }
+
+        .whatsapp-confirm:hover {
+            background: #128C7E;
+        }
+
+        .receipt {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-light);
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .receipt.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+
+        .receipt-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light-color);
+        }
+
+        .receipt-item:last-child {
+            border-bottom: none;
+        }
+
+        .receipt-totals {
+            border-top: 2px solid var(--light-color);
+            padding-top: 1rem;
+        }
+
+        .receipt-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .security-notice {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(37, 211, 102, 0.1);
+            border-radius: var(--border-radius);
+            color: var(--whatsapp-color);
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Estados específicos */
+        .pending-actions {
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: var(--border-radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .payment-instructions {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .confirmation-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .confirmation-title {
+                font-size: 2rem;
+            }
+
+            .confirmation-actions {
+                flex-direction: column;
+            }
+
+            .confirmation-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .detail-value {
+                text-align: left;
+            }
+
+            .steps-list li {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                align-self: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .confirmation-container {
+                padding: 0 1rem;
+            }
+
+            .confirmation-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .order-details {
+                padding: 1.5rem;
+            }
+
+            .next-steps {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="status-success">
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html" aria-label="Academia del Vallenato Cartagena - Página de inicio">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="50" 
+                             height="50">
+                        <span class="logo-text">Academia del Vallenato</span>
+                    </a>
+                </div>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Inicio</a></li>
+                        <li><a href="clases.html" class="nav-link">Clases</a></li>
+                        <li><a href="instrumentos.html" class="nav-link">Instrumentos</a></li>
+                        <li><a href="proceso-pago.html" class="nav-link">Pagar</a></li>
+                        <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <a href="https://wa.me/573006677447" 
+                       class="btn-whatsapp-header" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Soporte</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="confirmation-page">
+        <div class="confirmation-container">
+            <!-- Tarjeta de Confirmación Principal -->
+            <div class="confirmation-card">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                
+                <h1 class="confirmation-title">¡Pago Confirmado!</h1>
+                
+                <p class="confirmation-message">
+                    Gracias por tu compra. Tu pago ha sido procesado exitosamente y tu pedido está siendo preparado.
+                </p>
+
+                <!-- Detalles del Pedido -->
+                <div class="order-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Número de Orden:</span>
+                        <span class="detail-value highlight" id="orderNumber">ORD-123456</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Fecha y Hora:</span>
+                        <span class="detail-value" id="orderDate">20 Enero, 2024 - 14:30</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Método de Pago:</span>
+                        <span class="detail-value" id="paymentMethod">PayPal</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Total Pagado:</span>
+                        <span class="detail-value highlight" id="orderTotal">$200.000 COP</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Estado:</span>
+                        <span class="detail-value" style="color: var(--whatsapp-color); font-weight: 600;">Completado</span>
+                    </div>
+                </div>
+
+                <!-- Acciones -->
+                <div class="confirmation-actions">
+                    <button class="btn btn-primary" onclick="downloadReceipt()">
+                        <i class="fas fa-download"></i> Descargar Recibo
+                    </button>
+                    <a href="https://wa.me/573006677447?text=Hola,%20acabo%20de%20realizar%20mi%20pago%20con%20orden%20ORD-123456.%20¿Podrían%20confirmarme%20la%20recepción?" 
+                       class="btn whatsapp-confirm" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i> Confirmar por WhatsApp
+                    </a>
+                    <a href="index.html" class="btn btn-outline">
+                        <i class="fas fa-home"></i> Volver al Inicio
+                    </a>
+                </div>
+            </div>
+
+            <!-- Próximos Pasos -->
+            <div class="next-steps">
+                <h3><i class="fas fa-road"></i> Próximos Pasos</h3>
+                <ul class="steps-list">
+                    <li>
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Confirmación Inmediata</h4>
+                            <p>Recibirás un correo electrónico con los detalles de tu compra en los próximos 15 minutos.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Coordinación de Clases</h4>
+                            <p>Nos contactaremos contigo en las próximas 24 horas para coordinar horarios y nivel.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Material Didáctico</h4>
+                            <p>Recibirás el material de estudio digital inmediatamente y el físico en tu primera clase.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Recibo Digital (Oculto inicialmente) -->
+            <div class="receipt" id="digitalReceipt">
+                <div class="receipt-header">
+                    <h3>Recibo Digital</h3>
+                    <p>Academia del Vallenato Cartagena</p>
+                    <small>NIT: 901.234.567-8</small>
+                </div>
+
+                <div class="order-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Número de Recibo:</span>
+                        <span class="detail-value">REC-789012</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Fecha de Emisión:</span>
+                        <span class="detail-value" id="receiptDate">20 Enero, 2024</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Cliente:</span>
+                        <span class="detail-value" id="customerName">Juan Pérez González</span>
+                    </div>
+                </div>
+
+                <div class="receipt-items">
+                    <div class="receipt-item">
+                        <div>
+                            <strong>Clases de Acordeón - Mensual</strong>
+                            <p>4 clases personalizadas - Nivel Inicial</p>
+                        </div>
+                        <span>$200.000</span>
+                    </div>
+                    <div class="receipt-item">
+                        <div>
+                            <strong>Material Didáctico</strong>
+                            <p>Incluye partituras y métodos de estudio</p>
+                        </div>
+                        <span>$30.000</span>
+                    </div>
+                </div>
+
+                <div class="receipt-totals">
+                    <div class="receipt-item">
+                        <span>Subtotal:</span>
+                        <span>$230.000</span>
+                    </div>
+                    <div class="receipt-item">
+                        <span>Descuento:</span>
+                        <span style="color: var(--whatsapp-color);">-$30.000</span>
+                    </div>
+                    <div class="receipt-total">
+                        <span>Total:</span>
+                        <span>$200.000 COP</span>
+                    </div>
+                </div>
+
+                <div class="security-notice">
+                    <i class="fas fa-shield-alt"></i> 
+                    Este recibo es válido como comprobante de pago. Conserva una copia para tus registros.
+                </div>
+            </div>
+
+            <!-- Información de Contacto -->
+            <div class="pending-actions">
+                <h3><i class="fas fa-headset"></i> ¿Necesitas Ayuda?</h3>
+                <p>Nuestro equipo de soporte está disponible para ayudarte con cualquier pregunta sobre tu pedido.</p>
+                
+                <div class="confirmation-actions">
+                    <a href="https://wa.me/573006677447" 
+                       class="btn whatsapp-confirm" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i> WhatsApp +57 300 667 7447
+                    </a>
+                    <a href="tel:+573006677447" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> Llamar Ahora
+                    </a>
+                </div>
+
+                <div class="payment-instructions">
+                    <h4><i class="fas fa-clock"></i> Horarios de Atención</h4>
+                    <p>Lunes a Viernes: 8:00 AM - 8:00 PM<br>
+                       Sábados: 8:00 AM - 6:00 PM<br>
+                       <small>Respuesta en menos de 15 minutos</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-academia-vallenato.png" 
+                             alt="Academia del Vallenato Cartagena" 
+                             width="40" 
+                             height="40">
+                        <span class="footer-logo-text">Academia del Vallenato</span>
+                    </div>
+                    <p class="footer-description">Formando músicos vallenatos en Cartagena desde 2010</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Enlaces</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="clases.html">Clases</a></li>
+                        <li><a href="instrumentos.html">Instrumentos</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="terminos-condiciones.html">Términos y Condiciones</a></li>
+                        <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p class="copyright">© 2024 Academia del Vallenato Cartagena. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <div class="whatsapp-container">
+        <a href="https://wa.me/573006677447?text=Hola,%20tengo%20una%20consulta%20sobre%20mi%20pedido%20reciente" 
+           class="whatsapp-float" 
+           target="_blank" 
+           rel="noopener nofollow">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-pulse"></span>
+        </a>
+        <div class="whatsapp-tooltip">
+            ¿Preguntas sobre tu pedido? +57 300 667 7447
+        </div>
+    </div>
+
+    <script>
+        // Cargar datos del pedido desde localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const lastOrder = localStorage.getItem('lastOrder');
+            
+            if (lastOrder) {
+                const order = JSON.parse(lastOrder);
+                updateOrderDetails(order);
+            } else {
+                // Datos de ejemplo si no hay orden en localStorage
+                updateOrderDetails({
+                    orderId: 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                    timestamp: new Date().toISOString(),
+                    paymentMethod: 'PayPal',
+                    order: { amount: 200000 },
+                    customer: {
+                        firstName: 'Juan',
+                        lastName: 'Pérez González'
+                    }
+                });
+            }
+
+            // Actualizar fecha actual
+            const now = new Date();
+            document.getElementById('receiptDate').textContent = formatDate(now);
+        });
+
+        function updateOrderDetails(order) {
+            // Actualizar número de orden
+            document.getElementById('orderNumber').textContent = order.orderId;
+            
+            // Actualizar fecha y hora
+            const orderDate = new Date(order.timestamp);
+            document.getElementById('orderDate').textContent = formatDateTime(orderDate);
+            
+            // Actualizar método de pago
+            document.getElementById('paymentMethod').textContent = formatPaymentMethod(order.paymentMethod);
+            
+            // Actualizar total
+            document.getElementById('orderTotal').textContent = formatCurrency(order.order.amount);
+            
+            // Actualizar nombre del cliente
+            if (order.customer) {
+                document.getElementById('customerName').textContent = 
+                    `${order.customer.firstName} ${order.customer.lastName}`;
+            }
+
+            // Actualizar estado de la página según el método de pago
+            updatePageStatus(order.paymentMethod, order.orderStatus);
+        }
+
+        function formatDateTime(date) {
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return date.toLocaleDateString('es-CO', options);
+        }
+
+        function formatDate(date) {
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric'
+            };
+            return date.toLocaleDateString('es-CO', options);
+        }
+
+        function formatPaymentMethod(method) {
+            const methods = {
+                'paypal': 'PayPal',
+                'nequi': 'Nequi',
+                'daviplata': 'Daviplata'
+            };
+            return methods[method] || method;
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function updatePageStatus(paymentMethod, orderStatus) {
+            const body = document.body;
+            
+            if (orderStatus === 'pending' || paymentMethod === 'nequi' || paymentMethod === 'daviplata') {
+                body.className = 'status-pending';
+                document.querySelector('.confirmation-icon i').className = 'fas fa-clock';
+                document.querySelector('.confirmation-title').textContent = 'Pago en Procesamiento';
+                document.querySelector('.confirmation-message').textContent = 
+                    'Tu pago está siendo verificado. Te contactaremos dentro de las próximas 2 horas para confirmar.';
+                
+                // Actualizar estado en detalles
+                document.querySelector('.detail-row:last-child .detail-value').textContent = 'En Verificación';
+                document.querySelector('.detail-row:last-child .detail-value').style.color = 'var(--primary-color)';
+                
+                // Mostrar instrucciones específicas para transferencias
+                if (paymentMethod === 'nequi' || paymentMethod === 'daviplata') {
+                    showTransferInstructions(paymentMethod);
+                }
+            } else if (orderStatus === 'error') {
+                body.className = 'status-error';
+                document.querySelector('.confirmation-icon i').className = 'fas fa-exclamation-triangle';
+                document.querySelector('.confirmation-title').textContent = 'Error en el Pago';
+                document.querySelector('.confirmation-message').textContent = 
+                    'Hubo un problema procesando tu pago. Por favor contacta a soporte para assistance.';
+                
+                document.querySelector('.detail-row:last-child .detail-value').textContent = 'Fallido';
+                document.querySelector('.detail-row:last-child .detail-value').style.color = 'var(--secondary-color)';
+            }
+        }
+
+        function showTransferInstructions(method) {
+            const instructions = document.createElement('div');
+            instructions.className = 'payment-instructions';
+            instructions.innerHTML = `
+                <h4><i class="fas fa-info-circle"></i> Instrucciones para ${method === 'nequi' ? 'Nequi' : 'Daviplata'}</h4>
+                <p>Por favor envía el comprobante de transferencia a nuestro WhatsApp para acelerar la verificación:</p>
+                <div class="confirmation-actions">
+                    <a href="https://wa.me/573006677447?text=Hola,%20acabo%20de%20realizar%20una%20transferencia%20por%20${method}%20para%20mi%20pedido%20${document.getElementById('orderNumber').textContent}" 
+                       class="btn whatsapp-confirm" 
+                       target="_blank" 
+                       rel="noopener nofollow">
+                        <i class="fab fa-whatsapp"></i> Enviar Comprobante
+                    </a>
+                </div>
+            `;
+            
+            document.querySelector('.next-steps').before(instructions);
+        }
+
+        function downloadReceipt() {
+            // Mostrar recibo digital
+            document.getElementById('digitalReceipt').classList.add('active');
+            
+            // Simular descarga (en producción, esto generaría un PDF real)
+            setTimeout(() => {
+                alert('Recibo descargado exitosamente. También puedes tomar captura de pantalla del recibo digital.');
+                
+                // Scroll al recibo
+                document.getElementById('digitalReceipt').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            }, 1000);
+            
+            // Track event
+            if (window.statsSystem) {
+                window.statsSystem.trackEvent('receipt_download', {
+                    orderId: document.getElementById('orderNumber').textContent
+                });
+            }
+        }
+
+        // Impresión del recibo
+        function printReceipt() {
+            const receipt = document.getElementById('digitalReceipt');
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Recibo - Academia del Vallenato</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 20px; }
+                            .receipt-header { text-align: center; margin-bottom: 20px; }
+                            .detail-row { display: flex; justify-content: space-between; margin: 10px 0; }
+                            .receipt-total { font-weight: bold; font-size: 1.2em; margin-top: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        ${receipt.innerHTML}
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+    </script>
+</body>
+</html>
